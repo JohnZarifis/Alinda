@@ -1,0 +1,193 @@
+/* here you can put your own css to customize and override the theme */
+
+/***
+Rounded Portlets
+***/
+/*
+.portlet {
+	border-radius: 4px !important;
+}
+
+.portlet .portlet-title {
+	border-radius: 4px 4px 0px 0px !important;
+}
+
+.portlet .portlet-body,
+.portlet .portlet-body .form-actions  {
+	border-radius: 0px 0px 4px 4px !important;
+}
+*/
+
+/*
+Change Quick Sidebar Width
+*/
+
+/*
+.page-quick-sidebar-wrapper {
+  right: -370px;
+  width: 370px;
+}
+
+.page-quick-sidebar-open.page-quick-sidebar-push-content .page-sidebar-wrapper {
+  margin-left: -370px;
+}
+
+.page-quick-sidebar-open.page-quick-sidebar-push-content .page-footer {
+  margin-right: 370px;
+  margin-left: -370px;
+}
+
+.page-sidebar-reversed.page-quick-sidebar-open.page-quick-sidebar-push-content .page-sidebar-wrapper {
+  margin-right: 370px;
+}
+
+.page-quick-sidebar-open.page-quick-sidebar-push-content.page-quick-sidebar-full-height .page-header {
+  margin-left: -370px;
+}
+
+.page-quick-sidebar-wrapper .page-quick-sidebar .page-quick-sidebar-list {
+  width: 370px !important;
+}
+
+.page-quick-sidebar-wrapper .page-quick-sidebar .page-quick-sidebar-item {
+  width: 370px !important;
+  margin-left: 370px;
+}
+
+.page-quick-sidebar-wrapper .page-quick-sidebar .page-quick-sidebar-content-item-shown .page-quick-sidebar-list {
+  margin-left: -370px;
+}
+*/
+.alignRight { text-align:right; }
+
+/* STILI PRODOTTO */
+.simpleCart_shelfItem { 
+	float:left; 
+	display:inline; 
+	margin:20px 20px 20px 0;
+	width:168px;
+	line-height:100%;
+	position:relative;
+	background:#EEEEEE;
+	text-align:center;
+	-moz-border-radius:5px; 
+	border-radius:5px;
+}
+
+.simpleCart_shelfItem.last {
+	margin-right:0;
+}
+
+.simpleCart_shelfItem p { 
+	margin:10px 0 0 0; 
+}
+
+.item_name {
+	font-weight:bold;
+	font-size:12px;
+	margin:10px 0;
+	padding:0;
+}
+
+.item_size { font-size:12px; }
+
+.item_add {
+	margin:10px 5px;
+	padding:4px; 
+	background:#0033FF;
+	color:#FFFFFF;
+	border:none;
+	-moz-border-radius:5px; border-radius:5px;
+	text-transform: uppercase; 
+	font-size:9px;
+	cursor:pointer;
+}
+
+.item_price{
+	font-weight:bold;
+	font-size:14px;
+	color:#cc0000;
+	margin:10px 5px;
+}
+
+
+/* STILI CARRELLO */
+.simpleCart_items {
+	float:left; 
+	display:inline;
+	width:100%;
+	background:#EEEEEE;
+	-moz-border-radius:5px; 
+	border-radius:5px;
+	padding-bottom:10px;
+}
+
+.itemContainer, .cartHeaders {
+	width:100%;
+	float:left;
+	display:inline;
+	border-bottom:1px solid #CCCCCC;
+	padding-bottom:10px;
+}
+
+.cartHeaders {
+	font-weight:bold;
+	font-size:11px;
+	color: #666666;
+}
+
+.itemContainer div, .cartHeaders div {
+	float:left;
+	display:inline;
+	border-right:1px solid #CCCCCC;
+	margin:10px 0 0 0;
+	text-align:center;
+	width:100px;
+}
+
+div.itemName {
+	font-weight:bold;
+	width:200px;
+}
+
+div.itemTotal {
+	border-right:none;
+}
+
+
+#cartTotal {
+	text-align:right;
+	float:left;
+	width:100%;
+	margin:20px 0;
+}
+
+#cartTotal .simpleCart_total, .simpleCart_shippingCost, .simpleCart_finalTotal {
+	margin-right:15px;
+	padding:5px;
+	-moz-border-radius:5px; border-radius:5px;
+	background:#EEEEEE;
+	font-weight:bold;
+}
+
+
+/* STILI BOTTONI CHECKOUT / SVUOTA CARRELLO */
+.simpleCart_empty{
+	color:#FFFFFF;
+	background:#CC0000;
+	font-size:10px;
+	padding:5px;
+	margin-left:5px;
+	text-transform:uppercase;
+	-moz-border-radius:5px; border-radius:5px;
+}
+
+.simpleCart_checkout{
+	color:#FFFFFF;
+	background: #00CC00;
+	font-size:10px;
+	padding:5px;
+	margin-left:5px;
+	text-transform:uppercase;
+	-moz-border-radius:5px; border-radius:5px;
+}
