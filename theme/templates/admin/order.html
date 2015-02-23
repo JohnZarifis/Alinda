@@ -44,33 +44,28 @@
 			<!-- END PAGE HEADER-->
 			<div class="clearfix"></div>
                         <div class="portlet box blue">
-									<div class="portlet-title">
-										<div class="caption">
-											<i class="fa fa-gift"></i>Στοιχεία Πελάτη
-										</div>
-										
-									</div>
-									<div class="portlet-body form">
-										<!-- BEGIN FORM-->
-										<form class="form-horizontal" role="form">
-											<div class="form-body">
-												
-												
-												<div class="row">
-													<div class="col-md-6">
-														<div class="form-group">
-															<label class="control-label col-md-3">Επωνυμία πελάτη:</label>
-															<div class="col-md-9">
-																<p class="form-control-static">
-																	 {{leename}}
-																</p>
-															</div>
-														</div>
-													</div>
-													<!--/span-->
-													<div class="col-md-6">
-														<div class="form-group">
-															<label class="control-label col-md-3">ΑΦΜ:</label>
+                            <div class="portlet-title">
+				<div class="caption">
+				<i class="fa fa-gift"></i>Στοιχεία Πελάτη
+				</div>								
+			    </div>
+			    <div class="portlet-body form">
+                            <!-- BEGIN FORM-->
+                            <form class="form-horizontal" role="form">
+                            <div class="form-body">																							
+                            <div class="row">
+                                <div class="col-md-6">
+                                <div class="form-group">
+                                <label class="control-label col-md-3">Επωνυμία πελάτη:</label>
+                                <div class="col-md-9">
+                                <p class="form-control-static">{{leename}}</p>
+                                </div>
+                                </div>
+                                </div>
+                            <!--/span-->
+				<div class="col-md-6">
+				<div class="form-group">
+                                <label class="control-label col-md-3">ΑΦΜ:</label>
 															<div class="col-md-9">
 																<p class="form-control-static">
 																	 {{leeafm}}
@@ -116,466 +111,68 @@
 									</div>
 								</div>
 			<div class="row">
-                            <div class="col-md-12">
-                                
-                                <div class="tabbable tabbable-custom boxless tabbable-reversed">
-						<ul class="nav nav-tabs">
-							<li class="active">
-								<a href="#tab_0" data-toggle="tab">
-							           ΚΡΕΜΟΣΑΠΟΥΝΑ-ΑΝΤΙΣΗΠΤΙΚΑ </a>
-							</li>
-							<li>
-								<a href="#tab_1" data-toggle="tab">
-								   ΠΡΟΙΟΝΤΑ ΠΙΣΙΝΑΣ </a>
-							</li>
-							<li>
-								<a href="#tab_2" data-toggle="tab">
-								    ΕΠΑΓΓΕΛΜΑΤΙΚΑ ΧΑΡΤΙΚΑ </a>
-							</li>
-							<li>
-								<a href="#tab_3" data-toggle="tab">
-								ΥΓΡΑ ΑΠΟΡΡΥΠΑΝΤΙΚΑ ΠΙΑΤΩΝ </a>
-							</li>
-							<li>
-								<a href="#tab_4" data-toggle="tab">
-								ΚΑΘΑΡΙΣΜΟΣ & ΦΡΟΝΤΙΔΑ ΔΑΠΕΔΩΝ </a>
-							</li>
-							<li>
-								<a href="#tab_5" data-toggle="tab">
-								ΠΡΟΙΟΝΤΑ ΧΛΩΡΙΟΥ </a>
-							</li>
-							<li>
-								<a href="#tab_6" data-toggle="tab">
-								ΥΓΡΑ ΜΑΛΑΚΤΙΚΑ ΡΟΥΧΩΝ </a>
-							</li>
-							
-						</ul>
+                            <div class="col-md-12">                               
+                                <div class="tabbable tabbable-custom tabbable-reversed">
+                                    <ul class="nav nav-tabs"> 
+                                        {% for tab in tabnames %}
+                                        <li><a href="#tab_{{ tab }}" data-toggle="tab">{{ tab }}</a></li>
+                                        {% endfor %}
+                                                                            
+                                     </ul>
                                     
-						<div class="tab-content">
-                                                    <div class="tab-pane active" id="tab_0">
-                                                        <div class="portlet box blue-hoki">
-									<div class="portlet-title">
-										<div class="caption">
-											<i class="fa fa-gift"></i>ΚΡΕΜΟΣΑΠΟΥΝΑ-ΑΝΤΙΣΗΠΤΙΚΑ
-										</div>
-										
-									</div>
-							    <div class="portlet-body">
-                                                        
-                                                            <div class="simpleCart_shelfItem">
-                                                            <h3 class="item_name">TENSION PRIMAVERA ΡΟΖ(LUX WHITE)</h3>
-                                                            <img src="theme/assets/admin/layout/img/alinda products/2.png" width="42" height="62" />
-                                                            <p>ΣΥΣΚΕΥΑΣΙΑ:
-                                                             <select name="select" class="item_eidos">
-                                                                <option selected="selected" value="4ΤΕΜ.X4lt">4ΤΕΜ.X4lt</option>
-                                                                <option value="12ΤΕΜ.Χ1000GR">2ΤΕΜ.Χ1000GR</option>
-                                                               
-                                                              </select>
-                                                             </p>
-                                                             <p>Ποσότ:<input type="text" class="item_quantity" value="1" size="4"/>
-                                                             </p>
-                                                             <p>Τιμή:<strong class="item_price">5</strong> €
-                                                             </p>
-                                                               <input id="s1" class="item_add" value="add to cart" type="button">
-                                                            </div>
-                                                            <div class="simpleCart_shelfItem">
-                                                            <h3 class="item_name">TENSION PRIMAVERA ΛΕΥΚΟ(DOVE)</h3>
-                                                            <img src="theme/assets/admin/layout/img/alinda products/3.jpg" width="42" height="62" />
-                                                            <p>ΣΥΣΚΕΥΑΣΙΑ:
-                                                             <select name="select" class="item_eidos">
-                                                                <option selected="selected" value="4ΤΕΜ.X4lt">4ΤΕΜ.X4lt</option>
-                                                                <option value="12ΤΕΜ.Χ1000GR">2ΤΕΜ.Χ1000GR</option>
-                                                               
-                                                              </select>
-                                                             </p>
-                                                              <p>Ποσότ:<input type="text" class="item_quantity" value="1" size="4"/>
-                                                              </p>
-                                                             <p>Τιμή:<strong class="item_price">5</strong> €
-                                                             </p>
-                                                               <input id="s1" class="item_add" value="add to cart" type="button">
-                                                            </div>
-                                                            <div class="simpleCart_shelfItem">
-                                                            <h3 class="item_name">TENSION PRIMAVERA ΜΠΛΕ(DOVE)</h3>
-                                                            <img src="theme/assets/admin/layout/img/alinda products/4.jpg" width="42" height="62" />
-                                                            <p>ΣΥΣΚΕΥΑΣΙΑ:
-                                                             <select name="select" class="item_eidos">
-                                                                <option selected="selected" value="4ΤΕΜ.X4lt">4ΤΕΜ.X4lt</option>
-                                                                <option value="12ΤΕΜ.Χ1000GR">2ΤΕΜ.Χ1000GR</option>
-                                                               
-                                                              </select>
-                                                             </p>
-                                                              <p>Ποσότ:<input type="text" class="item_quantity" value="1" size="4"/>
-                                                              </p>
-                                                             <p>Τιμή:<strong class="item_price">5</strong> €
-                                                             </p>
-                                                               <input id="s1" class="item_add" value="add to cart" type="button">
-                                                           </div>
-                                                            <div class="simpleCart_shelfItem">
-                                                            <h3 class="item_name">SPARK ANTISEPT</h3>
-                                                            <img src="theme/assets/admin/layout/img/alinda products/5.jpg" width="42" height="62" />
-                                                            <p>ΣΥΣΚΕΥΑΣΙΑ:
-                                                             <select name="select" class="item_eidos">
-                                                                <option selected="selected" value="4ΤΕΜ.X4lt">4ΤΕΜ.X4lt</option>
-                                                                <option  value="12ΤΕΜ.X300ML">12ΤΕΜ.X300ML</option>
-                                                              </select>
-                                                             </p>
-                                                              <p>Ποσότ:<input type="text" class="item_quantity" value="1" size="4"/>
-                                                              </p>
-                                                             <p>Τιμή:<strong class="item_price">5</strong> €
-                                                             </p>
-                                                               <input id="s1" class="item_add" value="add to cart" type="button">
-                                                             </div>
-                                                            <div class="simpleCart_shelfItem">
-                                                            <h3 class="item_name">VITAL ΦΡΑΟΥΛΑ-ΒΑΝΙΛΙΑ</h3>
-                                                            <img src="theme/assets/admin/layout/img/alinda products/6.jpg" width="42" height="62" />
-                                                            <p>ΣΥΣΚΕΥΑΣΙΑ:
-                                                             <select name="select" class="item_eidos">
-                                                                
-                                                                <option selected="selected" value="15ΤΕΜ.X500ML">15ΤΕΜ.X500ML</option>
-                                                              </select>
-                                                             </p>
-                                                              <p>Ποσότ:<input type="text" class="item_quantity" value="1" size="4"/>
-                                                              </p>
-                                                             <p>Τιμή:<strong class="item_price">5</strong> €
-                                                             </p>
-                                                               <input id="s1" class="item_add" value="add to cart" type="button">
-                                                               </div>
-                                                            <div class="simpleCart_shelfItem">
-                                                            <h3 class="item_name">VITAL ΜΕΛΙ-ΓΑΛΑ</h3>
-                                                            <img src="theme/assets/admin/layout/img/alinda products/9.jpg" width="42" height="62" />
-                                                            <p>ΣΥΣΚΕΥΑΣΙΑ:
-                                                             <select name="select" class="item_eidos">
-                                                                
-                                                                <option selected="selected" value="15ΤΕΜ.X500ML">15ΤΕΜ.X500ML</option>
-                                                              </select>
-                                                             </p>
-                                                              <p>Ποσότ:<input type="text" class="item_quantity" value="1" size="4"/>
-                                                              </p>
-                                                             <p>Τιμή:<strong class="item_price">5</strong> €
-                                                             </p>
-                                                               <input id="s1" class="item_add" value="add to cart" type="button">
-                                                               </div>
-                                                            <div class="simpleCart_shelfItem">
-                                                            <h3 class="item_name">VITAL ΓΑΛΑ-ΑΜΥΓΔΑΛΟΥ</h3>
-                                                            <img src="theme/assets/admin/layout/img/alinda products/8.jpg" width="42" height="62" />
-                                                            <p>ΣΥΣΚΕΥΑΣΙΑ:
-                                                             <select name="select" class="item_eidos">
-                                                                
-                                                                <option selected="selected" value="15ΤΕΜ.X500ML">15ΤΕΜ.X500ML</option>
-                                                              </select>
-                                                             </p>
-                                                              <p>Ποσότ:<input type="text" class="item_quantity" value="1" size="4"/>
-                                                              </p>
-                                                             <p>Τιμή:<strong class="item_price">5</strong> €
-                                                             </p>
-                                                               <input id="s1" class="item_add" value="add to cart" type="button">
-                                                               </div>
-                                                            <div class="simpleCart_shelfItem">
-                                                            <h3 class="item_name">VITAL ΧΑΜΟΜΗΛΙ</h3>
-                                                            <img src="theme/assets/admin/layout/img/alinda products/10.jpg" width="42" height="62" />
-                                                            <p>ΣΥΣΚΕΥΑΣΙΑ:
-                                                             <select name="select" class="item_eidos">
-                                                                
-                                                                <option selected="selected" value="15ΤΕΜ.X500ML">15ΤΕΜ.X500ML</option>
-                                                              </select>
-                                                             </p>
-                                                              <p>Ποσότ:<input type="text" class="item_quantity" value="1" size="4"/>
-                                                              </p>
-                                                             <p>Τιμή:<strong class="item_price">5</strong> €
-                                                             </p>
-                                                               <input id="s1" class="item_add" value="add to cart" type="button">
-                                                            </div>
-                                                            <div class="simpleCart_shelfItem">
-                                                            <h3 class="item_name">ΑΛΚΟΟΛΟΥΧΟ ANTISEPT GEL</h3>
-                                                            <img src="theme/assets/admin/layout/img/alinda products/7.jpg" width="42" height="62" />
-                                                            <p>ΣΥΣΚΕΥΑΣΙΑ:
-                                                             <select name="select" class="item_eidos">
-                                                                <option selected="selected"  value="4ΤΕΜ.X4LT">4ΤΕΜ.X4LT</option>
-                                                                <option   value="15ΤΕΜ.X500ML">15ΤΕΜ.X500ML</option>
-                                                                <option   value="24ΤΕΜ.X80ML">24ΤΕΜ.X80ML</option>
-                                                              </select>
-                                                             </p>
-                                                              <p>Ποσότ:<input type="text" class="item_quantity" value="1" size="4"/>
-                                                              </p>
-                                                             <p>Τιμή:<strong class="item_price">5</strong> €
-                                                             </p>
-                                                               <input id="s1" class="item_add" value="add to cart" type="button">
-                                                               </div>
-                                                            <div class="simpleCart_shelfItem">
-                                                            <h3 class="item_name">VITAL ΧΑΜΟΜΗΛΙ</h3>
-                                                            <img src="theme/assets/admin/layout/img/alinda products/7.jpg" width="42" height="62" />
-                                                            <p>ΣΥΣΚΕΥΑΣΙΑ:
-                                                             <select name="select" class="item_eidos">
-                                                                
-                                                               <option  value="15ΤΕΜ.X500ML">15ΤΕΜ.X500ML</option>
-                                                             </select>
-                                                             </p>
-                                                             <p>Ποσότ:<input type="text" class="item_quantity" value="1" size="4"/>
-                                                             </p>
-                                                             <p>Τιμή:<strong class="item_price">5</strong> €
-                                                             </p>
-                                                              <input id="s1" class="item_add" value="add to cart" type="button">
-                                                              </div>
-                                                            <div class="simpleCart_shelfItem">
-                                                            <h3 class="item_name">VITAL ΧΑΜΟΜΗΛΙ</h3>
-                                                            <img src="theme/assets/admin/layout/img/alinda products/8.jpg" width="42" height="62" />
-                                                            <p>ΣΥΣΚΕΥΑΣΙΑ:
-                                                             <select name="select" class="item_eidos">
-                                                                
-                                                               <option  value="15ΤΕΜ.X500ML">15ΤΕΜ.X500ML</option>
-                                                             </select>
-                                                             </p>
-                                                             <p>Ποσότ:<input type="text" class="item_quantity" value="1" size="4"/>
-                                                             </p>
-                                                             <p>Τιμή:<strong class="item_price">5</strong> €
-                                                             </p>
-                                                              <input id="s1" class="item_add" value="add to cart" type="button">
-                                                              </div>
-                                                            <div class="simpleCart_shelfItem">
-                                                            <h3 class="item_name">ΑΛΚΟΟΛΟΥΧΟ ANTISEPT GEL</h3>
-                                                            <img src="theme/assets/admin/layout/img/alinda products/11.jpg" width="42" height="62" />
-                                                            <p>ΣΥΣΚΕΥΑΣΙΑ:
-                                                             <select name="select" class="item_eidos">
-                                                                <option selected="selected"  value="4ΤΕΜ.X4LT">4ΤΕΜ.X4LT</option>
-                                                                <option   value="15ΤΕΜ.X500ML">15ΤΕΜ.X500ML</option>
-                                                                <option   value="24ΤΕΜ.X80ML">24ΤΕΜ.X80ML</option>
-                                                              </select>
-                                                             </p>
-                                                              <p>Ποσότ:<input type="text" class="item_quantity" value="1" size="4"/>
-                                                              </p>
-                                                             <p>Τιμή:<strong class="item_price">5</strong> €
-                                                             </p>
-                                                               <input id="s1" class="item_add" value="add to cart" type="button">
-                                                               </div>
-                                                            <div class="simpleCart_shelfItem">
-                                                            <h3 class="item_name">VITAL ΧΑΜΟΜΗΛΙ</h3>
-                                                            <img src="theme/assets/admin/layout/img/alinda products/12.jpg" width="42" height="62" />
-                                                            <p>ΣΥΣΚΕΥΑΣΙΑ:
-                                                             <select name="select" class="item_eidos">
-                                                                
-                                                               <option  value="15ΤΕΜ.X500ML">15ΤΕΜ.X500ML</option>
-                                                             </select>
-                                                             </p>
-                                                             <p>Ποσότ:<input type="text" class="item_quantity" value="1" size="4"/>
-                                                             </p>
-                                                             <p>Τιμή:<strong class="item_price">5</strong> €
-                                                             </p>
-                                                              <input id="s1" class="item_add" value="add to cart" type="button">
-                                                              </div>
-                                                            <div class="simpleCart_shelfItem">
-                                                            <h3 class="item_name">VITAL ΧΑΜΟΜΗΛΙ</h3>
-                                                            <img src="theme/assets/admin/layout/img/alinda products/13.jpg" width="42" height="62" />
-                                                            <p>ΣΥΣΚΕΥΑΣΙΑ:
-                                                             <select name="select" class="item_eidos">
-                                                                
-                                                              <option  value="15ΤΕΜ.X500ML">15ΤΕΜ.X500ML</option>
-                                                             </select>
-                                                             </p>
-                                                             <p>Ποσότ:<input type="text" class="item_quantity" value="1" size="4"/>
-                                                             </p>
-                                                             <p>Τιμή:<strong class="item_price">5</strong> €
-                                                             </p>
-                                                              <input id="s1" class="item_add" value="add to cart" type="button">
-                                                              </div> 
-                                                            <div class="simpleCart_shelfItem">
-                                                            <h3 class="item_name">VITAL ΧΑΜΟΜΗΛΙ</h3>
-                                                            <img src="theme/assets/admin/layout/img/alinda products/7.jpg" width="42" height="62" />
-                                                            <p>ΣΥΣΚΕΥΑΣΙΑ:
-                                                             <select name="select" class="item_eidos">
-                                                                
-                                                               <option  value="15ΤΕΜ.X500ML">15ΤΕΜ.X500ML</option>
-                                                             </select>
-                                                             </p>
-                                                             <p>Ποσότ:<input type="text" class="item_quantity" value="1" size="4"/>
-                                                             </p>
-                                                             <p>Τιμή:<strong class="item_price">5</strong> €
-                                                             </p>
-                                                              <input id="s1" class="item_add" value="add to cart" type="button">
-                                                              </div>
-                                                            <div class="simpleCart_shelfItem">
-                                                            <h3 class="item_name">VITAL ΧΑΜΟΜΗΛΙ</h3>
-                                                            <img src="theme/assets/admin/layout/img/alinda products/3.jpg" width="42" height="62" />
-                                                            <p>ΣΥΣΚΕΥΑΣΙΑ:
-                                                             <select name="select" class="item_eidos">
-                                                                
-                                                               <option  value="15ΤΕΜ.X500ML">15ΤΕΜ.X500ML</option>
-                                                             </select>
-                                                             </p>
-                                                             <p>Ποσότ:<input type="text" class="item_quantity" value="1" size="4"/>
-                                                             </p>
-                                                             <p>Τιμή:<strong class="item_price">5</strong> €
-                                                             </p>
-                                                              <input id="s1" class="item_add" value="add to cart" type="button">
-                                                              </div>                                                             
-                                                        
-                                                             </div>
-                                                        </div>
-                                                        
-                                                    </div>  
-                                                    <div class="tab-pane" id="tab_1">
-                                                        <div class="simpleCart_shelfItem">
-                                                                <h3 class="item_name">UltraMax W100</h3>
-                                                                <img src="Mozilla%20Store%20-%20SimpleCart%28JS%29%20Demo_files/ultramaxw100.jpg" width="42" height="62" />
-                                                                <p>Είδος:
-                                                                 <select name="select" class="item_eidos">
-                                                                    <option selected="selected" value="1Dox X 20lt">1Dox X 20lt</option>
-                                                                    <option value="1Dox X 13lt">1Dox X 13lt</option>
-                                                                    <option value="4 temX4lt">4 temX4lt</option>
-                                                                  </select>
-                                                                </p>
-                                                                <p>Ποσότ:	  <input type="text" class="item_quantity" value="1" size="4"/>
-                                                                </p>
-                                                                    <p>Τιμή:<strong class="item_price">5</strong> €
-                                                                   </p>
-                                                                   <input id="s1" class="item_add" value="add to cart" type="button">
-                                                                </div>
-                                                        <div class="simpleCart_shelfItem">
-                                                               <h3 class="item_name">UltraMax W50</h3>
-                                                                
-                                                                <p>Είδος:
-                                                                  <select name="select" class="item_eidos">
-                                                                    <option selected="selected" value="1Dox X 20lt">1Dox X 20lt</option>
-                                                                    <option value="1Dox X 13lt">1Dox X 13lt</option>
-                                                                    <option value="4 temX4lt">4 temX4lt</option>
-                                                                  </select>
-                                                                </p>
-                                                                <p>Ποσότ:	  <input type="text" class="item_quantity" value="1" size="4"/>
-                                                                </p>
-                                                                    <p>Timh:       <strong class="item_price">5</strong> €
-                                                                   </p>
-                                                                   <input id="s1" class="item_add" value="add to cart" type="button">
-                                                              </div>
-                                                        <div class="simpleCart_shelfItem">
-                                                                <h3 class="item_name">UltraMax W33</h3>
-                                                                
-                                                                <p>Είδος:
-                                                                  <select name="select" class="item_eidos">
-                                                                    <option selected="selected" value="1Dox X 20lt">1Dox X 20lt</option>
-                                                                    <option value="1Dox X 13lt">1Dox X 13lt</option>
-                                                                    <option value="4 temX4lt">4 temX4lt</option>
-                                                                  </select>
-                                                                </p>
-                                                                <p>Ποσότ:	  <input type="text" class="item_quantity" value="1" size="6"/>
-                                                                </p>
-                                                                    <p>Timh:       <strong class="item_price">5</strong> €
-                                                                   </p>
-                                                                   <input id="s1" class="item_add" value="add to cart" type="button">
-                                                              </div>
-                                                        <div class="simpleCart_shelfItem last">
-                                                                <h3 class="item_name">Premwash 2000 Skoni</h3>
-                                                                <p>Είδος:
-                                                                  <select name="select" class="item_eidos">
-                                                                    <option selected="selected" value="1Dox X 20lt">1Dox X 20lt</option>
-                                                                    <option value="1Dox X 13lt">1Dox X 13lt</option>
-                                                                    <option value="4 temX4lt">4 temX4lt</option>
-                                                                  </select>
-                                                                </p>
-                                                                <p>Ποσότ:<input type="text" class="item_quantity" value="1" size="6"/>
-                                                                </p>
-                                                                    <p>Τιμη:<strong class="item_price">5</strong> €
-                                                                   </p>
-                                                                <strong class="item_price">5</strong> <input id="s5" class="item_add" value="add to cart" type="button">     
-                                                        </div>
-                                                    </div>
-                                                    <div class="tab-pane" id="tab_2">
-                                                        <h2> ΕΠΑΓΓΕΛΜΑΤΙΚΑ ΛΑΜΠΥΡΙΚΑ ΠΛΥΝΤΗΡΙΟΥ ΠΙΑΤΩΝ</h2>
-	
-    <div class="simpleCart_shelfItem">
-      <h3 class="item_name">Stainon R100</h3>
-      <img src="Mozilla%20Store%20-%20SimpleCart%28JS%29%20Demo_files/ultramaxw100.jpg" width="42" height="62" />
-      <p>eidos:
-        <select name="select" class="item_eidos">
-          <option selected="selected" value="1Dox X 20lt">1Dox X 20lt</option>
-          <option value="1Dox X 13lt">1Dox X 13lt</option>
-          <option value="4 temX4lt">4 temX4lt</option>
-        </select>
-      </p>
-      <p>Posothta:	  <input type="text" class="item_quantity" value="1" size="6"/>
-      </p>
-	  <p>Timh:       <strong class="item_price">58</strong> Euro
-	 </p>
-	 <input id="s1" class="item_add" value="add to cart" type="button">
-    </div>
-    
-    <div class="simpleCart_shelfItem">
-      <h3 class="item_name">Stainon R50</h3>
-      <img src="Mozilla%20Store%20-%20SimpleCart%28JS%29%20Demo_files/ultramaxw50.jpg" width="42" height="62" />
-      <p>eidos:
-        <select name="select" class="item_eidos">
-          <option selected="selected" value="1Dox X 20lt">1Dox X 20lt</option>
-          <option value="1Dox X 13lt">1Dox X 13lt</option>
-          <option value="4 temX4lt">4 temX4lt</option>
-        </select>
-      </p>
-      <p>Posothta:	  <input type="text" class="item_quantity" value="1" size="6"/>
-      </p>
-	  <p>Timh:       <strong class="item_price">5</strong> Euro
-	 </p>
-	 <input id="s1" class="item_add" value="add to cart" type="button">
-    </div>
+				<div class="tab-content">
+                                    {% for tab in tabnames %}
+                                    <div class="tab-pane active" id="tab_{{ tab}}">
+                                        {% for cat in catTab %}                                           
+                                          {% if cat.tabname == tab %}                                                                                    
+                                            <div class="portlet box blue-hoki">
+                                                <div class="portlet-title">
+                                                        <div class="caption">
 
-    <div class="simpleCart_shelfItem">
-      <h3 class="item_name">Stainon R33</h3>
-      <img src="Mozilla%20Store%20-%20SimpleCart%28JS%29%20Demo_files/ultramaxw33.jpg" width="42" height="62" />
-      <p>Είδος:
-        <select name="select" class="item_eidos">
-          <option selected="selected" value="1Dox X 20lt">1Dox X 20lt</option>
-          <option value="1Dox X 13lt">1Dox X 13lt</option>
-          <option value="4 temX4lt">4 temX4lt</option>
-        </select>
-      </p>
-      <p>Ποσότητα<input type="text" class="item_quantity" value="1" size="6"/>
-      </p>
-	  <p>Τιμή: <strong class="item_price">5</strong> Euro
-	 </p>
-	 <input id="s1" class="item_add" value="add to cart" type="button">
-    </div>
-                                                                                                          
-	
-    <div class="simpleCart_shelfItem">
-      <h3 class="item_name">DLM 500 ΑΦΑΛΑΤΙΚΟ</h3>
-      <img src="Mozilla%20Store%20-%20SimpleCart%28JS%29%20Demo_files/ultramaxw100.jpg" width="42" height="62" />
-      <p>είδος:
-        <select name="select" class="item_eidos">
-          <option value="1Dox X 13lt">1Dox X 13lt</option>
-          <option value="4 temX4lt">4 temX4lt</option>
-        </select>
-      </p>
-      <p>Ποσότ:	  <input type="text" class="item_quantity" value="1" size="6"/>
-      </p>
-	  <p>Τομή: <strong class="item_price">5</strong> Euro
-	 </p>
-	 <input id="s1" class="item_add" value="add to cart" type="button">
-    </div>
-    
-    <div class="simpleCart_shelfItem">
-      <h3 class="item_name">Plynthreks</h3>
-      <img src="Mozilla%20Store%20-%20SimpleCart%28JS%29%20Demo_files/ultramaxw50.jpg" width="42" height="62" />
-      <p>Συσκευασία:
-        <select name="select" class="item_eidos">
-          <option selected="selected" value="Lemon skonh">Lemon skonh</option>
-          <option value="Tampletes 20">Tampletes 20</option>
-          <option value="Alati">Alati</option>
-        </select>
-      </p>
-      <p>Ποσότ:<input type="text" class="item_quantity" value="1" size="6"/>
-      </p>
-	  <p>Τιμή:<strong class="item_price">5</strong> Euro
-	 </p>
-	 <input id="s1" class="item_add" value="add to cart" type="button">
-       </div>
-                                                    </div>
-                                                    <div class="tab-pane" id="tab_3">
-   
-    </div>
-                                                    <div class="tab-pane" id="tab_4"></div>
-                                                    <div class="tab-pane" id="tab_5"></div>
-                                                    <div class="tab-pane" id="tab_6"></div>
-                                                    
+                                                                <i class="fa fa-gift"></i>{{ cat.category }}
+                                                        </div>
+
                                                 </div>
+                                                <div class="portlet-body">
+                                                    {% for result in res %}
+                                                        {% if result.category == cat.category %}
+
+                                                    {{ result.productname }}
+                                                    <hr>
+                                                        {% endif %}
+                                                    {% endfor %}
+
+                                                </div>
+                                            </div>
+                                          
+                                          {% endif %}
+                                           
+                                        {% endfor %}           
+                                    </div>  
+                                    {% endfor %}             
+                                </div>
                                                         
                                 </div>
                             </div>
+                        </div>
+                        
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                             <div class="simpleCart_shelfItem dashboard-stat blue-hoki ">
+                             <h3 class="item_name">TENSION PRIMAVERA ΡΟΖ(LUX WHITE)</h3>
+                             <img src="theme/assets/admin/layout/img/alinda products/2.png" width="42" height="62" />
+                             <p>ΣΥΣΚΕΥΑΣΙΑ:
+                              <select name="select" class="item_eidos">
+                                 <option selected="selected" value="4ΤΕΜ.X4lt">4ΤΕΜ.X4lt</option>
+                                 <option value="12ΤΕΜ.Χ1000GR">2ΤΕΜ.Χ1000GR</option>
+
+                               </select>
+                              </p>
+                              <p>Ποσότ:<input type="text" class="item_quantity" value="1" size="4"/>
+                              </p>
+                              <p>Τιμή:<strong class="item_price">5</strong> €
+                              </p>
+                                <input id="s1" class="item_add" value="add to cart" type="button">
+                             </div>
                         </div>
                       
 		     

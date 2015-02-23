@@ -60,7 +60,7 @@ Change Quick Sidebar Width
 */
 .alignRight { text-align:right; }
 
-/* STILI PRODOTTO */
+/* STILI PRODOTTO 
 .simpleCart_shelfItem { 
 	float:left; 
 	display:inline; 
@@ -77,7 +77,7 @@ Change Quick Sidebar Width
 .simpleCart_shelfItem.last {
 	margin-right:0;
 }
-
+*/
 .simpleCart_shelfItem p { 
 	margin:10px 0 0 0; 
 }
