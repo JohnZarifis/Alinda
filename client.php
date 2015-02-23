@@ -22,7 +22,7 @@ FROM TRN
 WHERE TRNDATE  BETWEEN 
 STR_TO_DATE('{$from}', '%d/%m/%Y')  AND SYSDATE()
 AND TRAID = {$traid}
-AND DOSCODE <> 'ΠΑΡΟ'
+AND DOSCODE NOT IN ('ΠΑΡΟ','ΠΑΡΑ')
 ORDER BY TRNID
 MARKER;
 //goro

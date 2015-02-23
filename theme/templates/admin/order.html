@@ -124,8 +124,9 @@
                                     {% for tab in tabnames %}
                                     <div class="tab-pane active" id="tab_{{ tab}}">
                                         {% for cat in catTab %}                                           
-                                          {% if cat.tabname == tab %}                                                                                    
-                                            <div class="portlet box blue-hoki">
+                                          {% if cat.tabname == tab %} 
+                                          <div class="row">
+                                            <div class="portlet box blue">
                                                 <div class="portlet-title">
                                                         <div class="caption">
 
@@ -136,15 +137,25 @@
                                                 <div class="portlet-body">
                                                     {% for result in res %}
                                                         {% if result.category == cat.category %}
+                                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                                            <div class="simpleCart_shelfItem dashboard-stat blue-madison ">
+                                                            <h3 class="item_name">{{ result.productname }}</h3>
+                                                            <h4 class="item_eidos"> ΣΥΣΚΕΥΑΣΙΑ: {{result.package}}</h4>                                                         
+                                                             <p>Ποσότ:<input type="text" class="item_quantity input-mini" value="1" size="4"/>
+                                                             </p>
+                                                             
+                                                               <input id="s1" class="item_add btn btn-lg blue" value="Add to cart" type="button">
+                                                            </div>
+                                                        </div>
 
-                                                    {{ result.productname }}
-                                                    <hr>
+                                                    
+                                                  
                                                         {% endif %}
                                                     {% endfor %}
 
                                                 </div>
                                             </div>
-                                          
+                                          </div>
                                           {% endif %}
                                            
                                         {% endfor %}           
@@ -156,24 +167,7 @@
                             </div>
                         </div>
                         
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                             <div class="simpleCart_shelfItem dashboard-stat blue-hoki ">
-                             <h3 class="item_name">TENSION PRIMAVERA ΡΟΖ(LUX WHITE)</h3>
-                             <img src="theme/assets/admin/layout/img/alinda products/2.png" width="42" height="62" />
-                             <p>ΣΥΣΚΕΥΑΣΙΑ:
-                              <select name="select" class="item_eidos">
-                                 <option selected="selected" value="4ΤΕΜ.X4lt">4ΤΕΜ.X4lt</option>
-                                 <option value="12ΤΕΜ.Χ1000GR">2ΤΕΜ.Χ1000GR</option>
-
-                               </select>
-                              </p>
-                              <p>Ποσότ:<input type="text" class="item_quantity" value="1" size="4"/>
-                              </p>
-                              <p>Τιμή:<strong class="item_price">5</strong> €
-                              </p>
-                                <input id="s1" class="item_add" value="add to cart" type="button">
-                             </div>
-                        </div>
+                        
                       
 		     
                       
@@ -183,7 +177,47 @@
 	
   <div class="row">
      <div class="col-md-12">
-     <div class="simpleCart_items"><div class="cartHeaders"><div class="itemName">Name</div><div class="itemSize">Eidos</div><div class="itemPrice">Price</div><div class="itemdecrement">decrement</div><div class="itemQuantity">Quantity</div><div class="itemincrementgoro">incrementgoro</div><div class="itemremove">remove</div><div class="itemTotal">Total</div></div><div class="itemContainer"><div class="itemName">Navy Firefox T-Shirt</div><div class="itemSize">Small</div><div class="itemPrice">€10.71</div><div class="itemdecrement"><a href="javascript:;" onclick="simpleCart.items['c6'].decrement();">-</a></div><div class="itemQuantity">1</div><div class="itemincrementww"><a href="javascript:;" onclick="simpleCart.items['c6'].increment();">+</a></div><div class="itemremove"><a href="javascript:;" onclick="simpleCart.items['c6'].remove();">Remove</a></div><div class="itemTotal">€10.71</div></div><div class="itemContainer"><div class="itemName">Firefox Sweatshirt</div><div class="itemSize">Small</div><div class="itemPrice">€23.80</div><div class="itemdecrement"><a href="javascript:;" onclick="simpleCart.items['c7'].decrement();">-</a></div><div class="itemQuantity">1</div><div class="itemincrement"><a href="javascript:;" onclick="simpleCart.items['c7'].increment();">+</a></div><div class="itemremove"><a href="javascript:;" onclick="simpleCart.items['c7'].remove();">Remove</a></div><div class="itemTotal">€23.80</div></div><div class="itemContainer"><div class="itemName">Firefox Polo Cap</div><div class="itemSize"> </div><div class="itemPrice">€11.31</div><div class="itemdecrement"><a href="javascript:;" onclick="simpleCart.items['c8'].decrement();">-</a></div><div class="itemQuantity">1</div><div class="itemincrement"><a href="javascript:;" onclick="simpleCart.items['c8'].increment();">+</a></div><div class="itemremove"><a href="javascript:;" onclick="simpleCart.items['c8'].remove();">Remove</a></div><div class="itemTotal">€11.31</div></div></div>
+     <div class="simpleCart_items">
+         <div class="cartHeaders">
+             <div class="itemName">Name
+             </div>
+             <div class="itemSize">Eidos
+             </div>
+             <div class="itemPrice">Price</div>
+             <div class="itemdecrement">decrement</div>
+             <div class="itemQuantity">Quantity</div>
+             <div class="itemincrementgoro">incrementgoro</div>
+             <div class="itemremove">remove</div>
+             <div class="itemTotal">Total</div>
+                 
+         </div>
+         <div class="itemContainer">
+             <div class="itemName">Navy Firefox T-Shirt</div>
+             <div class="itemSize">Small</div>
+             <div class="itemPrice">€10.71</div>
+             <div class="itemdecrement">
+                 <a href="javascript:;" onclick="simpleCart.items['c6'].decrement();">-</a></div>
+             <div class="itemQuantity">1</div><div class="itemincrementww"><a href="javascript:;" onclick="simpleCart.items['c6'].increment();">+</a></div>
+             <div class="itemremove"><a href="javascript:;" onclick="simpleCart.items['c6'].remove();">Remove</a></div>
+             <div class="itemTotal">€10.71</div></div><div class="itemContainer">
+             <div class="itemName">Firefox Sweatshirt</div>
+             <div class="itemSize">Small</div><div class="itemPrice">€23.80</div>
+             <div class="itemdecrement"><a href="javascript:;" onclick="simpleCart.items['c7'].decrement();">-</a></div>
+             <div class="itemQuantity">1</div><div class="itemincrement"><a href="javascript:;" onclick="simpleCart.items['c7'].increment();">+</a></div>
+             <div class="itemremove"><a href="javascript:;" onclick="simpleCart.items['c7'].remove();">Remove</a></div>
+             <div class="itemTotal">€23.80</div></div>
+         <div class="itemContainer">
+             <div class="itemName">Firefox Polo Cap</div>
+             <div class="itemSize"> </div><div class="itemPrice">€11.31</div>
+             <div class="itemdecrement"><a href="javascript:;" onclick="simpleCart.items['c8'].decrement();">-</a>
+             </div><div class="itemQuantity">1</div>
+             <div class="itemincrement"><a href="javascript:;" onclick="simpleCart.items['c8'].increment();">+</a></div>
+             <div class="itemremove"><a href="javascript:;" onclick="simpleCart.items['c8'].remove();">Remove</a></div>
+             <div class="itemTotal">€11.31</div>
+             
+         </div>
+                 
+     </div>
      
     
     <div class="clear">&nbsp;</div>

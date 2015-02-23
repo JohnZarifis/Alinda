@@ -305,8 +305,12 @@
 									 ΝΕΑ ΠΑΡΑΓΓΕΛΙΑ
 								</th>
                                                                 <th>
+									 ΕΙΔΗ
+								</th>
+                                                                <th>
 									 ΑΦΜ
 								</th>
+                                                                
 							</tr>
 							</thead>
 							<tbody>
@@ -320,6 +324,7 @@
                                                          <td>{{ row['TZIROS']}}</td>
                                                          <td><a href="client.php?traid={{row['TRAID']}}">{{ row['LEENAME']}}</a></td>
                                                          <td><a href="order.php?traid={{row['TRAID']}}">Νέα Παραγγελία</a></td>
+                                                         <td><a href="goods.php?traid={{row['TRAID']}}">Είδη</a></td>
                                                          <td>{{ row['LEEAFM']}}</td>
                                                          </tr>
                                                           {% endfor %}

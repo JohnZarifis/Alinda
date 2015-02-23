@@ -248,8 +248,8 @@ function Cart(){
 			counter = 1;
 		form.style.display = "none";
 		form.method = "POST";
-		form.action = ""; //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< JOHN
-//		form.action = "http://127.0.0.1/alinda/print.php"; //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< JOHN
+		form.action = "insertOrder.php"; //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< JOHN
+//		form.action = "http://127.0.0.1:78/alinda/insertOrder.php"; //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< JOHN
 //		form.action = "https://checkout.google.com/api/checkout/v2/checkoutForm/Merchant/" + 
 //						me.merchantId;
 		form.acceptCharset = "utf-8";
