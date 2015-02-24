@@ -237,8 +237,13 @@
                     
         </div>
        </div>
-              
-          
+
+<form><!-- HIDE THE POST INFO HERE JOHN-->
+<input type="hidden" name="hiddenpost" id="hiddenpost" value="{{leename}}">
+<input type="hidden" name="hiddenpost2" id="hiddenpost2" value="lal">
+</form>	   
+
+		  
 <!-- END CONTENT -->
 
 {%  endblock %}
@@ -269,6 +274,9 @@
         simpleCart.currency = EUR;
 	simpleCart.taxRate  = 0.00;
 	simpleCart.shippingFlatRate = 15.00;
+	simpleCart.paparas="lol";
+
+//	simpleCart.paparas={{leename}};
 
 	simpleCart.cartHeaders = ["Name" , "eidos", "Price" , "decrement" , "Quantity", "increment", "remove", "Total" ];
 </script>

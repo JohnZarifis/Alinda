@@ -173,6 +173,7 @@ function Cart(){
 				simpleCart.paypalCheckout();
 				break;
 			case GoogleCheckout:
+			alert(simpleCart.paparas);
 				simpleCart.googleCheckout();
 				break;
 			case Email:
@@ -253,7 +254,14 @@ function Cart(){
 //		form.action = "https://checkout.google.com/api/checkout/v2/checkoutForm/Merchant/" + 
 //						me.merchantId;
 		form.acceptCharset = "utf-8";
-		
+
+		//JOHN
+		var hidden_post=document.getElementById("hiddenpost");
+		form.appendChild( me.createHiddenElement( "hidden_post_" 	, hidden_post.value 	) );
+		alert(hidden_post.value);
+		var hidden_post=document.getElementById("hiddenpost2");
+		form.appendChild( me.createHiddenElement( "hidden_post_2" 	, hidden_post.value 	) );
+		alert(hidden_post.value);
 		for( var current in me.items ){
 			var item = me.items[current];
 			form.appendChild( me.createHiddenElement( "item_name_" 		+ counter, item.name		) );
@@ -262,7 +270,8 @@ function Cart(){
 			form.appendChild( me.createHiddenElement( "item_currency_" 	+ counter, me.currency 	) );
 			form.appendChild( me.createHiddenElement( "item_tax_rate_" 	+ counter, me.taxRate 	) );
 			form.appendChild( me.createHiddenElement( "_charset_"					 , ""				) );
-			
+
+
 			var descriptionString = "";
 			
 			for( var field in item){

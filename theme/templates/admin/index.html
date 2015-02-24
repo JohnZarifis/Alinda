@@ -249,6 +249,7 @@
 								</div>
 							</div>
 						</div>
+						
 						<div class="portlet-body">
 							<div id="site_activities_loading">
 								<img src="theme/assets/admin/layout/img/loading.gif" alt="loading"/>
@@ -371,5 +372,32 @@
 <script src="theme/assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
 <script src="theme/assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
 <script src="theme/assets/admin/pages/scripts/table-advanced.js"></script>
+
+<script>
+jQuery(document).ready(function() {
+
+			//GORO INIT THE DATA CHART DATA HERE!
+			var chart_data  = GenerateSeries(0);
+			var chart_data2  = GenerateSeries(500);
+            function GenerateSeries(added) {
+                var data = [];
+                var start = 100 + added;
+                var end = 200 + added;
+
+                for (i = 1; i <= 12; i++) {
+				//JOHN
+                    var d = Math.floor(Math.random() * (end - start + 1) + start);
+                    data.push([i, d]); //HERE PUSH THE TOUPLE OF DATA. TODO GET THE REAL DATA PER MONTH!
+                    start++;
+                    end++;
+                }
+                return data;
+            }
+			
+Index_goro.initCharts(chart_data,chart_data2);
+
+});
+</script>
+
 
 {%  endblock %}

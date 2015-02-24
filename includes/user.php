@@ -72,7 +72,8 @@ class User{
             $sql  = "SELECT SLMID, SLMNAME,PSW,USERNAME FROM SLM ";
             $sql .= " WHERE USERNAME = '{$username}' ";
             $sql .= " AND slmid = '{$password}' ";
-
+//print_r ($sql);
+//exit();
             $result_array = self::find_by_sql($sql);
                         return !empty($result_array) ? array_shift($result_array) : false;
             //return $result_array;
