@@ -255,7 +255,7 @@ function Cart(){
 		form.acceptCharset = "utf-8";
 		
 		for( var current in me.items ){
-			var item 				= me.items[current];
+			var item = me.items[current];
 			form.appendChild( me.createHiddenElement( "item_name_" 		+ counter, item.name		) );
 			form.appendChild( me.createHiddenElement( "item_quantity_" 	+ counter, item.quantity 	) );
 			form.appendChild( me.createHiddenElement( "item_price_" 		+ counter, item.price		) );
