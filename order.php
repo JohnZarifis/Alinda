@@ -32,6 +32,7 @@ while ($row = mysql_fetch_assoc($resultProd))
                                                     'package'=>$row['package'],
                                                     'tab'=>$row['TAB'],
                                                     'tabname'=>$row['TABNAME'],
+                             
                                                     
                                                     
                                                     
@@ -58,6 +59,7 @@ foreach($MultiDimArray as $result){
                          $MultiCatArray[] = array ( 
                                                     'category'=>$row['CATEGORY'],                                                    
                                                     'tabname'=>$row['TABNAME'],
+                                                     
                                                     
                                                     
                                                     
@@ -82,6 +84,8 @@ if (isset($_POST['submit'])) {} // Form has been submitted.
                                'tabnames'=>$unique_tab,
                                'res'=>$MultiDimArray,
                                'catTab'=>$MultiCatArray,
+                               'traid'=>$traid,
+                               'slmid'=>$id,
       ));
   
 

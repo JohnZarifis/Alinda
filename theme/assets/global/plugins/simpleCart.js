@@ -259,6 +259,8 @@ function Cart(){
 		form.appendChild( me.createHiddenElement( "hidden_post_" 	, hidden_post.value 	) );
 		var hidden_post=document.getElementById("hiddenpost2");
 		form.appendChild( me.createHiddenElement( "hidden_post_2" 	, hidden_post.value 	) );
+                var hidden_post=document.getElementById("hiddenpost3");
+		form.appendChild( me.createHiddenElement( "hidden_post_3" 	, hidden_post.value 	) );
 		for( var current in me.items ){
 			var item = me.items[current];
 			form.appendChild( me.createHiddenElement( "item_name_" 		+ counter, item.name		) );

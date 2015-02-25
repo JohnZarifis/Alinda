@@ -14,6 +14,12 @@ print "<hr/>";
 $date = $_POST['hidden_post_2'];
 print $date;
 print "<hr/>";
+$test = $_POST['hidden_post_3'];
+print $test;
+print "<hr/>";
+print_r($_POST);
+print "<hr/>";
+
 
 $number=1;
 $item_name="item_name_".$number;

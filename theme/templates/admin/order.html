@@ -65,7 +65,7 @@
                             <!--/span-->
 				<div class="col-md-6">
 				<div class="form-group">
-                                <label class="control-label col-md-3">ΑΦΜ:</label>
+                                <label class="control-label col-md-3">ΑΦΜ:{{slmid}}</label>
 															<div class="col-md-9">
 																<p class="form-control-static">
 																	 {{leeafm}}
@@ -240,7 +240,8 @@
 
 <form><!-- HIDE THE POST INFO HERE JOHN-->
 <input type="hidden" name="hiddenpost" id="hiddenpost" value="{{leename}}">
-<input type="hidden" name="hiddenpost2" id="hiddenpost2" value="lal">
+<input type="hidden" name="hiddenpost2" id="hiddenpost2" value="{{traid}}">
+<input type="hidden" name="hiddenpost3" id="hiddenpost3" value="{{slmid}}">
 </form>	   
 
 		  
