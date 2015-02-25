@@ -13,8 +13,8 @@ $psw = $_SESSION['user_psw'];
 ///$sql = "select SLMID, SLMNAME, TRACODE, LEENAME,LEEAFM, ADRSFULLDEST, TZIROS08, TZIROS09, TZIROS10,TZIROS11,TZIROS12,XREOSI,PISTOSI,YPOLOIPO from Z_TSIROS_YPOLI";
 //$sql.= " WHERE SLMID = {$id} ";
 $text = 'tets';
-$from = '01/01/2014';
-$to =  'SYSDATE()'; 
+$from = '2014-01-01';
+$to =  '2015-01-01'; 
 $sql = <<<MARKER
 SELECT MIN(TRNDATE), MAX(TRNDATE) , TRAID,sum(XΡΕΩΣΗ),sum(ΠΙΣΤΩΣΗ),sum(ΤΖΙΡΟΣ),LEENAME,LEEAFM,
 SLMID
