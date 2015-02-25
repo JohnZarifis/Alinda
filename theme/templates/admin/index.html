@@ -212,7 +212,7 @@
 					<div class="portlet solid grey-cararra bordered">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-bullhorn"></i>Εισπράξεις
+								<i class="fa fa-bullhorn"></i>Εισπράξεις {{ GraphArray|json_encode() }};
 							</div>
 							<div class="actions">
 								<div class="btn-group pull-right">
@@ -271,7 +271,7 @@
 					<div class="portlet box blue-hoki">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-globe"></i>Πίνακας Πελατών
+								<i class="fa fa-globe"></i>Πίνακας Πελατών 
 							</div>
 							<div class="tools">
 							</div>
@@ -375,7 +375,8 @@
 
 <script>
 jQuery(document).ready(function() {
-
+                        //var chart_data= {{ GraphArray|json_encode() }};
+                        //alert({{ GraphArray|json_encode() }});
 			//GORO INIT THE DATA CHART DATA HERE!
 			var chart_data  = GenerateSeries(0);
 			var chart_data2  = GenerateSeries(500);

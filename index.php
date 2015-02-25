@@ -65,8 +65,17 @@ while ($row = mysql_fetch_assoc($result_set))
 //print_r($res);
 //print_r($MultiDimArray);
 
+$graphSql = "SELECT MONTH(TRNDATE) as MONTH ,SUM(ΤΖΙΡΟΣ) AS TZIROS FROM alinda.trn GROUP BY MONTH(TRNDATE) ";
+$result_graph = $database->query($graphSql);
+while ($row = mysql_fetch_assoc($result_graph)) {
+ //print_r($row);
+    $Grapharray[] = array (
+                     
+                     $row['MONTH']=>$row['TZIROS'],
+    );
 
-
+}
+$graph =  json_encode($Grapharray);
 $xreosi = 0;
 $pistosi = 0;
 $tziros = 0;
@@ -92,7 +101,9 @@ foreach($MultiDimArray as $result){
                                       'tziros' =>$tziros,
                                       'ypoloipo'=>$ypoloipo,
                                       'from'=>$from,
-                                      'to' => $to
+                                      'to' => $to,
+                                      'GraphArray'=>$Grapharray,
+                                      'graph'=>$graph
                                     ));
 
 ?>

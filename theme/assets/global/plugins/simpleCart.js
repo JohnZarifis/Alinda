@@ -235,6 +235,7 @@ function Cart(){
 	};
 
 	me.googleCheckout = function() {
+
 		var me = this;
 		/*
 		if( me.currency != USD && me.currency != GBP ){
