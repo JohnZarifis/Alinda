@@ -13,8 +13,8 @@ $psw = $_SESSION['user_psw'];
 ///$sql = "select SLMID, SLMNAME, TRACODE, LEENAME,LEEAFM, ADRSFULLDEST, TZIROS08, TZIROS09, TZIROS10,TZIROS11,TZIROS12,XREOSI,PISTOSI,YPOLOIPO from Z_TSIROS_YPOLI";
 //$sql.= " WHERE SLMID = {$id} ";
 $text = 'tets';
-$from = '2013-01-01';
-$to =  '2015-01-01';
+$from = '2014-01-01';
+$to =  date("Y-m-d");
 //$date = str_replace('/', '-', $from);
 //sql_from=date('d-m-Y', strtotime($date));
 //$date = str_replace('/', '-', $to);
@@ -31,15 +31,15 @@ GROUP BY TRAID ,LEENAME,LEEAFM,SLMID
 ORDER BY TRAID
 MARKER;
 
-if(isset($_POST['apo_value']) && isset($_POST['mexri_value'])){
-$from = $_POST['apo_value'];
-$to = $_POST['mexri_value'];
+if(isset($_POST['from']) && isset($_POST['to'])){
+$from = $_POST['from'];
+$to = $_POST['to'];
 $sql = <<<MARKER
 SELECT MIN(TRNDATE), MAX(TRNDATE), TRAID,sum(XΡΕΩΣΗ),sum(ΠΙΣΤΩΣΗ),sum(ΤΖΙΡΟΣ),LEENAME,LEEAFM,
 SLMID
 FROM TRN 
 WHERE TRNDATE  BETWEEN 
-STR_TO_DATE('{$from}', '%Y-%m-%d') AND STR_TO_DATE('{$to}', '%Y-%m-%d')
+STR_TO_DATE('{$from}', '%d/%m/%Y') AND STR_TO_DATE('{$to}', '%d/%m/%Y')
 AND SLMID = {$id}
 GROUP BY TRAID ,LEENAME,LEEAFM,SLMID
 ORDER BY TRAID
@@ -101,11 +101,11 @@ foreach($MultiDimArray as $result){
                                     'clientno'=>$clientno,
                                      'res'=>$MultiDimArray,
                                      'xreosi'=>$xreosi,
-                                    'pistosi'=>$pistosi,
-                                      'tziros' =>$tziros,
-                                      'ypoloipo'=>$ypoloipo,
-                                      'from'=>$from,
-                                      'to' => $to,
-                                      'graph'=>$graph
+                                     'pistosi'=>$pistosi,
+                                     'tziros' =>$tziros,
+                                     'ypoloipo'=>$ypoloipo,
+                                     'from'=>$from,
+                                     'to' => $to,
+                                     'graph'=>$graph
                                     ));
 ?>

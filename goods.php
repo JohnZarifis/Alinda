@@ -11,10 +11,16 @@ $id = $_SESSION['user_id'];
 //print_r($_SESSION); //for debugging reasons
 
 $from = '01/01/2014';
-$to =  'SYSDATE()'; 
+//$to =  'SYSDATE()';
+$to =  date("d/m/Y");
+
+if(isset($_POST['from']) && isset($_POST['to'])){
+$from = $_POST['from'];
+$to = $_POST['to'];
+}
 
 $sql = <<< MARKER
-SELECT MHNAS , G.TRAID, G.LEENAME, CODCODE, ITMNAME, 
+SELECT  G.TRAID, G.LEENAME, CODCODE, ITMNAME, 
                  SUM( case when G.ETOS = YEAR(CURDATE()) 
                                     then POSOTA
                                     else .00 END ) as POSOTITA_CURRENT_YEAR,
@@ -26,7 +32,9 @@ SELECT MHNAS , G.TRAID, G.LEENAME, CODCODE, ITMNAME,
 				(SELECT DISTINCT SLMID,TRAID FROM TRN) T
                 ON T.TRAID = G.TRAID
                 WHERE SLMID = {$id}
-GROUP BY MHNAS , G.TRAID, G.LEENAME, CODCODE, ITMNAME
+                AND  DOCEKDOSISDATE  BETWEEN 
+STR_TO_DATE('{$from}', '%d/%m/%Y')  AND STR_TO_DATE('{$to}', '%d/%m/%Y')
+GROUP BY G.TRAID, G.LEENAME, CODCODE, ITMNAME
 MARKER;
 
 if(isset($_GET['traid']))
@@ -45,6 +53,8 @@ SELECT MHNAS ,TRAID, LEENAME, CODCODE, ITMNAME,
                                     else .00 END ) as POSOTITA_PAST_YEAR
                 FROM GOODS
                 WHERE TRAID = {$traid}
+                AND  DOCEKDOSISDATE  BETWEEN 
+                STR_TO_DATE('{$from}', '%d/%m/%Y')  AND STR_TO_DATE('{$to}', '%d/%m/%Y')
 GROUP BY MHNAS ,TRAID, LEENAME, CODCODE, ITMNAME
 MARKER;
 }   
@@ -62,7 +72,7 @@ $result_set = $database->query($sql);
 $MultiDimArray = array();
 while ($row = mysql_fetch_assoc($result_set)) 
 			{
-                         $MultiDimArray[] = array ( 'MHNAS' => $row['MHNAS'],
+                         $MultiDimArray[] = array ( 
                                                     'LEENAME' => $row['LEENAME'],
                                                     'TRAID'=>$row['TRAID'],
                                                     'CODCODE'=>$row['CODCODE'],
@@ -95,6 +105,8 @@ while ($row = mysql_fetch_assoc($result_set))
         $template = $twig->loadTemplate('goods.html');  
         echo $template->render(array('username' => $username,                                     
                                       'res'=>$MultiDimArray,
+                                      'from'=>$from,
+                                      'to' => $to,
                                       
                                     
                                      ));

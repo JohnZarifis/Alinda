@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="theme/assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css"/>
 <link rel="stylesheet" type="text/css" href="theme/assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css"/>
 <link rel="stylesheet" type="text/css" href="theme/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="theme/assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css"/>
 
 
 <!-- END PAGE LEVEL STYLES -->
@@ -59,27 +60,30 @@
 				</ul>
 
 				<div class="page-toolbar">
-
-				<div class="theme-panel hidden-xs hidden-sm">
-				<div class="toggler">
-				</div>
-				<div class="toggler-close">
-				</div>
-				<div class="theme-options">
-					<form action="index.php">
-					Από:<input type="date" name="bday" value="{{from}}">
-					Έως:<input type="date" name="bday" value="{{to}}">
-					<input type="submit" value="Υπολόγισε Βάση των ημερομηνίων">
-					</form>
-				</div>
-				</div>
+                                <form action="index.php" method ="post">
+                                <button type="submit">Go</button>
+				<div class="form-group">
+                                    
+                                    <div class="col-md-4">
+                                            <div class="input-group input-large date-picker input-daterange" data-date="25/02/2015" data-date-format="dd/mm/yyyy">
+                                                    <input type="text" class="form-control" name="from">
+                                                    <span class="input-group-addon">
+                                                    έως </span>
+                                                    <input type="text" class="form-control" name="to">
+                                            </div>
+                                           
+                                    </div>
+                                </div>
+                                
+                                </form>
 					
 				</div>
 
 				</div>
 			<!-- END PAGE HEADER-->
 			<!-- BEGIN DASHBOARD STATS -->
-			<div class="row">
+			
+                        <div class="row">
 				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 					<div class="dashboard-stat blue-madison">
 						<div class="visual">
@@ -249,7 +253,7 @@
 					<div class="portlet box blue-hoki">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-globe"></i>Πίνακας Πελατών 
+								<i class="fa fa-globe"></i>Πίνακας Πελατών από {{from}} εώς {{to}}
 							</div>
 							<div class="tools">
 							</div>
@@ -342,7 +346,18 @@
 <script type="text/javascript" src="theme/assets/global/plugins/datatables/extensions/ColReorder/js/dataTables.colReorder.min.js"></script>
 <script type="text/javascript" src="theme/assets/global/plugins/datatables/extensions/Scroller/js/dataTables.scroller.min.js"></script>
 <script type="text/javascript" src="theme/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+<script type="text/javascript" src="theme/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="theme/assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+<script type="text/javascript" src="theme/assets/global/plugins/clockface/js/clockface.js"></script>
+<script type="text/javascript" src="theme/assets/global/plugins/bootstrap-daterangepicker/moment.min.js"></script>
+<script type="text/javascript" src="theme/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script type="text/javascript" src="theme/assets/global/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+<script type="text/javascript" src="theme/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
 
+
+<!-- END PAGE LEVEL SCRIPTS -->
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="theme/assets/global/scripts/metronic.js" type="text/javascript"></script>
@@ -350,6 +365,7 @@
 <script src="theme/assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
 <script src="theme/assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
 <script src="theme/assets/admin/pages/scripts/table-advanced.js"></script>
+<script src="theme/assets/admin/pages/scripts/components-pickers.js"></script>
 
 <script>
 jQuery(document).ready(function() {
@@ -365,8 +381,9 @@ jQuery(document).ready(function() {
 	}
 			
 Index_goro.initCharts(chart_data,chart_data);
-
+ComponentsPickers.init();
 });
+
 </script>
 
 

@@ -14,17 +14,28 @@ $traid =  $_GET['traid'] ;
 //print_r($_GET['traid']);
 
 $from = '01/01/2014';
-$to =  'SYSDATE()'; 
+//$to =  'SYSDATE()';
+$to =  date("d/m/Y");
+
+if(isset($_POST['from']) && isset($_POST['to'])){
+$from = $_POST['from'];
+$to = $_POST['to'];
+}
 
 $sql = <<<MARKER
 SELECT TRNDATE,TRAID,DOSCODE,DOCNUMBER,TRNREASON,XΡΕΩΣΗ,ΠΙΣΤΩΣΗ,ΤΖΙΡΟΣ,YPOL_2,LEENAME,LEEAFM,SLMID,ADRCITY
 FROM TRN 
 WHERE TRNDATE  BETWEEN 
-STR_TO_DATE('{$from}', '%d/%m/%Y')  AND SYSDATE()
+STR_TO_DATE('{$from}', '%d/%m/%Y')  AND STR_TO_DATE('{$to}', '%d/%m/%Y')
 AND TRAID = {$traid}
 AND DOSCODE NOT IN ('ΠΑΡΟ','ΠΑΡΑ')
 ORDER BY TRNID
 MARKER;
+
+
+
+
+
 //goro
 $result_set = $database->query($sql);
 $MultiDimArray = array();
@@ -84,7 +95,9 @@ foreach($MultiDimArray as $result){
                                       'tziros' =>$tziros,
                                       'ypoloipo'=>$ypoloipo,
                                       'LEENAME'=>$leename,
-                                      'graph'=>$graph
+                                      'graph'=>$graph,
+                                      'from'=>$from,
+                                      'to' => $to,
                                      ));
 
 ?>
