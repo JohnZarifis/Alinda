@@ -57,48 +57,26 @@
 						<a href="#">Dashboard</a>
 					</li>
 				</ul>
+
 				<div class="page-toolbar">
-                                    <div class="theme-panel hidden-xs hidden-sm">
+
+				<div class="theme-panel hidden-xs hidden-sm">
 				<div class="toggler">
 				</div>
 				<div class="toggler-close">
 				</div>
 				<div class="theme-options">
-				<form name="test" action="index.php" class="form-horizontal form-bordered"  method ="post">
-                                                                    <div class="form-body">
-                                                                            <div class="form-group">
-                                                                                    <label class="control-label col-md-3">Από Ημερομηνία</label>
-                                                                                    <div class="col-md-3">
-                                                                                            <input id="apo_value" name ="apo_value" class="form-control form-control-inline input-medium date-picker" size="16" type="text" value=""/>
-                                                                                            <span class="help-block">Από Ημερομηνία </span>
-                                                                                    </div>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                    <label class="control-label col-md-3">Εώς Ημερομηνία</label>
-                                                                                    <div class="col-md-3">
-                                                                                            <input id="mexri_value" name="mexri_value" class="form-control form-control-inline input-medium date-picker" size="16" type="text" value=""/>
-                                                                                            <span class="help-block"> Εώς Ημερομηνία </span>
-                                                                                    </div>
-                                                                            </div>
-                                                                            
-                                                                        <button type="submit">Υπολόγισε Βάση των ημερομηνίων</button>
-                                                                        from:{{from}}
-                                                                        to:{{to}}
-                                                                    </div>
-                                                            </form>	
-					
-					
-					
-					
-					
+					<form action="index.php">
+					Από:<input type="date" name="bday" value="{{from}}">
+					Έως:<input type="date" name="bday" value="{{to}}">
+					<input type="submit" value="Υπολόγισε Βάση των ημερομηνίων">
+					</form>
+				</div>
+				</div>
 					
 				</div>
-			        </div>
-                                    
-                                                            
-					
+
 				</div>
-			</div>
 			<!-- END PAGE HEADER-->
 			<!-- BEGIN DASHBOARD STATS -->
 			<div class="row">
@@ -212,7 +190,7 @@
 					<div class="portlet solid grey-cararra bordered">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-bullhorn"></i>Εισπράξεις {{ GraphArray|json_encode() }};
+								<i class="fa fa-bullhorn"></i>Εισπράξεις
 							</div>
 							<div class="actions">
 								<div class="btn-group pull-right">
