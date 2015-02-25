@@ -130,7 +130,7 @@ var visitors = chart_data;
                             var x = item.datapoint[0].toFixed(2),
                                 y = item.datapoint[1].toFixed(2);
 
-                            showChartTooltip(item.pageX, item.pageY, item.datapoint[0], item.datapoint[1] + ' visits');
+                            showChartTooltip(item.pageX, item.pageY, item.datapoint[0], item.datapoint[1] + ' ΕΥΡΩ ΤΖΙΡΟΣ');
                         }
                     } else {
                         $("#tooltip").remove();

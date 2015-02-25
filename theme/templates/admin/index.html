@@ -376,11 +376,13 @@
 <script>
 jQuery(document).ready(function() {
 	var context= JSON.parse('{{ graph|raw}}');
+	var monthNames = [ "Ιαν", "Φεβ", "Μαρ", "Απρ", "Μαι", "Ιουν",
+    "Ιουλ", "Αυγ", "Σεπ", "Οκτ", "Νοε", "Δεκ" ];
 	var i=0;
 	var chart_data = [];
 	for (;context[i];) {
 		var value = context[i];
-		chart_data.push([i+1, value]);
+		chart_data.push([monthNames[i], value]);
 		i++;
 	}
 			
