@@ -167,13 +167,11 @@ function Cart(){
 			error("Cart is empty");
 			return;
 		}
-		    //alert(simpleCart.checkoutTo);
 		switch( simpleCart.checkoutTo ){
 			case PayPal:
 				simpleCart.paypalCheckout();
 				break;
 			case GoogleCheckout:
-			alert(simpleCart.paparas);
 				simpleCart.googleCheckout();
 				break;
 			case Email:
@@ -259,10 +257,8 @@ function Cart(){
 		//JOHN
 		var hidden_post=document.getElementById("hiddenpost");
 		form.appendChild( me.createHiddenElement( "hidden_post_" 	, hidden_post.value 	) );
-		alert(hidden_post.value);
 		var hidden_post=document.getElementById("hiddenpost2");
 		form.appendChild( me.createHiddenElement( "hidden_post_2" 	, hidden_post.value 	) );
-		alert(hidden_post.value);
 		for( var current in me.items ){
 			var item = me.items[current];
 			form.appendChild( me.createHiddenElement( "item_name_" 		+ counter, item.name		) );
@@ -290,9 +286,12 @@ function Cart(){
 		}
 		
 		document.body.appendChild( form );
-		//return;
+		//clear the cart.
+		me.items={};
+		me.update();
 		form.submit();
 		document.body.removeChild( form );
+		
 	};
 	
 	

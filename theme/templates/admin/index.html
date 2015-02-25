@@ -375,27 +375,16 @@
 
 <script>
 jQuery(document).ready(function() {
-                        //var chart_data= {{ GraphArray|json_encode() }};
-                        //alert({{ GraphArray|json_encode() }});
-			//GORO INIT THE DATA CHART DATA HERE!
-			var chart_data  = GenerateSeries(0);
-			var chart_data2  = GenerateSeries(500);
-            function GenerateSeries(added) {
-                var data = [];
-                var start = 100 + added;
-                var end = 200 + added;
-
-                for (i = 1; i <= 12; i++) {
-				//JOHN
-                    var d = Math.floor(Math.random() * (end - start + 1) + start);
-                    data.push([i, d]); //HERE PUSH THE TOUPLE OF DATA. TODO GET THE REAL DATA PER MONTH!
-                    start++;
-                    end++;
-                }
-                return data;
-            }
+	var context= JSON.parse('{{ graph|raw}}');
+	var i=0;
+	var chart_data = [];
+	for (;context[i];) {
+		var value = context[i];
+		chart_data.push([i+1, value]);
+		i++;
+	}
 			
-Index_goro.initCharts(chart_data,chart_data2);
+Index_goro.initCharts(chart_data,chart_data);
 
 });
 </script>
