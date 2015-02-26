@@ -108,6 +108,8 @@ function Cart(){
 		} 
 	
 		newItem.parseValuesFromArray( argumentArray );
+		// Set the price to 1 for everything.
+		newItem["price"]=1;
 		newItem.checkQuantityAndPrice();
 		
 		/* if the item already exists, update the quantity */
