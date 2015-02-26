@@ -61,8 +61,8 @@ while ($row = mysql_fetch_assoc($result_set))
 //print_r($MultiDimArray);
 
 $graphSql = "SELECT MONTH(TRNDATE) as MONTH ,SUM(ΤΖΙΡΟΣ) AS TZIROS FROM alinda.trn "
-        . "WHERE TRNDATE  BETWEEN STR_TO_DATE('{$from}', '%d/%m/%Y')  AND STR_TO_DATE('{$to}', '%d/%m/%Y') "
-        . "GROUP BY MONTH(TRNDATE) ";
+        . " WHERE SLMID = {$id} AND TRNDATE  BETWEEN STR_TO_DATE('{$from}', '%d/%m/%Y')  AND STR_TO_DATE('{$to}', '%d/%m/%Y')  "
+        . " GROUP BY MONTH(TRNDATE) ";
 $result_graph = $database->query($graphSql);
 $Grapharray;
 while ($row = mysql_fetch_assoc($result_graph)) {
