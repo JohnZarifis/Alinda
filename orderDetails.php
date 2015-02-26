@@ -10,6 +10,10 @@ $username = $_SESSION['user_name'];
 $id = $_SESSION['user_id'];
 //print_r($_SESSION); //for debugging reasons
 
+if(isset($_GET['orderid'])){
+    $orderid =  $_GET['orderid'] ;
+}
+
 $from = '01/01/2014';
 $to =  'SYSDATE()'; 
 
@@ -20,8 +24,7 @@ SELECT distinct ORDERID,O.TRAID,ORDERDATE,O.SLMID,S.SLMNAME,PROCESSED,LEENAME,LE
        INNER JOIN 
        (SELECT DISTINCT SLMID,TRAID,LEENAME,LEEAFM FROM TRN) T
                 ON T.TRAID = O.TRAID
-       WHERE PROCESSED = 'NO'
-                
+        WHERE ORDERID = {$orderid}      
 MARKER;
 
 if($username != 'Admin')
@@ -37,8 +40,7 @@ SELECT distinct ORDERID,O.TRAID,ORDERDATE,O.SLMID,S.SLMNAME,PROCESSED,LEENAME,LE
        INNER JOIN 
        (SELECT DISTINCT SLMID,TRAID,LEENAME,LEEAFM FROM TRN) T
                 ON T.TRAID = O.TRAID              
-        WHERE O.SLMID = {$id}
-        AND PROCESSED = 'NO'
+        WHERE ORDERID = {$orderid}
 MARKER;
 }   
   
@@ -49,6 +51,14 @@ $result_set = $database->query($sql);
 $MultiDimArray = array();
 while ($row = mysql_fetch_assoc($result_set)) 
 			{
+    
+                         $leename = $row['LEENAME'];
+                         $leeafm = $row['LEEAFM'];
+                         $orderdate =$row['ORDERDATE'];
+                         $slmaname = $row['SLMNAME'];
+                         $processed = $row['PROCESSED'];
+                         
+                         
                          $MultiDimArray[] = array ( 'TRAID' => $row['TRAID'],
                                                     'ORDERDATE' => $row['ORDERDATE'],
                                                     'SLMID'=>$row['SLMID'],
@@ -60,30 +70,40 @@ while ($row = mysql_fetch_assoc($result_set))
                              );
 			}
 
-//$xreosi = 0;
-//$pistosi = 0;
-//$tziros = 0;
-//$ypoloipo = 0;
-//$clientno =0;
-//foreach($MultiDimArray as $result){
-//    $xreosi +=$result['XREOSI'];
-//    $pistosi += $result['PISTOSI'];
-//    $tziros += $result['TZIROS'];
-//    $ypoloipo = $result['YPOLOIPO'];
-//    $clientno +=1;
-//    $afm = $result['LEEAFM'];
-//    $leename = $result['LEENAME'];
-//    
-//    }   
+                        
+$sqlDetail = <<< MARKER
+        SELECT CODECODE,QTYA
+        FROM ORDERS 
+        WHERE ORDERID = {$orderid}
+MARKER;
+        
+//print_r($sqlDetail);
+$resultDetail = $database->query($sqlDetail);
+$MultiDetailArray = array();
+while ($row = mysql_fetch_assoc($resultDetail)) 
+			{
+                         $MultiDetailArray[] = array ( 'CODECODE' => $row['CODECODE'],
+                                                    'QTYA' => $row['QTYA'],
+                                                    
+                             );
+			}       
+  
        
 //print_r($MultiDimArray);
  
         //$name = 'John';
-        $template = $twig->loadTemplate('orderList.html');  
+        $template = $twig->loadTemplate('orderDetail.html');  
         echo $template->render(array('username' => $username,                                     
                                       'res'=>$MultiDimArray,
-                                      
-                                    
+                                      'detail'=>$MultiDetailArray,
+                                      'leename'=>$leename,
+                                      'leeafm'=>$leeafm,
+                                      'orderid'=>$orderid,
+                                      'orderdate'=>$orderdate,
+                                      'processed'=>$processed,
+                                      'slmname' => $slmaname,
+                                      'slmid' =>$id,
+            
                                      ));
 
 ?>

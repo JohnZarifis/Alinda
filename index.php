@@ -13,29 +13,17 @@ $psw = $_SESSION['user_psw'];
 ///$sql = "select SLMID, SLMNAME, TRACODE, LEENAME,LEEAFM, ADRSFULLDEST, TZIROS08, TZIROS09, TZIROS10,TZIROS11,TZIROS12,XREOSI,PISTOSI,YPOLOIPO from Z_TSIROS_YPOLI";
 //$sql.= " WHERE SLMID = {$id} ";
 $text = 'tets';
-$from = '2014-01-01';
-$to =  date("Y-m-d");
+$from = '01/01/2014';
+$to =  date("d/m/Y");
 //$date = str_replace('/', '-', $from);
 //sql_from=date('d-m-Y', strtotime($date));
 //$date = str_replace('/', '-', $to);
 //sql_to=date('d-m-Y', strtotime($date));
-
-$sql = <<<MARKER
-SELECT MIN(TRNDATE), MAX(TRNDATE) , TRAID,sum(XΡΕΩΣΗ),sum(ΠΙΣΤΩΣΗ),sum(ΤΖΙΡΟΣ),LEENAME,LEEAFM,
-SLMID
-FROM TRN 
-WHERE TRNDATE  BETWEEN 
-STR_TO_DATE('{$from}', '%Y-%m-%d') AND SYSDATE()
-AND SLMID = {$id}
-GROUP BY TRAID ,LEENAME,LEEAFM,SLMID
-ORDER BY TRAID
-MARKER;
-
 if(isset($_POST['from']) && isset($_POST['to'])){
 $from = $_POST['from'];
-$to = $_POST['to'];
+$to = $_POST['to'];}
 $sql = <<<MARKER
-SELECT MIN(TRNDATE), MAX(TRNDATE), TRAID,sum(XΡΕΩΣΗ),sum(ΠΙΣΤΩΣΗ),sum(ΤΖΙΡΟΣ),LEENAME,LEEAFM,
+SELECT MIN(TRNDATE), MAX(TRNDATE) , TRAID,sum(XΡΕΩΣΗ),sum(ΠΙΣΤΩΣΗ),sum(ΤΖΙΡΟΣ),LEENAME,LEEAFM,
 SLMID
 FROM TRN 
 WHERE TRNDATE  BETWEEN 
@@ -44,7 +32,9 @@ AND SLMID = {$id}
 GROUP BY TRAID ,LEENAME,LEEAFM,SLMID
 ORDER BY TRAID
 MARKER;
-}
+
+
+
 
 //print_r($sql); //for debugging reasons
 
@@ -70,7 +60,9 @@ while ($row = mysql_fetch_assoc($result_set))
 //print_r($res);
 //print_r($MultiDimArray);
 
-$graphSql = "SELECT MONTH(TRNDATE) as MONTH ,SUM(ΤΖΙΡΟΣ) AS TZIROS FROM alinda.trn GROUP BY MONTH(TRNDATE) ";
+$graphSql = "SELECT MONTH(TRNDATE) as MONTH ,SUM(ΤΖΙΡΟΣ) AS TZIROS FROM alinda.trn "
+        . "WHERE TRNDATE  BETWEEN STR_TO_DATE('{$from}', '%d/%m/%Y')  AND STR_TO_DATE('{$to}', '%d/%m/%Y') "
+        . "GROUP BY MONTH(TRNDATE) ";
 $result_graph = $database->query($graphSql);
 $Grapharray;
 while ($row = mysql_fetch_assoc($result_graph)) {

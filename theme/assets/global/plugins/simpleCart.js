@@ -49,7 +49,7 @@ function Cart(){
 	me.checkoutTo = PayPal;
 	me.email = "";
 	me.merchantId	 = "";
-	me.cartHeaders = ['Name','Price','Quantity','Total'];
+	me.cartHeaders = ['Name','Price','quantity','Total'];
 	/* 
 		cart headers: 
 		you can set these to which ever order you would like, and the cart will display the appropriate headers
@@ -279,7 +279,8 @@ function Cart(){
 									field != "quantity"	&& 
 									field != "price" )
 				{
-						descriptionString = descriptionString + ", " + field + ": " + item[field];				
+						descriptionString = descriptionString + ", " //+ field + ": " 
+                                                                                        + item[field];				
 				}
 			}
 			descriptionString = descriptionString.substring( 1 );

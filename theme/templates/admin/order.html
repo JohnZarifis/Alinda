@@ -66,63 +66,64 @@
 				<div class="col-md-6">
 				<div class="form-group">
                                 <label class="control-label col-md-3">ΑΦΜ:{{slmid}}</label>
-															<div class="col-md-9">
-																<p class="form-control-static">
-																	 {{leeafm}}
-																</p>
-															</div>
-														</div>
-													</div>
-													<!--/span-->
-												</div>
-												<!--/row-->
-												<div class="row">
-													<div class="col-md-6">
-														<div class="form-group">
-															<label class="control-label col-md-3">τηλ:</label>
-															<div class="col-md-9">
-																<p class="form-control-static">
-																	 210210210
-																</p>
-															</div>
-														</div>
-													</div>
-													<!--/span-->
-													<div class="col-md-6">
-														<div class="form-group">
-															<label class="control-label col-md-3">Email:</label>
-															<div class="col-md-9">
-																<p class="form-control-static">
-																	 test@gmail.com
-																</p>
-															</div>
-														</div>
-													</div>
-													<!--/span-->
-												</div>
-												<!--/row-->
-												
-												
-												
-											</div>
-											
-										</form>
-										<!-- END FORM-->
-									</div>
-								</div>
+                                                    <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                     {{leeafm}}
+                                                            </p>
+                                                    </div>
+                                </div>
+                                                         </div>
+                                                                <!--/span-->
+                                                     </div>
+                                                        <!--/row-->
+                                        <div class="row">
+                                                <div class="col-md-6">
+                                                        <div class="form-group">
+                                                                <label class="control-label col-md-3">τηλ:</label>
+                                                                <div class="col-md-9">
+                                                                        <p class="form-control-static">
+                                                                                 210210210
+                                                                        </p>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                        <div class="form-group">
+                                                                <label class="control-label col-md-3">Email:</label>
+                                                                <div class="col-md-9">
+                                                                        <p class="form-control-static">
+                                                                                 test@gmail.com
+                                                                        </p>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                                <!--/span-->
+                                        </div>
+                                        <!--/row-->
+
+
+
+                                            </div>
+
+                                        </form>
+                                        <!-- END FORM-->
+                                </div>
+                        </div>
 			<div class="row">
                             <div class="col-md-12">                               
                                 <div class="tabbable tabbable-custom tabbable-reversed">
                                     <ul class="nav nav-tabs"> 
                                         {% for tab in tabnames %}
-                                        <li><a href="#tab_{{ tab }}" data-toggle="tab">{{ tab }}</a></li>
+                                        <li><a href="#tab_{{ tab }}" data-toggle="tab"  
+                                               ">{{ tab }}</a></li>
                                         {% endfor %}
                                                                             
                                      </ul>
                                     
 				<div class="tab-content">
                                     {% for tab in tabnames %}
-                                    <div class="tab-pane active" id="tab_{{ tab}}">
+                                    <div class="tab-pane" id="tab_{{ tab}}">
                                         {% for cat in catTab %}                                           
                                           {% if cat.tabname == tab %} 
                                           <div class="row">
@@ -138,16 +139,22 @@
                                                     {% for result in res %}
                                                         {% if result.category == cat.category %}
                                                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                                            <div class="simpleCart_shelfItem dashboard-stat blue-madison ">
-                                                            <h3 class="item_name">{{ result.productname }}</h3>
-                                                            <h4 class="item_eidos"> ΣΥΣΚΕΥΑΣΙΑ: {{result.package}}</h4>                                                         
-                                                             <p>Ποσότ:<input type="text" class="item_quantity input-mini" value="1" size="4"/>
-                                                             </p>
-                                                             
-                                                               <input id="s1" class="item_add btn btn-lg blue" value="Add to cart" type="button">
-                                                            </div>
+                                                        <div class="simpleCart_shelfItem tile bg-blue-steel">
+                                                        <div class="tile-body">                                                       
+                                                        <h4 class="item_name">{{ result.productname }}</h4>
+                                                        <h5 class="item_eidos"> ΣΥΣΚΕΥΑΣΙΑ: {{result.package}}</h5> 
+                                                        <h6 class="item_description"> Κωδικός Είδους: {{result.productid}}</h6>
+                                                        <p>Ποσότ:<span  style="color: #030303"><input type="text" class="item_quantity input-mini" value="1" size="4" /></span>
+                                                         <input id="s1" class="item_add btn btn-small blue" value="Add to cart" type="button">   
+                                                        </p>
+                                                        
+                                                        
                                                         </div>
-
+                                                        <div class="tile-object">
+                                                        
+                                                        </div>
+                                                        </div>
+                                                        </div>
                                                     
                                                   
                                                         {% endif %}
@@ -274,11 +281,11 @@
 	simpleCart.checkoutTo = GoogleCheckout;
         simpleCart.currency = EUR;
 	simpleCart.taxRate  = 0.00;
-	simpleCart.shippingFlatRate = 15.00;
-	simpleCart.paparas="lol";
+	simpleCart.shippingFlatRate = 0.00;
+	simpleCart.paparas="test";
 
 //	simpleCart.paparas={{leename}};
 
-	simpleCart.cartHeaders = ["Name" , "eidos", "Price" , "decrement" , "Quantity", "increment", "remove", "Total" ];
+	simpleCart.cartHeaders = ["Name" , "eidos", "Price" , "decrement" , "quantity", "increment", "remove", "Total" ];
 </script>
 {%  endblock %}

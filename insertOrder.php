@@ -7,18 +7,32 @@ require_once("includes/database.php");
 
 if (!$session->is_logged_in()) { redirect_to("login.php"); }
 
+$sql = "SELECT MAX(ORDERID) FROM ORDERS";
+$result_set = $database->query($sql);
+$row = mysql_fetch_row($result_set);
+$orderid = $row[0] +1;
+
+/// orderid
+print $orderid;
+print "<hr/>";
+$orderdate = date("Y-m-d");
+////orderdate
+print $orderdate;
+print "<hr/>";
+
 //get the hidden posts. userid and date?
 $userid = $_POST['hidden_post_'];
 print $userid;
 print "<hr/>";
-$date = $_POST['hidden_post_2'];
-print $date;
+$traid = $_POST['hidden_post_2'];
+print $traid;
 print "<hr/>";
-$test = $_POST['hidden_post_3'];
-print $test;
+$slmid = $_POST['hidden_post_3'];
+print $slmid;
 print "<hr/>";
-print_r($_POST);
+//print_r($_POST);
 print "<hr/>";
+$processed = 'NO';
 
 
 $number=1;
@@ -44,9 +58,21 @@ $item_name="item_name_".$number;
 
 foreach($items as $item ) {
 //DO THE SQL QUERY.INSTEAD OF print_r do the sql add entry.
+$sqlIns = <<<MARKER
+        INSERT INTO ORDERS (orderid, traid, orderdate, slmid, codecode, qtyA, processed) VALUES 
+            ({$orderid},{$traid},'{$orderdate}',{$slmid},'{$item['item_description']}',{$item['item_quantity']},'{$processed}')
+MARKER;
+print_r ($sqlIns);
+print_r ("<hr/>");             
+            
+$database->query($sqlIns);  
+                 
+            
 print_r ($item);
 print_r ("<hr/>");
 }
+
+header( 'Location: client.php?traid='.$traid ) ;
 
 //REDIRECT TO INDEX. FOR NOW THIS IS COMENTED OUT FOR TESTS.
 //redirect_to("index.php");

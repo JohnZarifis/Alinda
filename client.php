@@ -9,7 +9,10 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 $username = $_SESSION['user_name'];
 $id = $_SESSION['user_id'];
 //print_r($_SESSION); //for debugging reasons
-$traid =  $_GET['traid'] ;
+if(isset($_GET['traid'])){
+    $traid =  $_GET['traid'] ;
+}
+//$traid =  $_GET['traid'] ;
 //print_r($traid);
 //print_r($_GET['traid']);
 
@@ -17,22 +20,25 @@ $from = '01/01/2014';
 //$to =  'SYSDATE()';
 $to =  date("d/m/Y");
 
-if(isset($_POST['from']) && isset($_POST['to'])){
+if(isset($_POST['from']) && isset($_POST['to']) && isset($_POST['traid']) ){
 $from = $_POST['from'];
 $to = $_POST['to'];
+$traid = $_POST['traid'];
+//print_r($_POST);
 }
 
 $sql = <<<MARKER
 SELECT TRNDATE,TRAID,DOSCODE,DOCNUMBER,TRNREASON,XΡΕΩΣΗ,ΠΙΣΤΩΣΗ,ΤΖΙΡΟΣ,YPOL_2,LEENAME,LEEAFM,SLMID,ADRCITY
 FROM TRN 
-WHERE TRNDATE  BETWEEN 
+WHERE
+DOSCODE NOT IN ('ΠΑΡΟ','ΠΑΡΑ') 
+AND TRNDATE  BETWEEN 
 STR_TO_DATE('{$from}', '%d/%m/%Y')  AND STR_TO_DATE('{$to}', '%d/%m/%Y')
 AND TRAID = {$traid}
-AND DOSCODE NOT IN ('ΠΑΡΟ','ΠΑΡΑ')
 ORDER BY TRNID
 MARKER;
 
-
+//print_r($sql);
 
 
 
@@ -57,7 +63,10 @@ while ($row = mysql_fetch_assoc($result_set))
                              );
 			}
 
-$graphSql = "SELECT MONTH(TRNDATE) as MONTH ,SUM(ΤΖΙΡΟΣ) AS TZIROS FROM alinda.trn GROUP BY MONTH(TRNDATE) ";
+$graphSql = "SELECT MONTH(TRNDATE) as MONTH ,SUM(ΤΖΙΡΟΣ) AS TZIROS FROM alinda.trn "
+        . " WHERE TRNDATE  BETWEEN STR_TO_DATE('{$from}', '%d/%m/%Y')  AND STR_TO_DATE('{$to}', '%d/%m/%Y') "
+        . "AND TRAID = {$traid} "
+        . "GROUP BY MONTH(TRNDATE) ";
 $result_graph = $database->query($graphSql);
 $Grapharray;
 while ($row = mysql_fetch_assoc($result_graph)) {
@@ -98,6 +107,7 @@ foreach($MultiDimArray as $result){
                                       'graph'=>$graph,
                                       'from'=>$from,
                                       'to' => $to,
+                                      'traid'=>$traid,
                                      ));
 
 ?>

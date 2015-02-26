@@ -71,7 +71,7 @@ foreach($MultiDimArray as $result){
 //print_r($clientno);
 //var_dump($unique_cat);
 // Remember to give your form's submit tag a name="submit" attribute!
-if (isset($_POST['submit'])) {} // Form has been submitted.
+//if (isset($_POST['submit'])) {} // Form has been submitted.
 
   
 
