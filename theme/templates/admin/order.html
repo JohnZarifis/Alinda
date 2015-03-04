@@ -124,28 +124,34 @@
 				<div class="tab-content">
                                     {% for tab in tabnames %}
                                     <div class="tab-pane" id="tab_{{ tab}}">
+                                        <div class="panel-group accordion" id="accordion{{tab}}">
+                                            
+                                            
+                                        
                                         {% for cat in catTab %}                                           
                                           {% if cat.tabname == tab %} 
-                                          <div class="row">
-                                            <div class="portlet box blue">
-                                                <div class="portlet-title">
-                                                        <div class="caption">
-
-                                                                <i class="fa fa-gift"></i>{{ cat.category }}
-                                                        </div>
-
+                                          
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">                                         
+                                                    <h4 class="panel-title">
+                                                    <a  class="accordion-toggle accordion-toggle-styled collapsed" data-toggle="collapse" data-parent="#accordion{{tab}}" href="#collapse_{{tab}}_{{cat.Catid}}">
+                                                    <i class="fa fa-gift"></i>{{ cat.category }} </a>
+                                                    </h4>                                                   
                                                 </div>
-                                                <div class="portlet-body">
-                                                    {% for result in res %}
+                                                <div id="collapse_{{tab}}_{{cat.Catid}}" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        {% for result in res %}
                                                         {% if result.category == cat.category %}
-                                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                                        
                                                         <div class="simpleCart_shelfItem tile bg-blue-steel">
                                                         <div class="tile-body">                                                       
                                                         <h4 class="item_name">{{ result.productname }}</h4>
-                                                        <h5 class="item_eidos"> ΣΥΣΚΕΥΑΣΙΑ: {{result.package}}</h5> 
-                                                        <h6 class="item_description"> Κωδικός Είδους: {{result.productid}}</h6>
-                                                        <p>Ποσότ:<span  style="color: #030303"><input type="text" class="item_quantity input-mini" value="1" size="4" /></span>
-                                                         <input id="s1" class="item_add btn btn-small blue" value="Add to cart" type="button">   
+                                                        <p><span class="item_eidos"> ΣΥΣΚΕΥΑΣΙΑ: {{result.package}}</span> 
+                                                            <span class="item_description">Κωδικός Είδους: {{result.productid}}</span>
+                                                                                                                                      
+                                                        Ποσότ:<span  style="color: #030303"><input type="text" class="item_quantity input-mini" value="" size="4" /></span>
+                                                         <input id="s1" class="item_add btn btn-small blue" value="ΠΡΟΣΘΗΚΗ" type="button"> 
+                                                         Παρατηρήσεις: <span  style="color: #030303"><input type="text" class="item_extras input-circle " value="" size="40" /></span>
                                                         </p>
                                                         
                                                         
@@ -154,18 +160,20 @@
                                                         
                                                         </div>
                                                         </div>
-                                                        </div>
+                                                        
                                                     
                                                   
                                                         {% endif %}
                                                     {% endfor %}
-
-                                                </div>
+                                                    </div>
+						</div>
+                                                
                                             </div>
-                                          </div>
+                                         
                                           {% endif %}
                                            
-                                        {% endfor %}           
+                                        {% endfor %} 
+                                        </div>
                                     </div>  
                                     {% endfor %}             
                                 </div>

@@ -44,23 +44,27 @@ while (isset($_POST[$item_name]))
 	$item_currency="item_currency_".$number;
 	$item_tax_rate="item_tax_rate_".$number;
 	$item_description="item_description_".$number;
+        $item_extras="item_extas_".$number;
 	$items[]=array(
 		"item_name"=> $_POST[$item_name],
 		"item_quantity"=> $_POST[$item_quantity],
 		"item_price"=> $_POST[$item_price],
 		"item_currency"=> $_POST[$item_currency],
 		"item_tax_rate"=> $_POST[$item_tax_rate],
-		"item_description"=> $_POST[$item_description]
+		"item_description"=> $_POST[$item_description],
+                "item_extras"=>$_POST[$item_extras]
 	);
 $number++;
 $item_name="item_name_".$number;
 }
 
 foreach($items as $item ) {
+    
+ $description = filter_var($item['item_description'], FILTER_SANITIZE_STRING);
 //DO THE SQL QUERY.INSTEAD OF print_r do the sql add entry.
 $sqlIns = <<<MARKER
         INSERT INTO ORDERS (orderid, traid, orderdate, slmid, codecode, qtyA, processed) VALUES 
-            ({$orderid},{$traid},'{$orderdate}',{$slmid},'{$item['item_description']}',{$item['item_quantity']},'{$processed}')
+            ({$orderid},{$traid},'{$orderdate}',{$slmid},'{$description}',{$item['item_quantity']},'{$processed}')
 MARKER;
 print_r ($sqlIns);
 print_r ("<hr/>");             

@@ -53,10 +53,12 @@ foreach($MultiDimArray as $result){
  
  $sqlDistCatTabs = "SELECT DISTINCT CATEGORY, TABNAME FROM PRODUCT";
  $resultCat = $database->query($sqlDistCatTabs);
+ $unCat = 0;
  while ($row = mysql_fetch_assoc($resultCat)) 
 			{
-                         
+                         $unCat+=1;
                          $MultiCatArray[] = array ( 
+                                                    'Catid'=>$unCat,
                                                     'category'=>$row['CATEGORY'],                                                    
                                                     'tabname'=>$row['TABNAME'],
                                                      
