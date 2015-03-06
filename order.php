@@ -23,6 +23,10 @@ while ($row = mysql_fetch_assoc($result_set))
                          $leephone2 = $row['ADRPHONE2'];
                          $leeEmail = $row['ADREMAIL'];
                          $leeCode = $row['ΚΩΔ_ΠΕΛΑΤΗ'];
+                         $leeCity = $row['ADRCITY'];
+                         $leeStreet = $row['ADRSTREET'];
+                         $leeAdrNumber = $row['ADRNUMBER'];
+                         
 			}
 
 }
@@ -91,12 +95,18 @@ foreach($MultiDimArray as $result){
   echo $template->render(array('username' => $username,
                                'leename'=>$leename,
                                'leeafm'=>$leeafm,
+                               'leeEmail'=>$leeEmail,
+                               'leePhone1'=>$leephone1,
+                               'leePhone2'=>$leephone2,
                                'categories'=>$unique_cat,
                                'tabnames'=>$unique_tab,
                                'res'=>$MultiDimArray,
                                'catTab'=>$MultiCatArray,
                                'traid'=>$traid,
                                'slmid'=>$id,
+                               'leeCity'=>$leeCity,
+                               'leeStreet'=>$leeStreet,
+                               'leeAdrNumber'=>$leeAdrNumber,
       ));
   
 
