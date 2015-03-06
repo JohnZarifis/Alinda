@@ -28,13 +28,14 @@ $traid = $_POST['traid'];
 }
 
 $sql = <<<MARKER
-SELECT TRNDATE,TRAID,DOSCODE,DOCNUMBER,TRNREASON,XΡΕΩΣΗ,ΠΙΣΤΩΣΗ,ΤΖΙΡΟΣ,YPOL_2,LEENAME,LEEAFM,SLMID,ADRCITY
-FROM TRN 
+SELECT TRNDATE,T.TRAID,DOSCODE,DOCNUMBER,TRNREASON,XΡΕΩΣΗ,ΠΙΣΤΩΣΗ,TZIROS,YPOLOIPO,ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ,ΑΦΜ_ΣΥΝΑΛΛΑΣΣΟΜΕΝΟΥ,SLMID,ADRCITY
+FROM TRN T
+INNER JOIN CUSTOMER C
+ON C.TRAID = T.TRAID
 WHERE
-DOSCODE NOT IN ('ΠΑΡΟ','ΠΑΡΑ') 
-AND TRNDATE  BETWEEN 
+TRNDATE  BETWEEN 
 STR_TO_DATE('{$from}', '%d/%m/%Y')  AND STR_TO_DATE('{$to}', '%d/%m/%Y')
-AND TRAID = {$traid}
+AND T.TRAID = {$traid}
 ORDER BY TRNID
 MARKER;
 
@@ -52,18 +53,18 @@ while ($row = mysql_fetch_assoc($result_set))
                                                     'TRAID'=>$row['TRAID'],
                                                     'XREOSI'=>$row['XΡΕΩΣΗ'],
                                                     'PISTOSI'=>$row['ΠΙΣΤΩΣΗ'],
-                                                    'TZIROS'=>$row['ΤΖΙΡΟΣ'],
-                                                    'LEENAME'=>$row['LEENAME'],
-                                                    'LEEAFM'=>$row['LEEAFM'],
+                                                    'TZIROS'=>$row['TZIROS'],
+                                                    'LEENAME'=>$row['ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ'],
+                                                    'LEEAFM'=>$row['ΑΦΜ_ΣΥΝΑΛΛΑΣΣΟΜΕΝΟΥ'],
                                                     'DOCNUMBER'=>$row['DOCNUMBER'], 
                                                     'TRNREASON'=>$row['TRNREASON'], 
-                                                    'YPOLOIPO'=>$row['YPOL_2'], 
+                                                    'YPOLOIPO'=>$row['YPOLOIPO'], 
                                                     'SLMID'=>$row['SLMID'], 
                                                     'ADRCITY'=>$row['ADRCITY'],
                              );
 			}
 
-$graphSql = "SELECT MONTH(TRNDATE) as MONTH ,SUM(ΤΖΙΡΟΣ) AS TZIROS FROM alinda.trn "
+$graphSql = "SELECT MONTH(TRNDATE) as MONTH ,SUM(TZIROS) AS TZIROS FROM alinda.trn "
         . " WHERE TRNDATE  BETWEEN STR_TO_DATE('{$from}', '%d/%m/%Y')  AND STR_TO_DATE('{$to}', '%d/%m/%Y') "
         . "AND TRAID = {$traid} "
         . "GROUP BY MONTH(TRNDATE) ";

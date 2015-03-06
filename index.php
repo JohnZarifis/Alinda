@@ -12,7 +12,7 @@ $psw = $_SESSION['user_psw'];
 //print_r($_SESSION); //for debugging reasons
 ///$sql = "select SLMID, SLMNAME, TRACODE, LEENAME,LEEAFM, ADRSFULLDEST, TZIROS08, TZIROS09, TZIROS10,TZIROS11,TZIROS12,XREOSI,PISTOSI,YPOLOIPO from Z_TSIROS_YPOLI";
 //$sql.= " WHERE SLMID = {$id} ";
-$text = 'tets';
+//$text = 'tets';
 $from = '01/01/2014';
 $to =  date("d/m/Y");
 //$date = str_replace('/', '-', $from);
@@ -23,13 +23,14 @@ if(isset($_POST['from']) && isset($_POST['to'])){
 $from = $_POST['from'];
 $to = $_POST['to'];}
 $sql = <<<MARKER
-SELECT MIN(TRNDATE), MAX(TRNDATE) , TRAID,sum(XΡΕΩΣΗ),sum(ΠΙΣΤΩΣΗ),sum(ΤΖΙΡΟΣ),LEENAME,LEEAFM,
-SLMID
-FROM TRN 
+SELECT MIN(TRNDATE), MAX(TRNDATE) , T.TRAID ,sum(XΡΕΩΣΗ),sum(ΠΙΣΤΩΣΗ),sum(TZIROS),ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ,ΑΦΜ_ΣΥΝΑΛΛΑΣΣΟΜΕΝΟΥ,SLMID
+FROM TRN T
+INNER JOIN CUSTOMER C
+ON T.TRAID = C.TRAID
 WHERE TRNDATE  BETWEEN 
 STR_TO_DATE('{$from}', '%d/%m/%Y') AND STR_TO_DATE('{$to}', '%d/%m/%Y')
 AND SLMID = {$id}
-GROUP BY TRAID ,LEENAME,LEEAFM,SLMID
+GROUP BY T.TRAID ,ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ,ΑΦΜ_ΣΥΝΑΛΛΑΣΣΟΜΕΝΟΥ,SLMID
 ORDER BY TRAID
 MARKER;
 
@@ -47,9 +48,9 @@ while ($row = mysql_fetch_assoc($result_set))
                                                     'TRAID'=>$row['TRAID'],
                                                     'XREOSI'=>$row['sum(XΡΕΩΣΗ)'],
                                                     'PISTOSI'=>$row['sum(ΠΙΣΤΩΣΗ)'],
-                                                    'TZIROS'=>$row['sum(ΤΖΙΡΟΣ)'],
-                                                    'LEENAME'=>$row['LEENAME'],
-                                                    'LEEAFM'=>$row['LEEAFM'],
+                                                    'TZIROS'=>$row['sum(TZIROS)'],
+                                                    'LEENAME'=>$row['ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ'],
+                                                    'LEEAFM'=>$row['ΑΦΜ_ΣΥΝΑΛΛΑΣΣΟΜΕΝΟΥ'],
                                                     'SLMID'=>$row['SLMID'], 
                              );
 			}
@@ -60,7 +61,8 @@ while ($row = mysql_fetch_assoc($result_set))
 //print_r($res);
 //print_r($MultiDimArray);
 
-$graphSql = "SELECT MONTH(TRNDATE) as MONTH ,SUM(ΤΖΙΡΟΣ) AS TZIROS FROM alinda.trn "
+$graphSql = "SELECT MONTH(TRNDATE) as MONTH ,SUM(TZIROS) AS TZIROS FROM TRN T "
+            . "INNER JOIN  CUSTOMER C ON T.TRAID = C.TRAID "
         . " WHERE SLMID = {$id} AND TRNDATE  BETWEEN STR_TO_DATE('{$from}', '%d/%m/%Y')  AND STR_TO_DATE('{$to}', '%d/%m/%Y')  "
         . " GROUP BY MONTH(TRNDATE) ";
 $result_graph = $database->query($graphSql);

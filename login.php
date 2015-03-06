@@ -19,11 +19,17 @@ if (isset($_POST['submit'])) { // Form has been submitted.
   // Check database to see if username/password exist.
 	$found_user = User::authenticate($username, $password);
 //print_r($found_user);
-  if ($found_user) {
+  if ($found_user && $username == 'Admin') {
     $session->login($found_user);
     //print_r($found_user); // for debugging reasons
+    redirect_to("orderList.php");
+  }
+  elseif ($found_user) {
+  $session->login($found_user);
+    //print_r($found_user); // for debugging reasons
     redirect_to("index.php");
-  } else {
+}
+  else {
     // username/password combo was not found in the database
     $message = "Ο συνδυασμός Username/password δεν είναι σωστός.";
     $template = $twig->loadTemplate('login.html');

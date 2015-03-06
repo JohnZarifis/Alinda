@@ -7,6 +7,9 @@
 <link rel="stylesheet" type="text/css" href="theme/assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css"/>
 <link rel="stylesheet" type="text/css" href="theme/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
 <!-- END PAGE LEVEL STYLES -->
+{% if username == 'Admin' %}
+<meta http-equiv="refresh" content="30">
+{% endif %}
 {% endblock %}
 {% block title %}
  Alinda|Sales Portal

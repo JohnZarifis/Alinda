@@ -14,12 +14,12 @@ $from = '01/01/2014';
 $to =  'SYSDATE()'; 
 
 $sql = <<< MARKER
-SELECT distinct ORDERID,O.TRAID,ORDERDATE,O.SLMID,S.SLMNAME,PROCESSED,LEENAME,LEEAFM FROM ORDERS O
+SELECT distinct ORDERID,O.TRAID,ORDERDATE,O.SLMID,S.SLMNAME,PROCESSED,ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ,ΑΦΜ_ΣΥΝΑΛΛΑΣΣΟΜΕΝΟΥ FROM ORDERS O
        INNER JOIN SLM S
        ON S.SLMID = O.SLMID      
-       INNER JOIN 
-       (SELECT DISTINCT SLMID,TRAID,LEENAME,LEEAFM FROM TRN) T
-                ON T.TRAID = O.TRAID
+       INNER JOIN CUSTOMER C
+       ON C.TRAID = O.TRAID
+       
        WHERE PROCESSED = 'NO'
                 
 MARKER;
@@ -31,16 +31,16 @@ if($username != 'Admin')
 //$from = $_POST['apo_value'];
 //$to = $_POST['mexri_value'];
 $sql = <<<MARKER
-SELECT distinct ORDERID,O.TRAID,ORDERDATE,O.SLMID,S.SLMNAME,PROCESSED,LEENAME,LEEAFM FROM ORDERS O
+SELECT distinct ORDERID,O.TRAID,ORDERDATE,O.SLMID,S.SLMNAME,PROCESSED,ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ,ΑΦΜ_ΣΥΝΑΛΛΑΣΣΟΜΕΝΟΥ FROM ORDERS O
        INNER JOIN SLM S
-       ON S.SLMID = O.SLMID      
-       INNER JOIN 
-       (SELECT DISTINCT SLMID,TRAID,LEENAME,LEEAFM FROM TRN) T
-                ON T.TRAID = O.TRAID              
+       ON S.SLMID = O.SLMID             
+       INNER JOIN CUSTOMER C
+       ON C.TRAID = O.TRAID              
         WHERE O.SLMID = {$id}
         AND PROCESSED = 'NO'
 MARKER;
-}   
+}
+
   
 //print_r($sql);
 //print_r($_GET['traid']);
@@ -54,8 +54,8 @@ while ($row = mysql_fetch_assoc($result_set))
                                                     'SLMID'=>$row['SLMID'],
                                                     'SLMNAME'=>$row['SLMNAME'],
                                                     'PROCESSED'=>$row['PROCESSED'],
-                                                    'LEENAME'=>$row['LEENAME'],
-                                                    'LEEAFM'=>$row['LEEAFM'],
+                                                    'LEENAME'=>$row['ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ'],
+                                                    'LEEAFM'=>$row['ΑΦΜ_ΣΥΝΑΛΛΑΣΣΟΜΕΝΟΥ'],
                                                     'ORDERID'=>$row['ORDERID'],
                              );
 			}

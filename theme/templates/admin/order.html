@@ -82,7 +82,7 @@
                                                                 <label class="control-label col-md-3">τηλ:</label>
                                                                 <div class="col-md-9">
                                                                         <p class="form-control-static">
-                                                                                 210210210
+                                                                                 {{leephone1}}
                                                                         </p>
                                                                 </div>
                                                         </div>
@@ -93,7 +93,7 @@
                                                                 <label class="control-label col-md-3">Email:</label>
                                                                 <div class="col-md-9">
                                                                         <p class="form-control-static">
-                                                                                 test@gmail.com
+                                                                                 {{leeEmail}}
                                                                         </p>
                                                                 </div>
                                                         </div>
@@ -146,12 +146,12 @@
                                                         <div class="simpleCart_shelfItem tile bg-blue-steel">
                                                         <div class="tile-body">                                                       
                                                         <h4 class="item_name">{{ result.productname }}</h4>
-                                                        <p><span class="item_eidos"> ΣΥΣΚΕΥΑΣΙΑ: {{result.package}}</span> 
+                                                        <p>
                                                             <span class="item_description">Κωδικός Είδους: {{result.productid}}</span>
                                                                                                                                       
                                                         Ποσότ:<span  style="color: #030303"><input type="text" class="item_quantity input-mini" value="" size="4" /></span>
                                                          <input id="s1" class="item_add btn btn-small blue" value="ΠΡΟΣΘΗΚΗ" type="button"> 
-                                                         Παρατηρήσεις: <span  style="color: #030303"><input type="text" class="item_extras input-circle " value="" size="40" /></span>
+                                                         Παρατηρήσεις: <span  style="color: #030303"><input type="text" class="item_eidos input-circle " value="-" size="40" /></span>
                                                         </p>
                                                         
                                                         

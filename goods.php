@@ -20,21 +20,20 @@ $to = $_POST['to'];
 }
 
 $sql = <<< MARKER
-SELECT  G.TRAID, G.LEENAME, CODCODE, ITMNAME, 
-                 SUM( case when G.ETOS = YEAR(CURDATE()) 
+SELECT  G.TRAID, ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ, CODCODE, ITMNAME, 
+                 SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) 
                                     then POSOTA
                                     else .00 END ) as POSOTITA_CURRENT_YEAR,
-				SUM( case when G.ETOS = YEAR(CURDATE()) -1
+				SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) -1
                                     then POSOTA
                                     else .00 END ) as POSOTITA_PAST_YEAR
                 FROM GOODS G
-				INNER JOIN 
-				(SELECT DISTINCT SLMID,TRAID FROM TRN) T
-                ON T.TRAID = G.TRAID
+	        INNER JOIN CUSTOMER C				
+                ON C.TRAID = G.TRAID
                 WHERE SLMID = {$id}
                 AND  DOCEKDOSISDATE  BETWEEN 
 STR_TO_DATE('{$from}', '%d/%m/%Y')  AND STR_TO_DATE('{$to}', '%d/%m/%Y')
-GROUP BY G.TRAID, G.LEENAME, CODCODE, ITMNAME
+GROUP BY G.TRAID, ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ, CODCODE, ITMNAME
 MARKER;
 
 if(isset($_GET['traid']))
@@ -44,18 +43,20 @@ if(isset($_GET['traid']))
 //$from = $_POST['apo_value'];
 //$to = $_POST['mexri_value'];
 $sql = <<<MARKER
-SELECT MHNAS ,TRAID, LEENAME, CODCODE, ITMNAME, 
-                 SUM( case when ETOS = YEAR(CURDATE()) 
+SELECT G.TRAID, ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ, CODCODE, ITMNAME, 
+                 SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) 
                                     then POSOTA
                                     else .00 END ) as POSOTITA_CURRENT_YEAR,
-				SUM( case when ETOS = YEAR(CURDATE()) -1
+				SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) -1
                                     then POSOTA
                                     else .00 END ) as POSOTITA_PAST_YEAR
-                FROM GOODS
-                WHERE TRAID = {$traid}
+                FROM GOODS G
+                INNER JOIN CUSTOMER C				
+                ON C.TRAID = G.TRAID
+                WHERE C.TRAID = {$traid}
                 AND  DOCEKDOSISDATE  BETWEEN 
                 STR_TO_DATE('{$from}', '%d/%m/%Y')  AND STR_TO_DATE('{$to}', '%d/%m/%Y')
-GROUP BY MHNAS ,TRAID, LEENAME, CODCODE, ITMNAME
+GROUP BY TRAID, ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ, CODCODE, ITMNAME
 MARKER;
 }   
   
@@ -73,7 +74,7 @@ $MultiDimArray = array();
 while ($row = mysql_fetch_assoc($result_set)) 
 			{
                          $MultiDimArray[] = array ( 
-                                                    'LEENAME' => $row['LEENAME'],
+                                                    'LEENAME' => $row['ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ'],
                                                     'TRAID'=>$row['TRAID'],
                                                     'CODCODE'=>$row['CODCODE'],
                                                     'ITMNAME'=>$row['ITMNAME'],

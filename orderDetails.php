@@ -18,12 +18,11 @@ $from = '01/01/2014';
 $to =  'SYSDATE()'; 
 
 $sql = <<< MARKER
-SELECT distinct ORDERID,O.TRAID,ORDERDATE,O.SLMID,S.SLMNAME,PROCESSED,LEENAME,LEEAFM FROM ORDERS O
+SELECT distinct ORDERID,O.TRAID,ORDERDATE,O.SLMID,S.SLMNAME,PROCESSED,ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ,ΑΦΜ_ΣΥΝΑΛΛΑΣΣΟΜΕΝΟΥ FROM ORDERS O
        INNER JOIN SLM S
        ON S.SLMID = O.SLMID      
-       INNER JOIN 
-       (SELECT DISTINCT SLMID,TRAID,LEENAME,LEEAFM FROM TRN) T
-                ON T.TRAID = O.TRAID
+       INNER JOIN CUSTOMER C
+       ON C.TRAID = O.TRAID
         WHERE ORDERID = {$orderid}      
 MARKER;
 
@@ -34,13 +33,12 @@ if($username != 'Admin')
 //$from = $_POST['apo_value'];
 //$to = $_POST['mexri_value'];
 $sql = <<<MARKER
-SELECT distinct ORDERID,O.TRAID,ORDERDATE,O.SLMID,S.SLMNAME,PROCESSED,LEENAME,LEEAFM FROM ORDERS O
+SELECT distinct ORDERID,O.TRAID,ORDERDATE,O.SLMID,S.SLMNAME,PROCESSED,ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ,ΑΦΜ_ΣΥΝΑΛΛΑΣΣΟΜΕΝΟΥ FROM ORDERS O
        INNER JOIN SLM S
        ON S.SLMID = O.SLMID      
-       INNER JOIN 
-       (SELECT DISTINCT SLMID,TRAID,LEENAME,LEEAFM FROM TRN) T
-                ON T.TRAID = O.TRAID              
-        WHERE ORDERID = {$orderid}
+       INNER JOIN CUSTOMER C
+       ON C.TRAID = O.TRAID
+        WHERE ORDERID = {$orderid}   
 MARKER;
 }   
   
@@ -52,8 +50,8 @@ $MultiDimArray = array();
 while ($row = mysql_fetch_assoc($result_set)) 
 			{
     
-                         $leename = $row['LEENAME'];
-                         $leeafm = $row['LEEAFM'];
+                         $leename = $row['ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ'];
+                         $leeafm = $row['ΑΦΜ_ΣΥΝΑΛΛΑΣΣΟΜΕΝΟΥ'];
                          $orderdate =$row['ORDERDATE'];
                          $slmaname = $row['SLMNAME'];
                          $processed = $row['PROCESSED'];
@@ -64,8 +62,8 @@ while ($row = mysql_fetch_assoc($result_set))
                                                     'SLMID'=>$row['SLMID'],
                                                     'SLMNAME'=>$row['SLMNAME'],
                                                     'PROCESSED'=>$row['PROCESSED'],
-                                                    'LEENAME'=>$row['LEENAME'],
-                                                    'LEEAFM'=>$row['LEEAFM'],
+                                                    'LEENAME'=>$row['ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ'],
+                                                    'LEEAFM'=>$row['ΑΦΜ_ΣΥΝΑΛΛΑΣΣΟΜΕΝΟΥ'],
                                                     'ORDERID'=>$row['ORDERID'],
                              );
 			}

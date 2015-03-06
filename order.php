@@ -8,18 +8,28 @@ require_once("includes/configs.php");
 if (!$session->is_logged_in()) { redirect_to("login.php"); }
 if (isset($_GET['traid'])){
 $traid =  $_GET['traid'] ;
-$sql = " SELECT DISTINCT LEENAME,LEEAFM FROM TRN WHERE TRAID = {$traid}";
+$sql = " SELECT TRAID,ΚΩΔ_ΠΕΛΑΤΗ,LEEID,ΕΝΕΡΓΟΣ,ΠΟΣΟΣΤΟ_ΕΚΠΤΩΣΗΣ,ΜΗΝΥΜΑ_ΤΙΜΟΛΟΓΗΣΗΣ,"
+        . "ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ,ΑΦΜ_ΣΥΝΑΛΛΑΣΣΟΜΕΝΟΥ,ΝΟΜΙΣΜΑ,ΠΕΡΙΓΡΑΦΗ_ΤΡΟΠΟΥ_ΠΛΗΡΩΜΗΣ,ΤΡΟΠΟΣ_ΜΕΤΑΦΟΡΑΣ,"
+        . "SLMID,ΠΩΛΗΤΗΣ,ADRIDMAIN,ADRID,ADRSTREET,ADRNUMBER,ADRCITY,ADRPHONE1,ADRPHONE2,ADREMAIL "
+        . "FROM CUSTOMER WHERE TRAID = {$traid}";
 $username = $_SESSION['user_name'];
 $id = $_SESSION['user_id'];
 $result_set = $database->query($sql);
 while ($row = mysql_fetch_assoc($result_set)) 
 			{
-                         $leename = $row['LEENAME'];
-                         $leeafm = $row['LEEAFM'];
+                         $leename = $row['ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ'];
+                         $leeafm = $row['ΑΦΜ_ΣΥΝΑΛΛΑΣΣΟΜΕΝΟΥ'];
+                         $leephone1 = $row['ADRPHONE1'];
+                         $leephone2 = $row['ADRPHONE2'];
+                         $leeEmail = $row['ADREMAIL'];
+                         $leeCode = $row['ΚΩΔ_ΠΕΛΑΤΗ'];
 			}
 
 }
-$sqlProd = "SELECT productid ,productcode, category,productname,package,TAB, TABNAME FROM product";
+//$sqlProd = "SELECT productid ,productcode, ,package category,productname ,TAB, TABNAME FROM product";
+$sqlProd = "SELECT MCIID as productid ,"
+        . "CODCODE productcode,DCTGDESCR as category,ITMNAME as productname,BCTGID as TAB, BCTGDESCR as TABNAME "
+        . "FROM product";
 $resultProd = $database->query($sqlProd);
 
 while ($row = mysql_fetch_assoc($resultProd)) 
@@ -28,8 +38,7 @@ while ($row = mysql_fetch_assoc($resultProd))
                          $MultiDimArray[] = array ( 'productid' => $row['productid'],
                                                     'productcode' => $row['productcode'],
                                                     'category'=>$row['category'],
-                                                    'productname'=>$row['productname'],
-                                                    'package'=>$row['package'],
+                                                    'productname'=>$row['productname'],                                               
                                                     'tab'=>$row['TAB'],
                                                     'tabname'=>$row['TABNAME'],
                              
@@ -51,7 +60,7 @@ foreach($MultiDimArray as $result){
  $unique_tab = array_unique($tabnames);
  
  
- $sqlDistCatTabs = "SELECT DISTINCT CATEGORY, TABNAME FROM PRODUCT";
+ $sqlDistCatTabs = "SELECT DISTINCT DCTGDESCR as CATEGORY, BCTGDESCR as TABNAME FROM PRODUCT";
  $resultCat = $database->query($sqlDistCatTabs);
  $unCat = 0;
  while ($row = mysql_fetch_assoc($resultCat)) 
