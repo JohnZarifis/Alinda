@@ -3,6 +3,61 @@ require_once("configs.php");
 
 
 
+class OracleDatabase{
+	
+	 private $connection;
+         function __construct(){
+		$this->open_connection();
+		
+	}
+	//$c = oci_pconnect('S01002', 'S01002', '//alindaserver:1521/SEN');
+	 public function open_connection(){
+		$this->connection = oci_pconnect(ORADB_USER,ORADB_PASS,ORADB_NAME,"UTF8");
+		if(!$this->connection){
+                    $m = oci_error();
+		    die("Database connection failed: ".$m['message']);
+		} 
+	 }
+         
+	 public function close_connection(){
+		if(isset($this->connection)){
+			oci_close($this->connection);
+		}
+	}
+        
+	 public function query($sql){
+              set_time_limit(0);
+              $stid = oci_parse($this->connection, $sql);
+              $result = oci_execute($stid);
+		if(!$result){
+                        $m = oci_error();
+			die("Database query failed: ".$m['message']);
+			
+		}
+		return $stid;
+	 }
+	 
+
+	 //database neutral methods
+	 public function fetch_array($result_set){
+	 	return oci_fetch_array($result_set);
+	 }
+	 
+	 
+	 
+         public function test_input($data)
+            {
+              $data = trim($data);//i have names with spaces for now.
+              $data = stripslashes($data);
+              $data = htmlspecialchars($data);
+              return $data;
+            }
+
+}
+
+//$Oradatabase = new OracleDatabase();
+
+
 class MySQLDatabase{
 	
 	 private $connection;
@@ -74,8 +129,6 @@ class MySQLDatabase{
 }
 
 $database = new MySQLDatabase();
-$db =& $database;
-
 ?>
 
 
@@ -83,25 +136,5 @@ $db =& $database;
 
 
 
-<?php
 
-//// Create connection to Oracle
-//$conn = oci_connect("phphol", "welcome", "//localhost/orcl");
-//
-//$query = 'select * from departments';
-//$stid = oci_parse($conn, $query);
-//$r = oci_execute($stid);
-//
-//// Fetch each row in an associative array
-//print '<table border="1">';
-//while ($row = oci_fetch_array($stid, OCI_RETURN_NULLS+OCI_ASSOC)) {
-//   print '<tr>';
-//   foreach ($row as $item) {
-//       print '<td>'.($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp').'</td>';
-//   }
-//   print '</tr>';
-//}
-//print '</table>';
-
-?>
 

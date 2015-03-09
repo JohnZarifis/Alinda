@@ -6,15 +6,22 @@
 //defined('DB_PASS')? null : define ("DB_PASS","nireus");
 //defined('DB_NAME')? null : define ("DB_NAME","sen_db");
 
+
+defined('ORADB_USER')? null : define ("ORADB_USER","s01002");
+defined('ORADB_PASS')? null : define ("ORADB_PASS","s01002");
+defined('ORADB_NAME')? null : define ("ORADB_NAME","//alindaserver:1521/SEN");
+
 defined('DB_SERVER')? null : define ("DB_SERVER","localhost");
 defined('DB_USER')? null : define ("DB_USER","root");
 defined('DB_PASS')? null : define ("DB_PASS","");
 defined('DB_NAME')? null : define ("DB_NAME","alinda");
 
-require_once 'C:\Program Files (x86)\EasyPHP-DevServer-14.1VC11\data\localweb\Alinda\Twig\lib\Twig\Autoloader.php';   #'/path/to/lib/Twig/Autoloader.php';
+require_once '/Twig/lib/Twig/Autoloader.php';  //relative path
+//require_once 'C:\Users\g.zarifis\vendor\twig\twig\lib\Twig\Autoloader.php';   #'/path/to/lib/Twig/Autoloader.php';
 Twig_Autoloader::register();
 
-$loader = new Twig_Loader_Filesystem('C:\Program Files (x86)\EasyPHP-DevServer-14.1VC11\data\localweb\Alinda\theme\templates\admin');
+//$loader = new Twig_Loader_Filesystem('/theme/templates/admin/');
+$loader = new Twig_Loader_Filesystem('C:\xampp\htdocs\Alinda\theme\templates\admin');
 
 $twig = new Twig_Environment($loader, array(
     
