@@ -270,14 +270,14 @@
 									 ΕΩΣ
 								</th>
                                                                 <th>
-									 ΧΡΕΩΣΗ
+									 ΧΡΕΩΣΗ<div id="header_col_2"></div>
 								</th>
 								<th>
-									 ΠΙΣΤΩΣΗ
+									 ΠΙΣΤΩΣΗ<div id="header_col_3"></div>
 								</th>
                                                                 
 								<th>
-									 ΤΖΙΡΟΣ
+									 ΤΖΙΡΟΣ<div id="header_col_4"></div>
 								</th>
                                                                
                                                                 
@@ -296,6 +296,35 @@
                                                                 
 							</tr>
 							</thead>
+
+							<tfoot style="display:table-header-group">
+							<tr>
+								<th>ΑΠΟ</th>
+								<th>ΕΩΣ</th>
+                                                                <th>
+									 ΧΡΕΩΣΗ
+								</th>
+								<th>
+									 ΠΙΣΤΩΣΗ
+								</th>
+								<th>
+									 ΤΖΙΡΟΣ
+								</th>
+                                                                <th>
+									 ΠΕΛΑΤΗΣ
+								</th>
+                                                                <th>
+									 ΝΕΑ ΠΑΡΑΓΓΕΛΙΑ
+								</th>
+                                                                <th>
+									 ΕΙΔΗ
+								</th>
+                                                                <th>
+									 ΑΦΜ
+								</th>
+							</tr>
+							</tfoot>
+							
 							<tbody>
                                                             {% for row in res %}
                                                          <tr>
@@ -380,8 +409,23 @@ jQuery(document).ready(function() {
 		i++;
 	}
 			
-Index_goro.initCharts(chart_data,chart_data);
-ComponentsPickers.init();
+	Index_goro.initCharts(chart_data,chart_data);
+	ComponentsPickers.init();
+
+	//Change ALL the footer values to input boxes.
+    $('#sample_1 tfoot th').each( function () {
+    //$('.myClass th').each( function () {
+        var title =   jQuery.trim($('#sample_1 thead th').eq( $(this).index() ).text());
+		//ALL ? Not all. Do not put search boxes for the buttons.
+		if ((title != "ΝΕΑ ΠΑΡΑΓΓΕΛΙΑ")&&(title != "ΕΙΔΗ"))
+		{
+        $(this).html( '<input size="10" type="text" class="lol" placeholder="'+title+'" />' );
+		}
+		else
+        $(this).html( ' ' );
+    } );
+	
+	
 });
 
 </script>
