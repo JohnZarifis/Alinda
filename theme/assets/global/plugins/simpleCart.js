@@ -772,14 +772,14 @@ function CartItem() {
 	
 	CartItem.prototype.checkQuantityAndPrice = function() {
 		if( !this.price || this.quantity == null || this.quantity == 'undefined'){ 
-			this.quantity = 1;
+			this.quantity = 0; //john
 			error('No quantity for item.');
 		} else {
 			this.quantity = ("" + this.quantity).replace(/,*/gi, "" );
 			this.quantity = parseInt( ("" + this.quantity).replace( /[^(\d|\.)]*/gi, "") , 10); 
-			if( isNaN(this.quantity) ){
+			if( isNaN(this.quantity) || this.quantity <= 0){  //john
 				error('Quantity is not a number.');
-				this.quantity = 1;
+				this.quantity = 0; // john
 			}
 		}
 				

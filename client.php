@@ -8,6 +8,11 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 
 $username = $_SESSION['user_name'];
 $id = $_SESSION['user_id'];
+$psw = $_SESSION['user_psw'];
+$Supervisor = $_SESSION['user_Supervisor'];
+$commonPSW = $_SESSION['user_commonPSW'];
+$isAdmin = $_SESSION['user_isAdmin'];
+$account = $_SESSION['user_account'];
 //print_r($_SESSION); //for debugging reasons
 if(isset($_GET['traid'])){
     $traid =  $_GET['traid'] ;
@@ -28,7 +33,7 @@ $traid = $_POST['traid'];
 }
 
 $sql = <<<MARKER
-SELECT TRNDATE,T.TRAID,DOSCODE,DOCNUMBER,TRNREASON,XΡΕΩΣΗ,ΠΙΣΤΩΣΗ,TZIROS,YPOLOIPO,ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ,ΑΦΜ_ΣΥΝΑΛΛΑΣΣΟΜΕΝΟΥ,SLMID,ADRCITY
+SELECT TRNDATE,T.TRAID,DOSCODE,DOCNUMBER,TRNREASON,XΡΕΩΣΗ,ΠΙΣΤΩΣΗ,TZIROS,YPOLOIPO,LEENAME,LEEAFM,C.SLMCODE,ADRCITY
 FROM TRN T
 INNER JOIN CUSTOMER C
 ON C.TRAID = T.TRAID
@@ -54,12 +59,12 @@ while ($row = mysql_fetch_assoc($result_set))
                                                     'XREOSI'=>$row['XΡΕΩΣΗ'],
                                                     'PISTOSI'=>$row['ΠΙΣΤΩΣΗ'],
                                                     'TZIROS'=>$row['TZIROS'],
-                                                    'LEENAME'=>$row['ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ'],
-                                                    'LEEAFM'=>$row['ΑΦΜ_ΣΥΝΑΛΛΑΣΣΟΜΕΝΟΥ'],
+                                                    'LEENAME'=>$row['LEENAME'],
+                                                    'LEEAFM'=>$row['LEEAFM'],
                                                     'DOCNUMBER'=>$row['DOCNUMBER'], 
                                                     'TRNREASON'=>$row['TRNREASON'], 
                                                     'YPOLOIPO'=>$row['YPOLOIPO'], 
-                                                    'SLMID'=>$row['SLMID'], 
+                                                    'SLMCODE'=>$row['SLMCODE'], 
                                                     'ADRCITY'=>$row['ADRCITY'],
                              );
 			}

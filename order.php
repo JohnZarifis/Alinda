@@ -8,25 +8,31 @@ require_once("includes/configs.php");
 if (!$session->is_logged_in()) { redirect_to("login.php"); }
 if (isset($_GET['traid'])){
 $traid =  $_GET['traid'] ;
-$sql = " SELECT TRAID,ΚΩΔ_ΠΕΛΑΤΗ,LEEID,ΕΝΕΡΓΟΣ,ΠΟΣΟΣΤΟ_ΕΚΠΤΩΣΗΣ,ΜΗΝΥΜΑ_ΤΙΜΟΛΟΓΗΣΗΣ,"
-        . "ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ,ΑΦΜ_ΣΥΝΑΛΛΑΣΣΟΜΕΝΟΥ,ΝΟΜΙΣΜΑ,ΠΕΡΙΓΡΑΦΗ_ΤΡΟΠΟΥ_ΠΛΗΡΩΜΗΣ,ΤΡΟΠΟΣ_ΜΕΤΑΦΟΡΑΣ,"
-        . "SLMID,ΠΩΛΗΤΗΣ,ADRIDMAIN,ADRID,ADRSTREET,ADRNUMBER,ADRCITY,ADRPHONE1,ADRPHONE2,ADREMAIL "
+$sql = " SELECT TRAID,TRACODE,LEENAME,LEEAFM,"       
+        . "SLMCODE,SLMNAME,ADRSTREET,ADRCITY,ADRPHONE1,ADRPHONE2,ADREMAIL, CONTACT "
         . "FROM CUSTOMER WHERE TRAID = {$traid}";
+
 $username = $_SESSION['user_name'];
 $id = $_SESSION['user_id'];
+$psw = $_SESSION['user_psw'];
+$Supervisor = $_SESSION['user_Supervisor'];
+$commonPSW = $_SESSION['user_commonPSW'];
+$isAdmin = $_SESSION['user_isAdmin'];
+$account = $_SESSION['user_account'];
+
+
 $result_set = $database->query($sql);
 while ($row = mysql_fetch_assoc($result_set)) 
 			{
-                         $leename = $row['ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ'];
-                         $leeafm = $row['ΑΦΜ_ΣΥΝΑΛΛΑΣΣΟΜΕΝΟΥ'];
+                         $leename = $row['LEENAME'];
+                         $leeafm = $row['LEEAFM'];
                          $leephone1 = $row['ADRPHONE1'];
                          $leephone2 = $row['ADRPHONE2'];
                          $leeEmail = $row['ADREMAIL'];
-                         $leeCode = $row['ΚΩΔ_ΠΕΛΑΤΗ'];
+                         $leeCode = $row['TRACODE'];
                          $leeCity = $row['ADRCITY'];
-                         $leeStreet = $row['ADRSTREET'];
-                         $leeAdrNumber = $row['ADRNUMBER'];
-                         
+                         $leeStreet = $row['ADRSTREET'];                      
+                         $leeContact = $row['CONTACT'];
 			}
 
 }
@@ -105,8 +111,8 @@ foreach($MultiDimArray as $result){
                                'traid'=>$traid,
                                'slmid'=>$id,
                                'leeCity'=>$leeCity,
-                               'leeStreet'=>$leeStreet,
-                               'leeAdrNumber'=>$leeAdrNumber,
+                               'leeStreet'=>$leeStreet,                              
+                               'leeContact'=>$leeContact,
       ));
   
 

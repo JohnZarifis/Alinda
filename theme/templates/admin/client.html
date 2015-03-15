@@ -235,35 +235,29 @@
 							<table class="table table-striped table-bordered table-hover" id="sample_1">
 							<thead>
 							<tr>
-								
-								<th>
-									 ΗΜΕΡΟΜΗΝΙΑ
-								</th>
-                                                                <th>
-									 ΣΕΙΡΑ
-								</th>
-                                                                 <th>
-									 ΑΡ.
-								</th>
-                                                                <th>
-									 ΤΥΠΟΣ ΠΑΡΑΣΤΑΤΙΚΟΥ
-								</th>
-                                                                <th>
-									 ΧΡΕΩΣΗ
-								</th>
-                                                                <th>
-									 ΠΙΣΤΩΣΗ
-								</th>
-								<th>
-									 ΤΖΙΡΟΣ
-								</th>
-                                                               
-                                                                <th>
-									 ΠΟΛΗ
-								</th>
-                                                               
+								<th> ΗΜΕΡΟΜΗΝΙΑ </th>
+                                <th>ΣΕΙΡΑ</th>
+                                <th>ΑΡ.</th>
+                                <th>ΤΥΠΟΣ ΠΑΡΑΣΤΑΤΙΚΟΥ</th>
+                                <th>ΧΡΕΩΣΗ<div id="header_col_2"></th>
+                                <th>ΠΙΣΤΩΣΗ<div id="header_col_3"></th>
+								<th>ΤΖΙΡΟΣ<div id="header_col_4"></th>
+								<th>ΥΠΟΛΟΙΠΟ<div id="header_col_5"></th>                               
 							</tr>
 							</thead>
+							<tfoot style="display:table-header-group">
+							<tr>
+								<th>ΗΜΕΡΟΜΗΝΙΑ</th>
+								<th>ΣΕΙΡΑ</th>
+                                <th>ΑΡ.</th>
+								<th>ΤΥΠΟΣ ΠΑΡΑΣΤΑΤΙΚΟΥ</th>
+								<th>ΧΡΕΩΣΗ</th>
+								<th>ΠΙΣΤΩΣΗ</th>
+                                <th>ΤΖΙΡΟΣ</th>
+                                <th>ΥΠΟΛΟΙΠΟ</th>
+                                
+							</tr>
+							</tfoot>
 							<tbody>
                                                             {% for row in res %}                                                                                
                                                          <tr>
@@ -274,7 +268,7 @@
                                                          <td>{{ row['XREOSI']}}</td>
                                                          <td>{{ row['PISTOSI']}}</td>
                                                          <td>{{ row['TZIROS']}}</td>                                                                                                             
-                                                         <td>{{ row['ADRCITY']}}</td>
+                                                         <td>{{ row['YPOLOIPO']}}</td>
                                                          </tr>
                                                          
                                                             
@@ -344,6 +338,18 @@ jQuery(document).ready(function() {
 			
 Index_goro.initCharts(chart_data,chart_data);
 ComponentsPickers.init();
+//Change ALL the footer values to input boxes.
+    $('#sample_1 tfoot th').each( function () {
+    //$('.myClass th').each( function () {
+        var title =   jQuery.trim($('#sample_1 thead th').eq( $(this).index() ).text());
+		//ALL ? Not all. Do not put search boxes for the buttons.
+		if ((title != "ΝΕΑ ΠΑΡΑΓΓΕΛΙΑ")&&(title != "ΕΙΔΗ"))
+		{
+        $(this).html( '<input size="10" type="text" class="lol" placeholder="'+title+'" />' );
+		}
+		else
+        $(this).html( ' ' );
+    } );
 });
 
 </script>

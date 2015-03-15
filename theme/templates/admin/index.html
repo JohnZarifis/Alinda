@@ -263,37 +263,16 @@
 							<thead>
 							<tr>
 								
-								<th>
-									 ΑΠΟ
-								</th>
-								<th>
-									 ΕΩΣ
-								</th>
-                                                                <th>
-									 ΧΡΕΩΣΗ<div id="header_col_2"></div>
-								</th>
-								<th>
-									 ΠΙΣΤΩΣΗ<div id="header_col_3"></div>
-								</th>
-                                                                
-								<th>
-									 ΤΖΙΡΟΣ<div id="header_col_4"></div>
-								</th>
-                                                               
-                                                                
-                                                                <th>
-									 ΠΕΛΑΤΗΣ
-								</th>
-                                                                <th>
-									 ΝΕΑ ΠΑΡΑΓΓΕΛΙΑ
-								</th>
-                                                                <th>
-									 ΕΙΔΗ
-								</th>
-                                                                <th>
-									 ΑΦΜ
-								</th>
-                                                                
+								<th>ΑΠΟ</th>
+								<th>ΕΩΣ</th>
+                                <th>ΧΡΕΩΣΗ<div id="header_col_2"></div></th>
+								<th>ΠΙΣΤΩΣΗ<div id="header_col_3"></div></th>                                
+								<th>ΤΖΙΡΟΣ<div id="header_col_4"></div></th>
+                                <th>ΥΠΟΛΟΙΠΟ<div id="header_col_5"></div></th>                             
+  								<th>ΠΕΛΑΤΗΣ</th>
+                                <th>ΝΕΑ ΠΑΡΑΓΓΕΛΙΑ</th>
+                                <th>ΕΙΔΗ</th>
+								<th>ΠΩΛΗΤΗΣ</th>                                 
 							</tr>
 							</thead>
 
@@ -301,45 +280,32 @@
 							<tr>
 								<th>ΑΠΟ</th>
 								<th>ΕΩΣ</th>
-                                                                <th>
-									 ΧΡΕΩΣΗ
-								</th>
-								<th>
-									 ΠΙΣΤΩΣΗ
-								</th>
-								<th>
-									 ΤΖΙΡΟΣ
-								</th>
-                                                                <th>
-									 ΠΕΛΑΤΗΣ
-								</th>
-                                                                <th>
-									 ΝΕΑ ΠΑΡΑΓΓΕΛΙΑ
-								</th>
-                                                                <th>
-									 ΕΙΔΗ
-								</th>
-                                                                <th>
-									 ΑΦΜ
-								</th>
+                                <th>ΧΡΕΩΣΗ</th>
+								<th>ΠΙΣΤΩΣΗ</th>
+								<th>ΤΖΙΡΟΣ</th>
+								<th>ΥΠΟΛΟΙΠΟ</th>
+                                <th>ΠΕΛΑΤΗΣ</th>
+                                <th>ΝΕΑ ΠΑΡΑΓΓΕΛΙΑ</th>
+                                <th>ΕΙΔΗ</th>
+                                <th>ΠΩΛΗΤΗΣ</th>
 							</tr>
 							</tfoot>
 							
 							<tbody>
-                                                            {% for row in res %}
-                                                         <tr>
-                                                         <td>{{row['Min Date']}}</td>
-                                                         <td>{{ row['Max Date']}}</td>
-                                                         
-                                                         <td>{{ row['XREOSI']}}</td>
-                                                         <td>{{ row['PISTOSI']}}</td> 
-                                                         <td>{{ row['TZIROS']}}</td>
-                                                         <td><a href="client.php?traid={{row['TRAID']}}">{{ row['LEENAME']}}</a></td>
-                                                         <td><a href="order.php?traid={{row['TRAID']}}"><span class="label label-sm label-danger">Νέα Παραγγελία</span></a></td>
-                                                         <td><a href="goods.php?traid={{row['TRAID']}}"><span class="label label-sm label-success ">Είδη</span></a></td>
-                                                         <td>{{ row['LEEAFM']}}</td>
-                                                         </tr>
-                                                          {% endfor %}
+                                 {% for row in res %}
+                                     <tr>
+                                       <td>{{row['Min Date']}}</td>
+                                       <td>{{ row['Max Date']}}</td>                                                      
+                                       <td>{{ row['XREOSI']}}</td>
+                                       <td>{{ row['PISTOSI']}}</td> 
+                                       <td>{{ row['TZIROS']}}</td>
+                                       <td>{{row['YPOLOIPO']}}</td>
+                                       <td><a href="client.php?traid={{row['TRAID']}}">{{ row['LEENAME']}}</a></td>
+                                       <td><a href="order.php?traid={{row['TRAID']}}"><span class="label label-sm label-danger">Νέα Παραγγελία</span></a></td>
+                                       <td><a href="goods.php?traid={{row['TRAID']}}"><span class="label label-sm label-success ">Είδη</span></a></td>
+                                       <td>{{ row['SLMNAME']}}</td>
+                                       </tr>
+                                       {% endfor %}
 							
 							</tbody>
 							</table>

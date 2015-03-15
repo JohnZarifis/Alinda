@@ -9,10 +9,12 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 $username = $_SESSION['user_name'];
 $id = $_SESSION['user_id'];
 $psw = $_SESSION['user_psw'];
+$Supervisor = $_SESSION['user_Supervisor'];
+$commonPSW = $_SESSION['user_commonPSW'];
+$isAdmin = $_SESSION['user_isAdmin'];
+$account = $_SESSION['user_account'];
 //print_r($_SESSION); //for debugging reasons
-///$sql = "select SLMID, SLMNAME, TRACODE, LEENAME,LEEAFM, ADRSFULLDEST, TZIROS08, TZIROS09, TZIROS10,TZIROS11,TZIROS12,XREOSI,PISTOSI,YPOLOIPO from Z_TSIROS_YPOLI";
-//$sql.= " WHERE SLMID = {$id} ";
-//$text = 'tets';
+
 $from = '01/01/2014';
 $to =  date("d/m/Y");
 //$date = str_replace('/', '-', $from);
@@ -23,14 +25,16 @@ if(isset($_POST['from']) && isset($_POST['to'])){
 $from = $_POST['from'];
 $to = $_POST['to'];}
 $sql = <<<MARKER
-SELECT MIN(TRNDATE), MAX(TRNDATE) , T.TRAID ,sum(XΡΕΩΣΗ),sum(ΠΙΣΤΩΣΗ),sum(TZIROS),ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ,ΑΦΜ_ΣΥΝΑΛΛΑΣΣΟΜΕΝΟΥ,SLMID
+SELECT MIN(TRNDATE), MAX(TRNDATE) , T.TRAID ,sum(XΡΕΩΣΗ),sum(ΠΙΣΤΩΣΗ),sum(TZIROS),YPOLOIPO,LEENAME,LEEAFM,S.SLMID,C.SLMNAME
 FROM TRN T
 INNER JOIN CUSTOMER C
 ON T.TRAID = C.TRAID
+INNER JOIN SLM S
+ON S.SLMID = C.SLMCODE
 WHERE TRNDATE  BETWEEN 
 STR_TO_DATE('{$from}', '%d/%m/%Y') AND STR_TO_DATE('{$to}', '%d/%m/%Y')
-AND SLMID = {$id}
-GROUP BY T.TRAID ,ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ,ΑΦΜ_ΣΥΝΑΛΛΑΣΣΟΜΕΝΟΥ,SLMID
+AND commonPSW = {$commonPSW}
+GROUP BY T.TRAID ,LEENAME,LEEAFM,S.SLMID,YPOLOIPO,C.SLMNAME
 ORDER BY TRAID
 MARKER;
 
@@ -49,9 +53,11 @@ while ($row = mysql_fetch_assoc($result_set))
                                                     'XREOSI'=>$row['sum(XΡΕΩΣΗ)'],
                                                     'PISTOSI'=>$row['sum(ΠΙΣΤΩΣΗ)'],
                                                     'TZIROS'=>$row['sum(TZIROS)'],
-                                                    'LEENAME'=>$row['ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ'],
-                                                    'LEEAFM'=>$row['ΑΦΜ_ΣΥΝΑΛΛΑΣΣΟΜΕΝΟΥ'],
+                                                    'LEENAME'=>$row['LEENAME'],
+                                                    'LEEAFM'=>$row['LEEAFM'],
                                                     'SLMID'=>$row['SLMID'], 
+                                                    'YPOLOIPO'=>$row['YPOLOIPO'],
+                                                    'SLMNAME'=>$row['SLMNAME']
                              );
 			}
                         
@@ -63,8 +69,8 @@ while ($row = mysql_fetch_assoc($result_set))
 
 $graphSql = "SELECT MONTH(TRNDATE) as MONTH ,SUM(TZIROS) AS TZIROS FROM TRN T "
             . "INNER JOIN  CUSTOMER C ON T.TRAID = C.TRAID "
-        . " WHERE SLMID = {$id} AND TRNDATE  BETWEEN STR_TO_DATE('{$from}', '%d/%m/%Y')  AND STR_TO_DATE('{$to}', '%d/%m/%Y')  "
-        . " GROUP BY MONTH(TRNDATE) ";
+        	. " WHERE SLMID = {$id} AND TRNDATE  BETWEEN STR_TO_DATE('{$from}', '%d/%m/%Y')  AND STR_TO_DATE('{$to}', '%d/%m/%Y')  "
+        	. " GROUP BY MONTH(TRNDATE) ";
 $result_graph = $database->query($graphSql);
 $Grapharray;
 while ($row = mysql_fetch_assoc($result_graph)) {
@@ -89,7 +95,7 @@ foreach($MultiDimArray as $result){
     }      
 	
 
-        //$name = 'John';
+ 
         $template = $twig->loadTemplate('index.html');  
         echo $template->render(array('username' => $username,
                                     'clientno'=>$clientno,

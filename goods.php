@@ -8,6 +8,11 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 
 $username = $_SESSION['user_name'];
 $id = $_SESSION['user_id'];
+$psw = $_SESSION['user_psw'];
+$Supervisor = $_SESSION['user_Supervisor'];
+$commonPSW = $_SESSION['user_commonPSW'];
+$isAdmin = $_SESSION['user_isAdmin'];
+$account = $_SESSION['user_account'];
 //print_r($_SESSION); //for debugging reasons
 
 $from = '01/01/2014';
@@ -20,7 +25,7 @@ $to = $_POST['to'];
 }
 
 $sql = <<< MARKER
-SELECT  G.TRAID, ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ, CODCODE, ITMNAME, 
+SELECT  G.TRAID, LEENAME, G.CODCODE, G.ITMNAME, BCTGDESCR,CCTGDESCR,
                  SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) 
                                     then POSOTA
                                     else .00 END ) as POSOTITA_CURRENT_YEAR,
@@ -28,12 +33,16 @@ SELECT  G.TRAID, ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ, CODCODE, ITMNAME,
                                     then POSOTA
                                     else .00 END ) as POSOTITA_PAST_YEAR
                 FROM GOODS G
-	        INNER JOIN CUSTOMER C				
+	            INNER JOIN CUSTOMER C				
                 ON C.TRAID = G.TRAID
-                WHERE SLMID = {$id}
+                INNER JOIN SLM S               
+                ON S.SLMID = C.SLMCODE
+                INNER JOIN PRODUCT P
+                ON P.CODCODE = G.CODCODE
+                WHERE commonPSW = {$commonPSW}
                 AND  DOCEKDOSISDATE  BETWEEN 
 STR_TO_DATE('{$from}', '%d/%m/%Y')  AND STR_TO_DATE('{$to}', '%d/%m/%Y')
-GROUP BY G.TRAID, ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ, CODCODE, ITMNAME
+GROUP BY G.TRAID, LEENAME, CODCODE, ITMNAME
 MARKER;
 
 if(isset($_GET['traid']))
@@ -43,7 +52,7 @@ if(isset($_GET['traid']))
 //$from = $_POST['apo_value'];
 //$to = $_POST['mexri_value'];
 $sql = <<<MARKER
-SELECT G.TRAID, ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ, CODCODE, ITMNAME, 
+SELECT G.TRAID, LEENAME, G.CODCODE, G.ITMNAME,BCTGDESCR,CCTGDESCR, 
                  SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) 
                                     then POSOTA
                                     else .00 END ) as POSOTITA_CURRENT_YEAR,
@@ -53,10 +62,12 @@ SELECT G.TRAID, ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ, CODCODE, ITMNAME,
                 FROM GOODS G
                 INNER JOIN CUSTOMER C				
                 ON C.TRAID = G.TRAID
+                INNER JOIN PRODUCT P
+                ON P.CODCODE = G.CODCODE
                 WHERE C.TRAID = {$traid}
                 AND  DOCEKDOSISDATE  BETWEEN 
                 STR_TO_DATE('{$from}', '%d/%m/%Y')  AND STR_TO_DATE('{$to}', '%d/%m/%Y')
-GROUP BY TRAID, ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ, CODCODE, ITMNAME
+GROUP BY TRAID, LEENAME, CODCODE, ITMNAME
 MARKER;
 }   
   
@@ -74,12 +85,14 @@ $MultiDimArray = array();
 while ($row = mysql_fetch_assoc($result_set)) 
 			{
                          $MultiDimArray[] = array ( 
-                                                    'LEENAME' => $row['ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ'],
+                                                    'LEENAME' => $row['LEENAME'],
                                                     'TRAID'=>$row['TRAID'],
                                                     'CODCODE'=>$row['CODCODE'],
                                                     'ITMNAME'=>$row['ITMNAME'],
                                                     'POSOTITA_CURRENT_YEAR'=>$row['POSOTITA_CURRENT_YEAR'],
                                                     'POSOTITA_PAST_YEAR'=>$row['POSOTITA_PAST_YEAR'],
+                                                    'BCTGDESCR'=>$row['BCTGDESCR'],
+                                                    'CCTGDESCR'=>$row['CCTGDESCR'],
                                                     
                              );
 			}

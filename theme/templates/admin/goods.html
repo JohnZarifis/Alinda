@@ -173,41 +173,39 @@
 							<table class="table table-striped table-bordered table-hover" id="sample_1">
 							<thead>
 							<tr>
-								
-                                                                <th>
-									ΠΕΛΑΤΗΣ
-								</th>
-								
-                                                                
-                                                                 <th>
-									 ΚΩΔ. ΕΙΔΟΥΣ
-								</th>
-                                                                <th>
-									 ΕΙΔΟΣ
-								</th>
-                                                                
-                                                                <th>
-									 ΠΟΣΟΤΗΤΑ 2015
-								</th>
-								<th>
-									 ΠΟΣΟΤΗΤΑ 2014
-								</th>
-                                                                                                             
+								<th>ΠΕΛΑΤΗΣ</th>
+								<th>ΚΑΤΗΓΟΡΙΑ</th>
+								<th>ΥΠΟΚΑΤΗΓΟΡΙΑ</th>
+								<th>ΚΩΔ. ΕΙΔΟΥΣ<div id="header_col_2"></div></th>
+                                <th>ΕΙΔΟΣ<div id="header_col_3"></div></th>
+                                <th>ΠΟΣΟΤΗΤΑ 2015<div id="header_col_4"></div></th>
+								<th>ΠΟΣΟΤΗΤΑ 2014<div id="header_col_5"></div></th>
+                             </tr?                                                                             
 							</thead>
+							<tfoot style="display:table-header-group">
+							<tr>
+								<th>ΠΕΛΑΤΗΣ</th>
+								<th>ΚΑΤΗΓΟΡΙΑ</th>
+								<th>ΥΠΟΚΑΤΗΓΟΡΙΑ</th>
+								<th>ΚΩΔ. ΕΙΔΟΥΣ</th>
+                                <th>ΕΙΔΟΣ</th>
+                                <th>ΠΟΣΟΤΗΤΑ 2015</th>
+								<th>ΠΟΣΟΤΗΤΑ 2014</th>
+							</tr>
+							</tfoot>
 							<tbody>
-                                                            {% for row in res %}                                                                                
-                                                         <tr>                                                        
-                                                         <td>{{ row['LEENAME']}}</td>
-                                                        
-                                                         <td>{{ row['CODCODE']}}</td>
-                                                         <td>{{ row['ITMNAME']}}</td>
-                                                         <td>{{ row['POSOTITA_CURRENT_YEAR']}}</td>
-                                                         <td>{{ row['POSOTITA_PAST_YEAR']}}</td>
-                                                         
-                                                         </tr>
-                                                         
-                                                            
-                                                          {% endfor %}
+                            {% for row in res %}                                                                                
+                            <tr>                                                        
+                             <td>{{ row['LEENAME']}}</td>
+                             <td>{{ row['BCTGDESCR']}}</td>
+                             <td>{{ row['CCTGDESCR']}}</td>                           
+                             <td>{{ row['CODCODE']}}</td>
+                             <td>{{ row['ITMNAME']}}</td>
+                             <td>{{ row['POSOTITA_CURRENT_YEAR']}}</td>
+                             <td>{{ row['POSOTITA_PAST_YEAR']}}</td>
+                             </tr>
+   
+                             {% endfor %}
 							
 							</tbody>
 							</table>
@@ -264,6 +262,18 @@
 jQuery(document).ready(function() {
 	
 ComponentsPickers.init();
+	//Change ALL the footer values to input boxes.
+    $('#sample_1 tfoot th').each( function () {
+    //$('.myClass th').each( function () {
+        var title =   jQuery.trim($('#sample_1 thead th').eq( $(this).index() ).text());
+		//ALL ? Not all. Do not put search boxes for the buttons.
+		if ((title != "ΝΕΑ ΠΑΡΑΓΓΕΛΙΑ")&&(title != "ΕΙΔΗ"))
+		{
+        $(this).html( '<input size="10" type="text" class="lol" placeholder="'+title+'" />' );
+		}
+		else
+        $(this).html( ' ' );
+    } );
 });
 
 </script>

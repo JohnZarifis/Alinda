@@ -79,13 +79,13 @@ var TableAdvanced = function () {
             // Remove the formatting to get integer data for summation
             var intVal = function ( i ) {
                 return typeof i === 'string' ?
-                    i.replace(/[\$,]/g, '')*1 :
+                    i.replace(/[\$,]/g, '.')*1 :  //john
                     typeof i === 'number' ?
                         i : 0;
             };
 			//Update columns 2 to 4 ( numeric columns that can be agregated)
 			var i=2;
-			for (i=2;i<=4;i++)
+			for (i=2;i<=5;i++)
 			{
 				// Total over all pages
 				total = api
@@ -124,9 +124,9 @@ var TableAdvanced = function () {
 				header_input="header_col_"+i;
 				var x=document.getElementById(header_input);
 				if (searchTotal == total)
-					x.innerHTML=total;
+					x.innerHTML=total.toFixed(2);
 				else
-					x.innerHTML=searchTotal +'/'+ total;
+					x.innerHTML=searchTotal.toFixed(2) +'/'+ total.toFixed(2);
 			}
         }
         });

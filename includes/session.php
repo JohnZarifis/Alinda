@@ -9,7 +9,13 @@ class Session {
 	
 	private $logged_in=false;
 	public $user_id;
-        public $user_name;
+    public $user_name;
+	public $user_psw;
+	public $user_Supervisor;
+	public $user_isAdmin;
+	public $user_commonPSW;
+	public $user_account;
+	
 	
 	function __construct() {
 		session_start();
@@ -29,8 +35,12 @@ class Session {
     // database should find user based on username/password
     if($user){
       $this->user_id = $_SESSION['user_id'] = $user-> SLMID;
-      $this->user_name = $_SESSION['user_name'] = $user-> SLMNAME;
+      $this->user_name = $_SESSION['user_name'] = $user-> USERNAME;
+	  $this->user_account = $_SESSION['user_account'] = $user-> SLMNAME;
       $this->user_psw = $_SESSION['user_psw'] = $user-> PSW;
+	  $this->user_Supervisor = $_SESSION['user_Supervisor'] = $user-> Supervisor;
+      $this->user_isAdmin = $_SESSION['user_isAdmin'] = $user-> isAdmin;
+      $this->user_commonPSW = $_SESSION['user_commonPSW'] = $user-> commonPSW;
       $this->logged_in = true;
     }
   }
