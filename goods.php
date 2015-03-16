@@ -13,11 +13,23 @@ $Supervisor = $_SESSION['user_Supervisor'];
 $commonPSW = $_SESSION['user_commonPSW'];
 $isAdmin = $_SESSION['user_isAdmin'];
 $account = $_SESSION['user_account'];
+//$email = $_SESSION['user_email'];
 //print_r($_SESSION); //for debugging reasons
 
 $from = '01/01/2014';
 //$to =  'SYSDATE()';
 $to =  date("d/m/Y");
+
+if($isAdmin == 1){
+$filter = "";
+}
+else if($isAdmin == 2){
+
+$filter = "AND Supervisor = {$id}";	
+}
+else{
+$filter = "AND commonPSW = {$commonPSW}";
+}
 
 if(isset($_POST['from']) && isset($_POST['to'])){
 $from = $_POST['from'];
@@ -39,10 +51,10 @@ SELECT  G.TRAID, LEENAME, G.CODCODE, G.ITMNAME, BCTGDESCR,CCTGDESCR,
                 ON S.SLMID = C.SLMCODE
                 INNER JOIN PRODUCT P
                 ON P.CODCODE = G.CODCODE
-                WHERE commonPSW = {$commonPSW}
-                AND  DOCEKDOSISDATE  BETWEEN 
-STR_TO_DATE('{$from}', '%d/%m/%Y')  AND STR_TO_DATE('{$to}', '%d/%m/%Y')
-GROUP BY G.TRAID, LEENAME, CODCODE, ITMNAME
+                WHERE DOCEKDOSISDATE  BETWEEN 
+				STR_TO_DATE('{$from}', '%d/%m/%Y')  AND STR_TO_DATE('{$to}', '%d/%m/%Y')
+				{$filter}
+				GROUP BY G.TRAID, LEENAME, CODCODE, ITMNAME
 MARKER;
 
 if(isset($_GET['traid']))
@@ -53,7 +65,7 @@ if(isset($_GET['traid']))
 //$to = $_POST['mexri_value'];
 $sql = <<<MARKER
 SELECT G.TRAID, LEENAME, G.CODCODE, G.ITMNAME,BCTGDESCR,CCTGDESCR, 
-                 SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) 
+                SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) 
                                     then POSOTA
                                     else .00 END ) as POSOTITA_CURRENT_YEAR,
 				SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) -1

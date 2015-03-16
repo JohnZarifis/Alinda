@@ -15,6 +15,7 @@ class Session {
 	public $user_isAdmin;
 	public $user_commonPSW;
 	public $user_account;
+	public $user_email;
 	
 	
 	function __construct() {
@@ -41,6 +42,7 @@ class Session {
 	  $this->user_Supervisor = $_SESSION['user_Supervisor'] = $user-> Supervisor;
       $this->user_isAdmin = $_SESSION['user_isAdmin'] = $user-> isAdmin;
       $this->user_commonPSW = $_SESSION['user_commonPSW'] = $user-> commonPSW;
+	  $this->user_email = $_SESSION['user_email'] = $user -> slmEmail;
       $this->logged_in = true;
     }
   }

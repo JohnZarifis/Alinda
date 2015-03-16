@@ -18,5 +18,14 @@ $query= "UPDATE ORDERS SET PROCESSED = 'YES' WHERE  orderid = '$_POST[orderid]'"
 $database -> query($query);
 
 }
+if (isset($_GET['orderid'])){
+
+// update  order status
+ 
+$query= "UPDATE ORDERS SET PROCESSED = 'YES' WHERE  orderid = '$_GET[orderid]'"; 
+
+$database -> query($query);
+
+}
 
 header( 'Location: orderList.php' ) ;

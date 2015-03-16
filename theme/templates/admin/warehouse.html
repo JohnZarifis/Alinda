@@ -7,9 +7,6 @@
 <link rel="stylesheet" type="text/css" href="theme/assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css"/>
 <link rel="stylesheet" type="text/css" href="theme/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
 <!-- END PAGE LEVEL STYLES -->
-{% if username == 'Admin' %}
-<meta http-equiv="refresh" content="90">
-{% endif %}
 {% endblock %}
 {% block title %}
  Alinda|Sales Portal
@@ -20,11 +17,11 @@
 
 	<div class="page-content-wrapper">
 		<div class="page-content">
-			
+		
 
 			<!-- BEGIN PAGE HEADER-->
 			<h3 class="page-title">
-			{{LEENAME}} <small>ΚΑΡΤΕΛΑ ΠΕΛΑΤΗ</small>
+			 <small>ΑΠΟΘΗΚΕΣ</small>
 			</h3>
 			<div class="page-bar">
 				<ul class="page-breadcrumb">
@@ -34,14 +31,14 @@
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
-						<a href="#">Παραγγελίες</a>
+						<a href="#">Dashboard</a>
 					</li>
 				</ul>
 				<div class="page-toolbar">
-	
+                               
+					
 				</div>
 			</div>
-			
 			<!-- END PAGE HEADER-->
 			<!-- BEGIN DASHBOARD STATS -->
 			<div class="row">
@@ -52,7 +49,7 @@
 						</div>
 						<div class="details">
 							<div class="number">
-								 {{ xreosi }} 
+								 {{ xreosi }} €
 							</div>
 							<div class="desc">
 								 Πωλήσεις
@@ -70,10 +67,10 @@
 						</div>
 						<div class="details">
 							<div class="number">
-								 {{ tziros }} 
+								 {{ tziros }} €
 							</div>
 							<div class="desc">
-								 Παραγγελίες
+								 Συνολικός Τζίρος
 							</div>
 						</div>
 						<a class="more" href="#">
@@ -91,7 +88,7 @@
 								 {{ clientno }}
 							</div>
 							<div class="desc">
-								 Πελάτες
+								 Συναλλαγές
 							</div>
 						</div>
 						<a class="more" href="#">
@@ -106,10 +103,10 @@
 						</div>
 						<div class="details">
 							<div class="number">
-								 {{ ypoloipo }} 
+								 {{ ypoloipo }} €
 							</div>
 							<div class="desc">
-								 Πωλητές
+								 Υπόλοιπο
 							</div>
 						</div>
 						<a class="more" href="#">
@@ -121,17 +118,14 @@
 			<!-- END DASHBOARD STATS -->
 			<div class="clearfix">
 			</div>
-			<div class="row">
-				
-				
-                        </div>
+			
 				<div class="row">
 		                 <div class="col-md-12">
 					<!-- BEGIN EXAMPLE TABLE PORTLET-->
 					<div class="portlet box blue-hoki">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-globe"></i>ΠΕΛΑΤΗΣ: {{client }}
+								<i class="fa fa-globe"></i>ΑΠΟΘΗΚΕΣ: 
 							</div>
 							<div class="tools">
 							</div>
@@ -140,25 +134,38 @@
 							<table class="table table-striped table-bordered table-hover" id="sample_1">
 							<thead>
 							<tr>
-                                <th>ΠΩΛΗΤΗΣ</th>
-								<th>ΗΜΕΡΟΜΗΝΙΑ</th>                                
-                                <th>ΠΕΛΑΤΗΣ</th>
-                                <th>ΑΦΜ</th>                                                                                              
-								<th>PROCESSED</th>
-								<th>ΠΡΟΒΟΛΗ</th>
+								<th>ΚΩΔ. ΕΙΔΟΥΣ</th>
+                                <th>ΕΙΔΟΣ</th>
+                                <th>ΑΠΟΘΗΚΗ 00<div id="header_col_2"></div></th>
+								<th>ΑΠΟΘΗΚΗ ΟΙΝΟΦΥΤΩΝ<div id="header_col_3"></div></th>
+								<th>ΑΠΟΘΗΚΗ ΤΡΙΤΩΝ ΟΙΝΟΦΥΤΑ-ΤΕΛΩΝΕΙΟ<div id="header_col_4"></div></th>
+								<th>ΑΠΟΘΗΚΗ ΑΣΠΡΟΠΥΡΓΟΥ<div id="header_col_5"></div></th>							
                             </tr>                                                                            
 							</thead>
+							<tfoot style="display:table-header-group">
+							<tr>
+								<th>ΚΩΔ. ΕΙΔΟΥΣ</th>
+								<th>ΕΙΔΟΣ</th>
+								<th>ΑΠΟΘΗΚΗ 00</th>
+								<th>ΑΠΟΘΗΚΗ ΟΙΝΟΦΥΤΩΝ</th>
+								<th>ΑΠΟΘΗΚΗ ΤΡΙΤΩΝ ΟΙΝΟΦΥΤΑ-ΤΕΛΩΝΕΙΟ</th>
+								<th>ΑΠΟΘΗΚΗ ΑΣΠΡΟΠΥΡΓΟΥ</th>
+							</tr>
+							</tfoot>
 							<tbody>
-                              {% for row in res %}                                                                                
-                               <tr>                                                        
-                               <td>{{ row['SLMNAME']}}</td>
-                               <td>{{row['ORDERDATE']}}</td>
-                               <td>{{ row['LEENAME']}}</td>
-                               <td>{{ row['LEEAFM']}}</td>                                                       
-                               <td>{{ row['PROCESSED']}}</td>
-                               <td><a href="orderDetails.php?orderid={{row['ORDERID']}}"><span class="label label-success"> ΠΡΟΒΟΛΗ </span></a></td>
-							   </tr>
-							 {% endfor %}
+                            {% for row in res %}                                                                                
+                            <tr>                                                        
+                             
+                             <td>{{ row['CODCODE']}}</td>
+                             <td>{{ row['ITMNAME']}}</td>                           
+                             <td>{{ row['POSOT_00']}}</td>
+                             <td>{{ row['POSOT_22']}}</td>
+                             <td>{{ row['POSOT_42']}}</td>
+                             <td>{{ row['POSOT_43']}}</td>
+                             </tr>
+   
+                             {% endfor %}
+							
 							</tbody>
 							</table>
 						</div>
@@ -167,8 +174,8 @@
                                         
 				</div>
 
-								</div>
-			
+			</div>
+		</div>
 
 
 					<!-- END PORTLET-->
@@ -179,7 +186,7 @@
 
 
  </div>
-</div>
+
 <!-- END CONTENT -->
 
 {%  endblock %}
@@ -193,6 +200,13 @@
 <script type="text/javascript" src="theme/assets/global/plugins/datatables/extensions/ColReorder/js/dataTables.colReorder.min.js"></script>
 <script type="text/javascript" src="theme/assets/global/plugins/datatables/extensions/Scroller/js/dataTables.scroller.min.js"></script>
 <script type="text/javascript" src="theme/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+<script type="text/javascript" src="theme/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="theme/assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+<script type="text/javascript" src="theme/assets/global/plugins/clockface/js/clockface.js"></script>
+<script type="text/javascript" src="theme/assets/global/plugins/bootstrap-daterangepicker/moment.min.js"></script>
+<script type="text/javascript" src="theme/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script type="text/javascript" src="theme/assets/global/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+<script type="text/javascript" src="theme/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="theme/assets/global/scripts/metronic.js" type="text/javascript"></script>
@@ -200,4 +214,26 @@
 <script src="theme/assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
 <script src="theme/assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
 <script src="theme/assets/admin/pages/scripts/table-advanced.js"></script>
+<script src="theme/assets/admin/pages/scripts/components-pickers.js"></script>
+
+
+<script>
+jQuery(document).ready(function() {
+	
+ComponentsPickers.init();
+	//Change ALL the footer values to input boxes.
+    $('#sample_1 tfoot th').each( function () {
+    //$('.myClass th').each( function () {
+        var title =   jQuery.trim($('#sample_1 thead th').eq( $(this).index() ).text());
+		//ALL ? Not all. Do not put search boxes for the buttons.
+		if ((title != "ΝΕΑ ΠΑΡΑΓΓΕΛΙΑ")&&(title != "ΕΙΔΗ"))
+		{
+        $(this).html( '<input size="10" type="text" class="lol" placeholder="'+title+'" />' );
+		}
+		else
+        $(this).html( ' ' );
+    } );
+});
+
+</script>
 {%  endblock %}

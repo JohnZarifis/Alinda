@@ -13,6 +13,7 @@ $Supervisor = $_SESSION['user_Supervisor'];
 $commonPSW = $_SESSION['user_commonPSW'];
 $isAdmin = $_SESSION['user_isAdmin'];
 $account = $_SESSION['user_account'];
+//$email = $_SESSION['user_email'];
 //print_r($_SESSION); //for debugging reasons
 if(isset($_GET['traid'])){
     $traid =  $_GET['traid'] ;

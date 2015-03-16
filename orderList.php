@@ -8,13 +8,19 @@ if (!$session->is_logged_in()) { redirect_to("login.php"); }
 
 $username = $_SESSION['user_name'];
 $id = $_SESSION['user_id'];
+$psw = $_SESSION['user_psw'];
+$Supervisor = $_SESSION['user_Supervisor'];
+$commonPSW = $_SESSION['user_commonPSW'];
+$isAdmin = $_SESSION['user_isAdmin'];
+$account = $_SESSION['user_account'];
+//$email = $_SESSION['user_email'];
 //print_r($_SESSION); //for debugging reasons
 
 $from = '01/01/2014';
 $to =  'SYSDATE()'; 
 
 $sql = <<< MARKER
-SELECT distinct ORDERID,O.TRAID,ORDERDATE,O.SLMID,S.SLMNAME,PROCESSED,ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ,ΑΦΜ_ΣΥΝΑΛΛΑΣΣΟΜΕΝΟΥ FROM ORDERS O
+SELECT distinct ORDERID,O.TRAID,ORDERDATE,O.SLMID,S.SLMNAME,PROCESSED,LEENAME,LEEAFM FROM ORDERS O
        INNER JOIN SLM S
        ON S.SLMID = O.SLMID      
        INNER JOIN CUSTOMER C
@@ -24,20 +30,20 @@ ORDER BY ORDERDATE DESC
                 
 MARKER;
 
-if($username != 'Admin')
+if($isAdmin != 3)
     {
         //$traid =  $_GET['traid']; 
 //if(isset($_POST['apo_value']) && isset($_POST['mexri_value'])){
 //$from = $_POST['apo_value'];
 //$to = $_POST['mexri_value'];
 $sql = <<<MARKER
-SELECT distinct ORDERID,O.TRAID,ORDERDATE,O.SLMID,S.SLMNAME,PROCESSED,ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ,ΑΦΜ_ΣΥΝΑΛΛΑΣΣΟΜΕΝΟΥ FROM ORDERS O
+SELECT distinct ORDERID,O.TRAID,ORDERDATE,O.SLMID,S.SLMNAME,PROCESSED,LEENAME,LEEAFM FROM ORDERS O
        INNER JOIN SLM S
        ON S.SLMID = O.SLMID             
        INNER JOIN CUSTOMER C
        ON C.TRAID = O.TRAID              
-        WHERE O.SLMID = {$id}
-        AND PROCESSED = 'NO'
+       WHERE S.commonPSW = {$commonPSW}
+       AND PROCESSED = 'NO'
 MARKER;
 }
 
@@ -54,8 +60,8 @@ while ($row = mysql_fetch_assoc($result_set))
                                                     'SLMID'=>$row['SLMID'],
                                                     'SLMNAME'=>$row['SLMNAME'],
                                                     'PROCESSED'=>$row['PROCESSED'],
-                                                    'LEENAME'=>$row['ΕΠΩΝΥΜΙΑ_ΠΕΛΑΤΗ'],
-                                                    'LEEAFM'=>$row['ΑΦΜ_ΣΥΝΑΛΛΑΣΣΟΜΕΝΟΥ'],
+                                                    'LEENAME'=>$row['LEENAME'],
+                                                    'LEEAFM'=>$row['LEEAFM'],
                                                     'ORDERID'=>$row['ORDERID'],
                              );
 			}

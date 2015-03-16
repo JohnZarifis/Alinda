@@ -85,7 +85,7 @@ var TableAdvanced = function () {
             };
 			//Update columns 2 to 4 ( numeric columns that can be agregated)
 			var i=2;
-			for (i=2;i<=5;i++)
+			for (i=2;i<=6;i++)
 			{
 				// Total over all pages
 				total = api
@@ -123,11 +123,14 @@ var TableAdvanced = function () {
 
 				header_input="header_col_"+i;
 				var x=document.getElementById(header_input);
+				if(x){
 				if (searchTotal == total)
-					x.innerHTML=total.toFixed(2);
+					x.innerHTML = total.toFixed(2);
+				else if (isNaN(searchTotal))
+					x.innerHTML=''
 				else
 					x.innerHTML=searchTotal.toFixed(2) +'/'+ total.toFixed(2);
-			}
+			}}
         }
         });
  

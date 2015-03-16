@@ -38,8 +38,8 @@ while ($row = mysql_fetch_assoc($result_set))
 }
 //$sqlProd = "SELECT productid ,productcode, ,package category,productname ,TAB, TABNAME FROM product";
 $sqlProd = "SELECT MCIID as productid ,"
-        . "CODCODE productcode,DCTGDESCR as category,ITMNAME as productname,BCTGID as TAB, BCTGDESCR as TABNAME "
-        . "FROM product";
+         . "CODCODE productcode,DCTGDESCR as category,ITMNAME as productname,BCTGID as TAB, BCTGDESCR as TABNAME "
+         . "FROM product WHERE COMPANY = 1";
 $resultProd = $database->query($sqlProd);
 
 while ($row = mysql_fetch_assoc($resultProd)) 

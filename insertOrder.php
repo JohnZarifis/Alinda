@@ -63,7 +63,7 @@ foreach($items as $item ) {
  $description = filter_var($item['item_description'], FILTER_SANITIZE_STRING);
 //DO THE SQL QUERY.INSTEAD OF print_r do the sql add entry.
 $sqlIns = <<<MARKER
-        INSERT INTO ORDERS (orderid, traid, orderdate, slmid, codecode, qtyA, processed) VALUES 
+        INSERT INTO ORDERS (orderid, traid, orderdate, slmid, codcode, qtyA, processed) VALUES 
             ({$orderid},{$traid},'{$orderdate}',{$slmid},'{$description}',{$item['item_quantity']},'{$processed}')
 MARKER;
 print_r ($sqlIns);

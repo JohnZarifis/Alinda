@@ -13,6 +13,7 @@ $Supervisor = $_SESSION['user_Supervisor'];
 $commonPSW = $_SESSION['user_commonPSW'];
 $isAdmin = $_SESSION['user_isAdmin'];
 $account = $_SESSION['user_account'];
+//$email = $_SESSION['user_email'];
 //print_r($_SESSION); //for debugging reasons
 
 $from = '01/01/2014';
@@ -24,6 +25,21 @@ $to =  date("d/m/Y");
 if(isset($_POST['from']) && isset($_POST['to'])){
 $from = $_POST['from'];
 $to = $_POST['to'];}
+
+if($isAdmin == 1){
+$filter = "";
+}
+else if($isAdmin == 2){
+
+$filter = "AND Supervisor = {$id}";	
+}
+else if($isAdmin == 2){
+	
+}
+else{
+$filter = "AND commonPSW = {$commonPSW}";
+}
+
 $sql = <<<MARKER
 SELECT MIN(TRNDATE), MAX(TRNDATE) , T.TRAID ,sum(XΡΕΩΣΗ),sum(ΠΙΣΤΩΣΗ),sum(TZIROS),YPOLOIPO,LEENAME,LEEAFM,S.SLMID,C.SLMNAME
 FROM TRN T
@@ -33,7 +49,7 @@ INNER JOIN SLM S
 ON S.SLMID = C.SLMCODE
 WHERE TRNDATE  BETWEEN 
 STR_TO_DATE('{$from}', '%d/%m/%Y') AND STR_TO_DATE('{$to}', '%d/%m/%Y')
-AND commonPSW = {$commonPSW}
+{$filter}
 GROUP BY T.TRAID ,LEENAME,LEEAFM,S.SLMID,YPOLOIPO,C.SLMNAME
 ORDER BY TRAID
 MARKER;
@@ -67,10 +83,16 @@ while ($row = mysql_fetch_assoc($result_set))
 //print_r($res);
 //print_r($MultiDimArray);
 
-$graphSql = "SELECT MONTH(TRNDATE) as MONTH ,SUM(TZIROS) AS TZIROS FROM TRN T "
-            . "INNER JOIN  CUSTOMER C ON T.TRAID = C.TRAID "
-        	. " WHERE SLMID = {$id} AND TRNDATE  BETWEEN STR_TO_DATE('{$from}', '%d/%m/%Y')  AND STR_TO_DATE('{$to}', '%d/%m/%Y')  "
-        	. " GROUP BY MONTH(TRNDATE) ";
+$graphSql = <<<MARKER
+				SELECT MONTH(TRNDATE) as MONTH ,SUM(TZIROS) AS TZIROS FROM TRN T
+                INNER JOIN  CUSTOMER C 
+                ON T.TRAID = C.TRAID
+                INNER JOIN   SLM S 
+                ON  S.SLMID = C.SLMCODE
+        	    WHERE TRNDATE  BETWEEN STR_TO_DATE('{$from}', '%d/%m/%Y')  AND STR_TO_DATE('{$to}', '%d/%m/%Y')
+				{$filter}
+        	    GROUP BY MONTH(TRNDATE) 
+MARKER;
 $result_graph = $database->query($graphSql);
 $Grapharray;
 while ($row = mysql_fetch_assoc($result_graph)) {

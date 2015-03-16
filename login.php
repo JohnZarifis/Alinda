@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) { // Form has been submitted.
   // Check database to see if username/password exist.
 	$found_user = User::authenticate($username, $password);
 //print_r($found_user);
-  if ($found_user && $username == 'Admin') {
+  if ($found_user && $username == 'ΚΑΤΑΧΩΡΗΣΗ') {
     $session->login($found_user);
     //print_r($found_user); // for debugging reasons
     redirect_to("orderList.php");

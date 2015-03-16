@@ -15,15 +15,16 @@ class User{
 		public $Supervisor;
 		public $isAdmin;
 		public $commonPSW;
+		public $slmEmail;
         	
 	
 	
 	public static function find_all() {
-		return self::find_by_sql("SELECT SLIMID,SLMNAME,PSW,USERNAME,Supervisor,isAdmin,commonPSW FROM SLM");
+		return self::find_by_sql("SELECT SLIMID,SLMNAME,PSW,USERNAME,Supervisor,isAdmin,commonPSW,slmEmail FROM SLM");
   }
   
   	public static function find_by_id($id=0) {
-    $result_array = self::find_by_sql("SELECT SLIMID,SLMNAME,PSW,USERNAME,Supervisor,isAdmin,commonPSW WHERE SLMID={$id}");
+    $result_array = self::find_by_sql("SELECT SLIMID,SLMNAME,PSW,USERNAME,Supervisor,isAdmin,commonPSW ,slmEmail WHERE SLMID={$id}");
 		return !empty($result_array) ? array_shift($result_array) : false;
   }
   
@@ -72,7 +73,7 @@ class User{
             $username = $database->mysql_prep($username);
             $password = $database->mysql_prep($password);
 
-            $sql  = "SELECT SLMID, SLMNAME,PSW,USERNAME,Supervisor,isAdmin,commonPSW  FROM SLM ";
+            $sql  = "SELECT SLMID, SLMNAME,PSW,USERNAME,Supervisor,isAdmin,commonPSW ,slmEmail  FROM SLM ";
             $sql .= " WHERE USERNAME = '{$username}' ";
             $sql .= " AND commonPSW = '{$password}' ";
 //print_r ($sql);
