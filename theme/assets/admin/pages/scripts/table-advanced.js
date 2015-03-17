@@ -87,6 +87,10 @@ var TableAdvanced = function () {
 			var i=2;
 			for (i=2;i<=6;i++)
 			{
+				header_input="header_col_"+i;
+				var x=document.getElementById(header_input);
+				if(x==null)
+					continue;
 				// Total over all pages
 				total = api
 					.column( i )
@@ -121,16 +125,13 @@ var TableAdvanced = function () {
 				);
 				*/
 
-				header_input="header_col_"+i;
-				var x=document.getElementById(header_input);
-				if(x){
 				if (searchTotal == total)
 					x.innerHTML = total.toFixed(2);
 				else if (isNaN(searchTotal))
 					x.innerHTML=''
 				else
 					x.innerHTML=searchTotal.toFixed(2) +'/'+ total.toFixed(2);
-			}}
+			}
         }
         });
  
