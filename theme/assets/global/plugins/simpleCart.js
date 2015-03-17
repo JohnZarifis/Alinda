@@ -166,7 +166,7 @@ function Cart(){
 
 	me.checkout = function() {
 		if( simpleCart.quantity === 0 ){
-			error("Cart is empty");
+			error("Το καλάθι είναι άδειο");
 			return;
 		}
 		switch( simpleCart.checkoutTo ){
@@ -261,8 +261,10 @@ function Cart(){
 		form.appendChild( me.createHiddenElement( "hidden_post_" 	, hidden_post.value 	) );
 		var hidden_post=document.getElementById("hiddenpost2");
 		form.appendChild( me.createHiddenElement( "hidden_post_2" 	, hidden_post.value 	) );
-                var hidden_post=document.getElementById("hiddenpost3");
+		var hidden_post=document.getElementById("hiddenpost3");
 		form.appendChild( me.createHiddenElement( "hidden_post_3" 	, hidden_post.value 	) );
+		var hidden_post=document.getElementById("general_parathrhseis");
+		form.appendChild( me.createHiddenElement( "hidden_post_4" 	, hidden_post.value 	) );
 		for( var current in me.items ){
 			var item = me.items[current];
 			form.appendChild( me.createHiddenElement( "item_name_" 		+ counter, item.name		) );
@@ -390,6 +392,8 @@ function Cart(){
 	};
 	
 	me.updateViewTotals = function() {
+	//GORO: Alternatively we can change the currency to none and the currency will go away.
+	//GORO: For now the valueToCurrencyString is changed
 		var outlets = [ ["quantity"		, "none"		] , 
 						["total"		, "currency"	] , 
 						["shippingCost"	, "currency"	] ,
@@ -428,11 +432,14 @@ function Cart(){
 		
 		/* create headers row */
 		newRow = document.createElement('div');
+		//GORO :CREATE HERE THE HEADER OF THE CART. 
 		for( header in me.cartHeaders ){
 			newCell = document.createElement('div');
 			headerInfo = me.cartHeaders[header].split("_");
-			
-			newCell.innerHTML = headerInfo[0];
+
+			//GORO :Use headerInfoName to populate the header. Use headerInfo to make the js transaction. Nothing will broke this way.
+			headerInfoName = me.cartHeadersNames[header].split("_");
+			newCell.innerHTML = headerInfoName[0];
 			newCell.className = "item" + headerInfo[0];
 			for(x=1,xlen=headerInfo.length;x<xlen;x++){
 				if( headerInfo[x].toLowerCase() == "noheader" ){
@@ -470,7 +477,7 @@ function Cart(){
 						outputValue = me.valueToLink( "-" , "javascript:;" , "onclick=\"simpleCart.items[\'" + item.id + "\'].decrement();\"" );
 						break;
 					case "remove":
-						outputValue = me.valueToLink( "Remove" , "javascript:;" , "onclick=\"simpleCart.items[\'" + item.id + "\'].remove();\"" );
+						outputValue = me.valueToLink( "Διέγραψε" , "javascript:;" , "onclick=\"simpleCart.items[\'" + item.id + "\'].remove();\"" );
 						break;
 					case "price":
 						outputValue = me.valueToCurrencyString( item[ info[0].toLowerCase() ] ? item[info[0].toLowerCase()] : " " );
@@ -500,6 +507,8 @@ function Cart(){
 							outputValue = me.valueToElement( option , outputValue , "" );
 							break;
 						case "noheader":
+						// In case the noheader is defined we do not want to see this item.
+						newCell.style.display = "none";
 							break;
 						default:
 							error( "unkown header option: " + option );
@@ -595,7 +604,9 @@ function Cart(){
 	
 	
 	me.valueToCurrencyString = function( value ) {
-		return parseFloat( value ).toCurrency( me.currencySymbol() );
+		//GORO replace this with simple value to avoid having currency symbols.
+		return parseFloat( value );
+		//return parseFloat( value ).toCurrency( me.currencySymbol() );
 	};
 	
 	me.valueToPercentageString = function( value ){

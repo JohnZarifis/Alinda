@@ -154,7 +154,7 @@
                                            <div class="form-group">
 										   <label class="control-label col-md-3">Παρατηρήσεις:</label>
 										   <div class="col-md-9">
-										   <input class="form-control input-lg" placeholder="Παρατηρήσεις" type="text">
+										   <input class="form-control input-lg" placeholder="Παρατηρήσεις" type="text" name="general_parathrhseis" id="general_parathrhseis">
 									       </div>
 									       </div>
                                            </div>
@@ -260,30 +260,6 @@
              <div class="itemTotal">Total</div>
                  
          </div>
-         <div class="itemContainer">
-             <div class="itemName">Navy Firefox T-Shirt</div>
-             <div class="itemSize">Small</div>
-             <div class="itemPrice">€10.71</div>
-             <div class="itemdecrement">
-                 <a href="javascript:;" onclick="simpleCart.items['c6'].decrement();">-</a></div>
-             <div class="itemQuantity">1</div><div class="itemincrementww"><a href="javascript:;" onclick="simpleCart.items['c6'].increment();">+</a></div>
-             <div class="itemremove"><a href="javascript:;" onclick="simpleCart.items['c6'].remove();">Remove</a></div>
-             <div class="itemTotal">€10.71</div></div><div class="itemContainer">
-             <div class="itemName">Firefox Sweatshirt</div>
-             <div class="itemSize">Small</div><div class="itemPrice">€23.80</div>
-             <div class="itemdecrement"><a href="javascript:;" onclick="simpleCart.items['c7'].decrement();">-</a></div>
-             <div class="itemQuantity">1</div><div class="itemincrement"><a href="javascript:;" onclick="simpleCart.items['c7'].increment();">+</a></div>
-             <div class="itemremove"><a href="javascript:;" onclick="simpleCart.items['c7'].remove();">Remove</a></div>
-             <div class="itemTotal">€23.80</div></div>
-         <div class="itemContainer">
-             <div class="itemName">Firefox Polo Cap</div>
-             <div class="itemSize"> </div><div class="itemPrice">€11.31</div>
-             <div class="itemdecrement"><a href="javascript:;" onclick="simpleCart.items['c8'].decrement();">-</a>
-             </div><div class="itemQuantity">1</div>
-             <div class="itemincrement"><a href="javascript:;" onclick="simpleCart.items['c8'].increment();">+</a></div>
-             <div class="itemremove"><a href="javascript:;" onclick="simpleCart.items['c8'].remove();">Remove</a></div>
-             <div class="itemTotal">€11.31</div>
-             
          </div>
                  
      </div>
@@ -295,7 +271,7 @@
     
     <div id="cartTotal">
         <h3>Σύνολο Παραγγελίας</h3>
-    SubTotal: <span class="simpleCart_total">€45.82</span> Shipping: <span class="simpleCart_shippingCost">€15.00</span> Final Total: <span class="simpleCart_finalTotal">€60.82</span> <a href="javascript:;" class="simpleCart_checkout">checkout</a> 
+    Σύνολο Προϊόντων: <span class="simpleCart_total">€45.82</span> <div style="display: none">Shipping: <span class="simpleCart_shippingCost">€15.00</span> Final Total: <span class="simpleCart_finalTotal">€60.82</span></div> <a href="javascript:;" class="simpleCart_checkout">παραγγελία</a> 
     </div>
          
     </div>
@@ -339,16 +315,13 @@
 <script type="text/javascript">
 
 	simpleCart.email = "email@venditore.ext";
-//	simpleCart.checkoutTo = PayPal;
 	simpleCart.checkoutTo = GoogleCheckout;
-        simpleCart.currency = EUR;
+	simpleCart.currency = EUR;
 	simpleCart.taxRate  = 0.00;
 	simpleCart.shippingFlatRate = 0.00;
-	simpleCart.paparas="test";
-
-//	simpleCart.paparas={{leename}};
-
-	simpleCart.cartHeaders = ["Name" , "eidos", "Price" , "decrement" , "quantity", "increment", "remove", "Total" ];
+	//Adding noheader directive in price. The js will make it invisible.
+	simpleCart.cartHeaders = ["Name" , "eidos", "Price_noheader" , "decrement" , "quantity", "increment", "remove", "Total" ];
+	simpleCart.cartHeadersNames = ["Όνομα" , "Παρατηρήσεις", "τιμή" , "μείωσε" , "ποσότητα", "αύξησε", "διέγραψε", "Σύνολο" ];
 	
 	
 	
