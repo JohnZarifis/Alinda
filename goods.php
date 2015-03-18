@@ -60,13 +60,14 @@ SELECT  G.TRAID, LEENAME, G.CODCODE, G.ITMNAME, BCTGDESCR,CCTGDESCR,
                                     SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) -1
                                     then AXIA
                                     else .00 END ) as AXIA_PAST_YEAR
+               
                 FROM GOODS G
 	            INNER JOIN CUSTOMER C				
                 ON C.TRAID = G.TRAID
                 INNER JOIN SLM S               
                 ON S.SLMID = C.SLMCODE
                 INNER JOIN PRODUCT P
-                ON P.CODCODE = G.CODCODE              
+                ON P.CODCODE = G.CODCODE                           
                 WHERE 
                 ( DOCEKDOSISDATE  BETWEEN 
                 STR_TO_DATE('{$from}', '%d-%m-%Y')  AND STR_TO_DATE('{$to}', '%d-%m-%Y')
@@ -94,12 +95,15 @@ SELECT G.TRAID, LEENAME, G.CODCODE, G.ITMNAME,BCTGDESCR,CCTGDESCR,
                                     else .00 END ) as POSOTITA_PAST_YEAR,
                                     SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) -1
                                     then AXIA
-                                    else .00 END ) as AXIA_PAST_YEAR
+                                    else .00 END ) as AXIA_PAST_YEAR,
+                MAX(MAXPRICE) AS LASTPRICE
                 FROM GOODS G
                 INNER JOIN CUSTOMER C				
                 ON C.TRAID = G.TRAID
                 INNER JOIN PRODUCT P
                 ON P.CODCODE = G.CODCODE
+                INNER JOIN LASTPRICE L 
+                ON (L.TRAID = C.TRAID AND L.CODCODE = P.CODCODE)
                 WHERE C.TRAID = {$traid}
                 AND ( DOCEKDOSISDATE  BETWEEN 
                 STR_TO_DATE('{$from}', '%d-%m-%Y')  AND STR_TO_DATE('{$to}', '%d-%m-%Y')
@@ -119,6 +123,28 @@ MARKER;
 //goro
 $result_set = $database->query($sql);
 $MultiDimArray = array();
+if(isset($_GET['traid']))
+    {
+while ($row = mysql_fetch_assoc($result_set)) 
+			{
+                         $MultiDimArray[] = array ( 
+                                                    'LEENAME' => $row['LEENAME'],
+                                                    'TRAID'=>$row['TRAID'],
+                                                    'CODCODE'=>$row['CODCODE'],
+                                                    'ITMNAME'=>$row['ITMNAME'],
+                                                    'POSOTITA_CURRENT_YEAR'=>$row['POSOTITA_CURRENT_YEAR'],
+                                                    'POSOTITA_PAST_YEAR'=>$row['POSOTITA_PAST_YEAR'],
+                                                    'AXIA_CURRENT_YEAR'=>$row['AXIA_CURRENT_YEAR'],
+                                                    'AXIA_PAST_YEAR'=>$row['AXIA_PAST_YEAR'],
+                                                    'BCTGDESCR'=>$row['BCTGDESCR'],
+                                                    'CCTGDESCR'=>$row['CCTGDESCR'],
+                                                    'LASTPRICE' =>$row['LASTPRICE'],
+                                                    
+                                                   
+                                                    
+                             );
+			}
+	}
 while ($row = mysql_fetch_assoc($result_set)) 
 			{
                          $MultiDimArray[] = array ( 
@@ -134,9 +160,10 @@ while ($row = mysql_fetch_assoc($result_set))
                                                     'CCTGDESCR'=>$row['CCTGDESCR'],
                                                    
                                                     
+                                                   
+                                                    
                              );
 			}
-
 //$xreosi = 0;
 //$pistosi = 0;
 //$tziros = 0;

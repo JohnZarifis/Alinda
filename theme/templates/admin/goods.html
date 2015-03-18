@@ -161,6 +161,7 @@
 								<th>ΠΟΣΟΤΗΤΑ 2014<div id="header_col_6"></div></th>
 								<th>ΑΞΙΑ 2015<div id="header_col_7"></div></th>
 								<th>ΑΞΙΑ 2014<div id="header_col_8"></div></th>
+								<th>ΤΕΛΕΥΤΑΙΑ ΤΙΜΗ</th>
                              </tr>                                                                             
 							</thead>
 							<tfoot style="display:table-header-group">
@@ -173,7 +174,9 @@
                                 <th>ΠΟΣΟΤΗΤΑ 2015</th>
 								<th>ΠΟΣΟΤΗΤΑ 2014</th>
 								<th>ΑΞΙΑ 2015</th>
-								<th>ΑΞΙΑ 2014</th>
+								<th>ΑΞΙΑ 2014</th>								
+								<th>ΤΕΛΕΥΤΑΙΑ ΤΙΜΗ</th>
+								
 							</tr>
 							</tfoot>
 							<tbody>
@@ -188,6 +191,7 @@
                              <td>{{ row['POSOTITA_PAST_YEAR']}}</td>
                              <td>{{ row['AXIA_CURRENT_YEAR']}}</td>
                              <td>{{ row['AXIA_PAST_YEAR']}}</td>
+                             <td>{{ row['LASTPRICE']}}</td>
                              </tr>
    
                              {% endfor %}
