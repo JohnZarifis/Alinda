@@ -15,7 +15,7 @@ $isAdmin = $_SESSION['user_isAdmin'];
 $account = $_SESSION['user_account'];
 //$email = $_SESSION['user_email'];
 //print_r($_SESSION); //for debugging reasons
-
+$traid = '';
 $from = '01-01-2015';
 $to =  date("d-m-Y");
 
