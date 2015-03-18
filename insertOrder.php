@@ -55,7 +55,7 @@ while (isset($_POST[$item_name]))
 		"item_currency"=> $_POST[$item_currency],
 		"item_tax_rate"=> $_POST[$item_tax_rate],
 		"item_description"=> $_POST[$item_description],
-                "item_extras"=>$_POST[$item_extras]
+        //"item_extras"=>$_POST[$item_extras]
 	);
 $number++;
 $item_name="item_name_".$number;
@@ -64,10 +64,11 @@ $item_name="item_name_".$number;
 foreach($items as $item ) {
     
  $description = filter_var($item['item_description'], FILTER_SANITIZE_STRING);
+ $parathrhseis = filter_var($parathrhseis, FILTER_SANITIZE_STRING);
 //DO THE SQL QUERY.INSTEAD OF print_r do the sql add entry.
 $sqlIns = <<<MARKER
-        INSERT INTO ORDERS (orderid, traid, orderdate, slmid, codcode, qtyA, processed) VALUES 
-            ({$orderid},{$traid},'{$orderdate}',{$slmid},'{$description}',{$item['item_quantity']},'{$processed}')
+        INSERT INTO ORDERS (orderid, traid, orderdate, slmid, codcode, qtyA, processed,ordercomments) VALUES 
+            ({$orderid},{$traid},'{$orderdate}',{$slmid},'{$description}',{$item['item_quantity']},'{$processed}','{$parathrhseis}')
 MARKER;
 print_r ($sqlIns);
 print_r ("<hr/>");             

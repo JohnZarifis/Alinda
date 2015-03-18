@@ -40,7 +40,7 @@
 				<div class="form-group">
                                     
                                    
-                                            <div class="input-group input-large date-picker input-daterange" data-date="25/02/2015" data-date-format="dd/mm/yyyy">
+                                            <div class="input-group input-large date-picker input-daterange" data-date="25/02/2015" data-date-format="dd-mm-yyyy">
                                                     <input type="text" class="form-control" name="from">
                                                     <span class="input-group-addon">
                                                     έως </span>
@@ -64,10 +64,10 @@
 						</div>
 						<div class="details">
 							<div class="number">
-								 {{ xreosi }} €
+								 {{ xreosi }} 
 							</div>
 							<div class="desc">
-								 Πωλήσεις
+								 Ποσότητες 2014
 							</div>
 						</div>
 						<a class="more" href="#">
@@ -82,10 +82,10 @@
 						</div>
 						<div class="details">
 							<div class="number">
-								 {{ tziros }} €
+								 {{ tziros }} 
 							</div>
 							<div class="desc">
-								 Συνολικός Τζίρος
+								 Ποσότητες 2015
 							</div>
 						</div>
 						<a class="more" href="#">
@@ -100,10 +100,10 @@
 						</div>
 						<div class="details">
 							<div class="number">
-								 {{ clientno }}
+								 {{ clientno }} €
 							</div>
 							<div class="desc">
-								 Συναλλαγές
+								 Αξία 2014
 							</div>
 						</div>
 						<a class="more" href="#">
@@ -121,7 +121,7 @@
 								 {{ ypoloipo }} €
 							</div>
 							<div class="desc">
-								 Υπόλοιπο
+								 Αξία 2015
 							</div>
 						</div>
 						<a class="more" href="#">
@@ -143,7 +143,7 @@
 					<div class="portlet box blue-hoki">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-globe"></i>ΠΕΛΑΤΗΣ: {{client }} | από {{from}} εώς {{to}}
+								<i class="fa fa-globe"></i>ΠΕΛΑΤΗΣ: {{client }} | από {{from}} εώς {{to}} και {{fromLast}} έως {{toLast}}
 							</div>
 							<div class="tools">
 							</div>
@@ -159,6 +159,8 @@
                                 <th>ΕΙΔΟΣ<div id="header_col_4"></div></th>
                                 <th>ΠΟΣΟΤΗΤΑ 2015<div id="header_col_5"></div></th>
 								<th>ΠΟΣΟΤΗΤΑ 2014<div id="header_col_6"></div></th>
+								<th>ΑΞΙΑ 2015<div id="header_col_7"></div></th>
+								<th>ΑΞΙΑ 2014<div id="header_col_8"></div></th>
                              </tr>                                                                             
 							</thead>
 							<tfoot style="display:table-header-group">
@@ -170,6 +172,8 @@
                                 <th>ΕΙΔΟΣ</th>
                                 <th>ΠΟΣΟΤΗΤΑ 2015</th>
 								<th>ΠΟΣΟΤΗΤΑ 2014</th>
+								<th>ΑΞΙΑ 2015</th>
+								<th>ΑΞΙΑ 2014</th>
 							</tr>
 							</tfoot>
 							<tbody>
@@ -182,6 +186,8 @@
                              <td>{{ row['ITMNAME']}}</td>
                              <td>{{ row['POSOTITA_CURRENT_YEAR']}}</td>
                              <td>{{ row['POSOTITA_PAST_YEAR']}}</td>
+                             <td>{{ row['AXIA_CURRENT_YEAR']}}</td>
+                             <td>{{ row['AXIA_PAST_YEAR']}}</td>
                              </tr>
    
                              {% endfor %}

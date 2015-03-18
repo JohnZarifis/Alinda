@@ -20,7 +20,7 @@ $from = '01/01/2014';
 $to =  'SYSDATE()'; 
 
 $sql = <<< MARKER
-SELECT distinct ORDERID,O.TRAID,ORDERDATE,O.SLMID,S.SLMNAME,PROCESSED,LEENAME,LEEAFM FROM ORDERS O
+SELECT distinct ORDERID,O.TRAID,ORDERDATE,O.SLMID,S.SLMNAME,PROCESSED,LEENAME,LEEAFM,ORDERCOMMENTS FROM ORDERS O
        INNER JOIN SLM S
        ON S.SLMID = O.SLMID      
        INNER JOIN CUSTOMER C
@@ -32,12 +32,12 @@ MARKER;
 
 if($isAdmin != 3)
     {
-        //$traid =  $_GET['traid']; 
+//$traid =  $_GET['traid']; 
 //if(isset($_POST['apo_value']) && isset($_POST['mexri_value'])){
 //$from = $_POST['apo_value'];
 //$to = $_POST['mexri_value'];
 $sql = <<<MARKER
-SELECT distinct ORDERID,O.TRAID,ORDERDATE,O.SLMID,S.SLMNAME,PROCESSED,LEENAME,LEEAFM FROM ORDERS O
+SELECT distinct ORDERID,O.TRAID,ORDERDATE,O.SLMID,S.SLMNAME,PROCESSED,LEENAME,LEEAFM, ORDERCOMMENTS FROM ORDERS O
        INNER JOIN SLM S
        ON S.SLMID = O.SLMID             
        INNER JOIN CUSTOMER C
@@ -63,6 +63,7 @@ while ($row = mysql_fetch_assoc($result_set))
                                                     'LEENAME'=>$row['LEENAME'],
                                                     'LEEAFM'=>$row['LEEAFM'],
                                                     'ORDERID'=>$row['ORDERID'],
+                                                    'ORDERCOMMENTS'=>$row['ORDERCOMMENTS'],
                              );
 			}
 
@@ -84,7 +85,7 @@ while ($row = mysql_fetch_assoc($result_set))
        
 //print_r($MultiDimArray);
  
-        //$name = 'John';
+
         $template = $twig->loadTemplate('orderList.html');  
         echo $template->render(array('username' => $username,                                     
                                       'res'=>$MultiDimArray,

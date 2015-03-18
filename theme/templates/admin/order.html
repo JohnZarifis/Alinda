@@ -33,12 +33,16 @@
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
-						<a href="#">Dashboard</a>
+						<a href="client.php?traid={{traid}}">{{leename}}</a>
+						<i class="fa fa-angle-right"></i>
+					</li>
+					<li>
+						<a href="#">Παραγγελία</a>
 					</li>
 				</ul>
-                            <p class="alignRight"> ΚΑΛΑΘΙ: <span class="simpleCart_total">€45.82</span> (<span class="simpleCart_quantity">0</span> ΑΝΤΙΚΕΙΜΕΝΑ) 
-                            <a href="javascript:;" class="simpleCart_empty">ΑΔΕΙΑΣΜΑ ΚΑΛΑΘΙΟΥ</a> <br>
-                            </p>
+                   <p class="alignRight"> ΚΑΛΑΘΙ: <span class="simpleCart_total">€45.82</span> (<span class="simpleCart_quantity">0</span> ΑΝΤΙΚΕΙΜΕΝΑ) 
+                   <a href="javascript:;" class="simpleCart_empty">ΑΔΕΙΑΣΜΑ ΚΑΛΑΘΙΟΥ</a> <br>
+                    </p>
 				
 			</div>
 			<!-- END PAGE HEADER-->
@@ -169,8 +173,7 @@
                                 <div class="tabbable tabbable-custom tabbable-reversed">
                                     <ul class="nav nav-tabs"> 
                                         {% for tab in tabnames %}
-                                        <li><a href="#tab_{{ tab }}" data-toggle="tab"  
-                                               ">{{ tab }}</a></li>
+                                        <li><a href="#tab_{{ tab }}" data-toggle="tab">{{ tab }}</a></li>
                                         {% endfor %}
                                                                             
                                      </ul>
@@ -179,9 +182,7 @@
                                     {% for tab in tabnames %}
                                     <div class="tab-pane" id="tab_{{ tab}}">
                                         <div class="panel-group accordion" id="accordion{{tab}}">
-                                            
-                                            
-                                        
+
                                         {% for cat in catTab %}                                           
                                           {% if cat.tabname == tab %} 
                                           
@@ -220,7 +221,7 @@
                                                         {% endif %}
                                                     {% endfor %}
                                                     </div>
-						</div>
+												</div>
                                                 
                                             </div>
                                          
@@ -321,7 +322,7 @@
 	simpleCart.shippingFlatRate = 0.00;
 	//Adding noheader directive in price. The js will make it invisible.
 	simpleCart.cartHeaders = ["Name" , "eidos", "Price_noheader" , "decrement" , "quantity", "increment", "remove", "Total" ];
-	simpleCart.cartHeadersNames = ["Όνομα" , "Παρατηρήσεις", "τιμή" , "μείωσε" , "ποσότητα", "αύξησε", "διέγραψε", "Σύνολο" ];
+	simpleCart.cartHeadersNames = ["Όνομα" , "Παρατηρήσεις", "τιμή" , "Μείωση" , "ποσότητα", "Αύξηση", "Διέγραφή", "Σύνολο" ];
 	
 	
 	

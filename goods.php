@@ -16,9 +16,12 @@ $account = $_SESSION['user_account'];
 //$email = $_SESSION['user_email'];
 //print_r($_SESSION); //for debugging reasons
 
-$from = '01/01/2014';
+$from = '01-01-2015';
+
 //$to =  'SYSDATE()';
-$to =  date("d/m/Y");
+$to =  date("d-m-Y");
+
+
 
 if($isAdmin == 1){
 $filter = "";
@@ -36,23 +39,38 @@ $from = $_POST['from'];
 $to = $_POST['to'];
 }
 
+
+
+$fromLast =  strtotime($from .' -1 year');
+$fromLast =  date('d-m-Y', $fromLast);
+$toLast = strtotime($to .' -1 year');
+$toLast = date('d-m-Y', $toLast);
+
 $sql = <<< MARKER
 SELECT  G.TRAID, LEENAME, G.CODCODE, G.ITMNAME, BCTGDESCR,CCTGDESCR,
                  SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) 
                                     then POSOTA
                                     else .00 END ) as POSOTITA_CURRENT_YEAR,
-				SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) -1
+                 SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) 
+                                    then AXIA
+                                    else .00 END ) as AXIA_CURRENT_YEAR,
+				 SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) -1
                                     then POSOTA
-                                    else .00 END ) as POSOTITA_PAST_YEAR
+                                    else .00 END ) as POSOTITA_PAST_YEAR,
+                                    SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) -1
+                                    then AXIA
+                                    else .00 END ) as AXIA_PAST_YEAR
                 FROM GOODS G
 	            INNER JOIN CUSTOMER C				
                 ON C.TRAID = G.TRAID
                 INNER JOIN SLM S               
                 ON S.SLMID = C.SLMCODE
                 INNER JOIN PRODUCT P
-                ON P.CODCODE = G.CODCODE
-                WHERE DOCEKDOSISDATE  BETWEEN 
-				STR_TO_DATE('{$from}', '%d/%m/%Y')  AND STR_TO_DATE('{$to}', '%d/%m/%Y')
+                ON P.CODCODE = G.CODCODE              
+                WHERE 
+                ( DOCEKDOSISDATE  BETWEEN 
+                STR_TO_DATE('{$from}', '%d-%m-%Y')  AND STR_TO_DATE('{$to}', '%d-%m-%Y')
+				OR (DOCEKDOSISDATE  BETWEEN STR_TO_DATE('{$fromLast}', '%d-%m-%Y')  AND STR_TO_DATE('{$toLast}', '%d-%m-%Y')))
 				{$filter}
 				GROUP BY G.TRAID, LEENAME, CODCODE, ITMNAME
 MARKER;
@@ -68,17 +86,24 @@ SELECT G.TRAID, LEENAME, G.CODCODE, G.ITMNAME,BCTGDESCR,CCTGDESCR,
                 SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) 
                                     then POSOTA
                                     else .00 END ) as POSOTITA_CURRENT_YEAR,
-				SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) -1
+                 SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) 
+                                    then AXIA
+                                    else .00 END ) as AXIA_CURRENT_YEAR,
+				 SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) -1
                                     then POSOTA
-                                    else .00 END ) as POSOTITA_PAST_YEAR
+                                    else .00 END ) as POSOTITA_PAST_YEAR,
+                                    SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) -1
+                                    then AXIA
+                                    else .00 END ) as AXIA_PAST_YEAR
                 FROM GOODS G
                 INNER JOIN CUSTOMER C				
                 ON C.TRAID = G.TRAID
                 INNER JOIN PRODUCT P
                 ON P.CODCODE = G.CODCODE
                 WHERE C.TRAID = {$traid}
-                AND  DOCEKDOSISDATE  BETWEEN 
-                STR_TO_DATE('{$from}', '%d/%m/%Y')  AND STR_TO_DATE('{$to}', '%d/%m/%Y')
+                AND ( DOCEKDOSISDATE  BETWEEN 
+                STR_TO_DATE('{$from}', '%d-%m-%Y')  AND STR_TO_DATE('{$to}', '%d-%m-%Y')
+				OR (DOCEKDOSISDATE  BETWEEN STR_TO_DATE('{$fromLast}', '%d-%m-%Y')  AND STR_TO_DATE('{$toLast}', '%d-%m-%Y'))) 
 GROUP BY TRAID, LEENAME, CODCODE, ITMNAME
 MARKER;
 }   
@@ -103,8 +128,11 @@ while ($row = mysql_fetch_assoc($result_set))
                                                     'ITMNAME'=>$row['ITMNAME'],
                                                     'POSOTITA_CURRENT_YEAR'=>$row['POSOTITA_CURRENT_YEAR'],
                                                     'POSOTITA_PAST_YEAR'=>$row['POSOTITA_PAST_YEAR'],
+                                                    'AXIA_CURRENT_YEAR'=>$row['AXIA_CURRENT_YEAR'],
+                                                    'AXIA_PAST_YEAR'=>$row['AXIA_PAST_YEAR'],
                                                     'BCTGDESCR'=>$row['BCTGDESCR'],
                                                     'CCTGDESCR'=>$row['CCTGDESCR'],
+                                                   
                                                     
                              );
 			}
@@ -133,6 +161,9 @@ while ($row = mysql_fetch_assoc($result_set))
                                       'res'=>$MultiDimArray,
                                       'from'=>$from,
                                       'to' => $to,
+                                      'fromLast'=>$fromLast,
+                                      'toLast'=>$toLast,
+                                      
                                       
                                     
                                      ));

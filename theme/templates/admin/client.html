@@ -35,23 +35,18 @@
 					</li>
 				</ul>
 				<div class="page-toolbar">
-                                <form action="client.php" method ="post">
-                                <button type="submit">Go</button>
-				<div class="form-group">
-                                    
-                                   
-                                            <div class="input-group input-large date-picker input-daterange" data-date="25/02/2015" data-date-format="dd/mm/yyyy">
-                                                    <input type="text" class="form-control" name="from">
-                                                    <span class="input-group-addon">
-                                                    έως </span>
-                                                    <input type="text" class="form-control" name="to">
-                                            </div>
-                                           
-                                   
-                                    
-                                </div>
-                                <input type="hidden" name="traid" id="traid" value="{{traid}}">
-                                </form>
+                   <form action="client.php" method ="post">
+                      <button type="submit">Go</button>
+				      <div class="form-group">
+                 	<div class="input-group input-large date-picker input-daterange" data-date="25/02/2015" data-date-format="dd/mm/yyyy">
+                  	<input type="text" class="form-control" name="from">
+                    <span class="input-group-addon">
+                    έως </span>
+                    <input type="text" class="form-control" name="to">
+                    </div>
+                    </div>
+                    <input type="hidden" name="traid" id="traid" value="{{traid}}">
+                    </form>
 					
 				</div>
 			</div>
@@ -227,8 +222,12 @@
 						<div class="portlet-title">
 							<div class="caption">
 								<i class="fa fa-globe"></i>ΠΕΛΑΤΗΣ: {{ LEENAME }} |από {{from}} εώς {{to}}
+								<a class="btn btn-sm blue-madison hidden-print " href="order.php?traid={{traid}}">
+						        ΠΑΡΑΓΓΕΛΙΑ <i class="fa fa-check"></i>
+						        </a>
 							</div>
 							<div class="tools">
+							
 							</div>
 						</div>
 						<div class="portlet-body">

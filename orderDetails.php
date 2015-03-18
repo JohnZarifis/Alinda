@@ -24,7 +24,7 @@ $from = '01/01/2014';
 $to =  'SYSDATE()'; 
 
 $sql = <<< MARKER
-SELECT distinct ORDERID,O.TRAID,ORDERDATE,O.SLMID,S.SLMNAME,PROCESSED,LEENAME,LEEAFM,TRACODE,ADRCITY,ADRSTREET, ADRPHONE1,slmEmail FROM ORDERS O
+SELECT distinct ORDERID,O.TRAID,ORDERDATE,ORDERCOMMENTS,O.SLMID,S.SLMNAME,PROCESSED,LEENAME,LEEAFM,TRACODE,ADRCITY,ADRSTREET, ADRPHONE1,slmEmail FROM ORDERS O
        INNER JOIN SLM S
        ON S.SLMID = O.SLMID      
        INNER JOIN CUSTOMER C
@@ -32,21 +32,7 @@ SELECT distinct ORDERID,O.TRAID,ORDERDATE,O.SLMID,S.SLMNAME,PROCESSED,LEENAME,LE
        WHERE ORDERID = {$orderid}      
 MARKER;
 
-// if($username != 'Admin')
-    // {
-        // //$traid =  $_GET['traid']; 
-// //if(isset($_POST['apo_value']) && isset($_POST['mexri_value'])){
-// //$from = $_POST['apo_value'];
-// //$to = $_POST['mexri_value'];
-// $sql = <<<MARKER
-// SELECT distinct ORDERID,O.TRAID,ORDERDATE,O.SLMID,S.SLMNAME,PROCESSED,LEENAME,LEEAFM,TRACODE,ADRCITY,ADRSTREET,ADRPHONE1 FROM ORDERS O
-       // INNER JOIN SLM S
-       // ON S.SLMID = O.SLMID      
-       // INNER JOIN CUSTOMER C
-       // ON C.TRAID = O.TRAID
-       // WHERE ORDERID = {$orderid}   
-// MARKER;
-// }   
+
   
 //print_r($sql);
 //print_r($_GET['traid']);
@@ -66,6 +52,7 @@ while ($row = mysql_fetch_assoc($result_set))
 						 $adrstreet = $row['ADRSTREET'];
 						 $adrphone1 = $row['ADRPHONE1'];
 						 $slmEmail = $row['slmEmail'];
+						 $ordercomments = $row['ORDERCOMMENTS'];
                          
                          
                          $MultiDimArray[] = array ( 'TRAID' => $row['TRAID'],
@@ -81,6 +68,8 @@ while ($row = mysql_fetch_assoc($result_set))
                                                     'ADRSTEET'=>$row['ADRSTREET'],
                                                     'ADRPHONE1'=>$row['ADRPHONE1'],
                                                     'SLMEMAIL'=>$row['slmEmail'],
+                                                    'ORDERCOMMENTS'=>$row['ORDERCOMMENTS'],
+                                                    
 													
                              );
 			}
@@ -126,7 +115,9 @@ while ($row = mysql_fetch_assoc($resultDetail))
                                       'adrcity'=>$adrcity,
                                       'adrstreet'=>$adrstreet,
                                       'adrphone1'=>$adrphone1,
-                                      'slmemail'=>$slmEmail
+                                      'slmemail'=>$slmEmail,
+                                      'ordercomments' => $ordercomments,
+                                      'isAdmin' =>$isAdmin,
             
                                      ));
 

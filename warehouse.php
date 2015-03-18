@@ -20,15 +20,11 @@ $account = $_SESSION['user_account'];
 
 $sql = <<< MARKER
 SELECT  MCIID,CODCODE,ITMNAME,
-				case when wrhid = '00'
-                                    then QTYA
-                                    else .00 END  as POSOT_00,
+				
                 case when wrhid = '22'
                                     then QTYA
                                     else .00 END  as POSOT_22,
-                case when wrhid = '42'
-                                    then QTYA
-                                    else .00 END  as POSOT_42,
+                
                 case when wrhid = '43'
                                     then QTYA
                                     else .00 END  as POSOT_43
@@ -50,9 +46,7 @@ while ($row = mysql_fetch_assoc($result_set))
                                                     'MCIID' => $row['MCIID'],                                                   
                                                     'CODCODE'=>$row['CODCODE'],
                                                     'ITMNAME'=>$row['ITMNAME'],
-                                                    'POSOT_00'=>$row['POSOT_00'],
                                                     'POSOT_22'=>$row['POSOT_22'],
-                                                    'POSOT_42'=>$row['POSOT_42'],
                                                     'POSOT_43'=>$row['POSOT_43'],
                                                     
                              );

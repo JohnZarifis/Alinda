@@ -49,13 +49,19 @@ sleep(2);
 $sqlGoods = <<<MARKER
 SELECT  A.DOCID,K.DOTCODE,K.DOTDESCRIPTION,TO_CHAR(A.DOCEKDOSISDATE,'YYYYMMDD') AS DATEKEY,TO_CHAR(A.DOCEKDOSISDATE,'YYYY-MM-DD')AS DOCEKDOSISDATE,
         A.TRAID,B.CODCODE,D.ITMNAME,
-        B.STDQTYA * K.TDTSIGN AS POSOTA,
-        (B.STDQTYB * K.TDTSIGN) AS POSOTB
+        DECODE(K.DOTCODE,'Π620',0,
+                  'Π621',0,
+                  'Π622',0,b.stdqtya * k.tdtsign) AS POSOTA ,
+        DECODE(K.DOTCODE,'Π620',0,
+                  'Π621',0,
+                  'Π622',0,b.stdqtyb * k.tdtsign) AS POSOTB,
+        (b.ssdnetvalue* k.tdtsign) as AXIA
         FROM SLD A,
         SSD B, 
        (select mciid,ITMNAME,codcode from sti ) D,              
-       (SELECT DOTID,DOTCODE,DOTDESCRIPTION,TDTSIGN FROM SDT WHERE SUBSTR(DOTCODE,2,1) IN ('3','4','5','6','7')) K
-        WHERE TO_CHAR(A.DOCEKDOSISDATE,'YYYY')>= '2014'
+       (SELECT DOTID,DOTCODE,DOTDESCRIPTION,TDTSIGN FROM SDT WHERE SUBSTR(DOTCODE,2,1) IN ('3','4','5','6','7')
+       	and DOTCODE NOT IN ('Π751','Π752','Π601','Π602','Π603','Π604','Π605','Π606')) K
+        WHERE TO_CHAR(A.DOCEKDOSISDATE,'YYYY')>= TO_CHAR(SYSDATE,'YYYY') -1
         AND b.mciid =  d.mciid
         AND B.DOCID = A.DOCID               
         AND A.DOTID = K.DOTID

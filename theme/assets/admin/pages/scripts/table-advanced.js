@@ -85,7 +85,7 @@ var TableAdvanced = function () {
             };
 			//Update columns 2 to 4 ( numeric columns that can be agregated)
 			var i=2;
-			for (i=2;i<=6;i++)
+			for (i=2;i<=8;i++)
 			{
 				header_input="header_col_"+i;
 				var x=document.getElementById(header_input);

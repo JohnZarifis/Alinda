@@ -31,7 +31,7 @@
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
-						<a href="#">Dashboard</a>
+						<a href="#">Αποθήκες</a>
 					</li>
 				</ul>
 				<div class="page-toolbar">
@@ -49,10 +49,10 @@
 						</div>
 						<div class="details">
 							<div class="number">
-								 {{ xreosi }} €
+								 {{ xreosi }} #
 							</div>
 							<div class="desc">
-								 Πωλήσεις
+								 ΠΡΟΙΟΝΤΑ
 							</div>
 						</div>
 						<a class="more" href="#">
@@ -67,10 +67,10 @@
 						</div>
 						<div class="details">
 							<div class="number">
-								 {{ tziros }} €
+								 {{ tziros }} #
 							</div>
 							<div class="desc">
-								 Συνολικός Τζίρος
+								 ΑΣΠΡΟΠΥΡΓΟΣ
 							</div>
 						</div>
 						<a class="more" href="#">
@@ -88,7 +88,7 @@
 								 {{ clientno }}
 							</div>
 							<div class="desc">
-								 Συναλλαγές
+								 ΟΙΝΟΦΥΤΑ
 							</div>
 						</div>
 						<a class="more" href="#">
@@ -103,10 +103,10 @@
 						</div>
 						<div class="details">
 							<div class="number">
-								 {{ ypoloipo }} €
+								 {{ ypoloipo }} #
 							</div>
 							<div class="desc">
-								 Υπόλοιπο
+								 ΚΑΤΗΓΟΡΙΕΣ
 							</div>
 						</div>
 						<a class="more" href="#">
@@ -135,20 +135,16 @@
 							<thead>
 							<tr>
 								<th>ΚΩΔ. ΕΙΔΟΥΣ</th>
-                                <th>ΕΙΔΟΣ</th>
-                                <th>ΑΠΟΘΗΚΗ 00<div id="header_col_2"></div></th>
-								<th>ΑΠΟΘΗΚΗ ΟΙΝΟΦΥΤΩΝ<div id="header_col_3"></div></th>
-								<th>ΑΠΟΘΗΚΗ ΤΡΙΤΩΝ ΟΙΝΟΦΥΤΑ-ΤΕΛΩΝΕΙΟ<div id="header_col_4"></div></th>
-								<th>ΑΠΟΘΗΚΗ ΑΣΠΡΟΠΥΡΓΟΥ<div id="header_col_5"></div></th>							
+                                <th>ΕΙΔΟΣ</th>                                
+								<th>ΑΠΟΘΗΚΗ ΟΙΝΟΦΥΤΩΝ<div id="header_col_2"></div></th>							
+								<th>ΑΠΟΘΗΚΗ ΑΣΠΡΟΠΥΡΓΟΥ<div id="header_col_3"></div></th>							
                             </tr>                                                                            
 							</thead>
 							<tfoot style="display:table-header-group">
 							<tr>
 								<th>ΚΩΔ. ΕΙΔΟΥΣ</th>
-								<th>ΕΙΔΟΣ</th>
-								<th>ΑΠΟΘΗΚΗ 00</th>
-								<th>ΑΠΟΘΗΚΗ ΟΙΝΟΦΥΤΩΝ</th>
-								<th>ΑΠΟΘΗΚΗ ΤΡΙΤΩΝ ΟΙΝΟΦΥΤΑ-ΤΕΛΩΝΕΙΟ</th>
+								<th>ΕΙΔΟΣ</th>								
+								<th>ΑΠΟΘΗΚΗ ΟΙΝΟΦΥΤΩΝ</th>								
 								<th>ΑΠΟΘΗΚΗ ΑΣΠΡΟΠΥΡΓΟΥ</th>
 							</tr>
 							</tfoot>
@@ -157,10 +153,8 @@
                             <tr>                                                        
                              
                              <td>{{ row['CODCODE']}}</td>
-                             <td>{{ row['ITMNAME']}}</td>                           
-                             <td>{{ row['POSOT_00']}}</td>
-                             <td>{{ row['POSOT_22']}}</td>
-                             <td>{{ row['POSOT_42']}}</td>
+                             <td>{{ row['ITMNAME']}}</td>                                                      
+                             <td>{{ row['POSOT_22']}}</td>                            
                              <td>{{ row['POSOT_43']}}</td>
                              </tr>
    
