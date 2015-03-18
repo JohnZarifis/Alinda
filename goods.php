@@ -17,8 +17,6 @@ $account = $_SESSION['user_account'];
 //print_r($_SESSION); //for debugging reasons
 
 $from = '01-01-2015';
-
-//$to =  'SYSDATE()';
 $to =  date("d-m-Y");
 
 
@@ -37,8 +35,12 @@ $filter = "AND commonPSW = {$commonPSW}";
 if(isset($_POST['from']) && isset($_POST['to'])){
 $from = $_POST['from'];
 $to = $_POST['to'];
+$traid = $_POST['traid'];
 }
-
+if(isset($_GET['traid']))
+    {
+        $traid =  $_GET['traid'];
+	}
 
 
 $fromLast =  strtotime($from .' -1 year');
@@ -76,9 +78,9 @@ SELECT  G.TRAID, LEENAME, G.CODCODE, G.ITMNAME, BCTGDESCR,CCTGDESCR,
 				GROUP BY G.TRAID, LEENAME, CODCODE, ITMNAME
 MARKER;
 
-if(isset($_GET['traid']))
+if(isset($_GET['traid'])||isset($_POST['traid']))
     {
-        $traid =  $_GET['traid']; 
+        
 //if(isset($_POST['apo_value']) && isset($_POST['mexri_value'])){
 //$from = $_POST['apo_value'];
 //$to = $_POST['mexri_value'];
@@ -123,7 +125,7 @@ MARKER;
 //goro
 $result_set = $database->query($sql);
 $MultiDimArray = array();
-if(isset($_GET['traid']))
+if(isset($_GET['traid']) || isset($_POST['traid']))
     {
 while ($row = mysql_fetch_assoc($result_set)) 
 			{
@@ -190,6 +192,7 @@ while ($row = mysql_fetch_assoc($result_set))
                                       'to' => $to,
                                       'fromLast'=>$fromLast,
                                       'toLast'=>$toLast,
+                                      'traid'=>$traid,
                                       
                                       
                                     
