@@ -66,14 +66,19 @@ while ($row = mysql_fetch_assoc($result_set))
                          $MultiDimArray[] = array ( 'Min Date' => $row['MIN(TRNDATE)'],
                                                     'Max Date' => $row['MAX(TRNDATE)'],
                                                     'TRAID'=>$row['TRAID'],
-                                                    'XREOSI'=>$row['sum(XΡΕΩΣΗ)'],
-                                                    'PISTOSI'=>$row['sum(ΠΙΣΤΩΣΗ)'],
-                                                    'TZIROS'=>$row['sum(TZIROS)'],
+                                                    'XREOSI'=>number_format_clean($row['sum(XΡΕΩΣΗ)']),
+                                                    'PISTOSI'=>number_format_clean($row['sum(ΠΙΣΤΩΣΗ)']),
+                                                    //'PISTOSI'=>$row['sum(ΠΙΣΤΩΣΗ)'],
+                                                    'TZIROS'=>number_format_clean($row['sum(TZIROS)']),
                                                     'LEENAME'=>$row['LEENAME'],
                                                     'LEEAFM'=>$row['LEEAFM'],
                                                     'SLMID'=>$row['SLMID'], 
-                                                    'YPOLOIPO'=>$row['YPOLOIPO'],
+                                                    'YPOLOIPO'=>number_format_clean($row['YPOLOIPO']),
+                                                    //'YPOLOIPO'=> $row['YPOLOIPO'],          
                                                     'SLMNAME'=>$row['SLMNAME']
+                                                    
+                                                    
+                                                    
                              );
 			}
                         
