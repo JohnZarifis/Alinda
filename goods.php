@@ -134,13 +134,13 @@ while ($row = mysql_fetch_assoc($result_set))
                                                     'TRAID'=>$row['TRAID'],
                                                     'CODCODE'=>$row['CODCODE'],
                                                     'ITMNAME'=>$row['ITMNAME'],
-                                                    'POSOTITA_CURRENT_YEAR'=>$row['POSOTITA_CURRENT_YEAR'],
-                                                    'POSOTITA_PAST_YEAR'=>$row['POSOTITA_PAST_YEAR'],
-                                                    'AXIA_CURRENT_YEAR'=>$row['AXIA_CURRENT_YEAR'],
-                                                    'AXIA_PAST_YEAR'=>$row['AXIA_PAST_YEAR'],
+                                                    'POSOTITA_CURRENT_YEAR'=>number_format_clean($row['POSOTITA_CURRENT_YEAR']),
+                                                    'POSOTITA_PAST_YEAR'=>number_format_clean($row['POSOTITA_PAST_YEAR']),
+                                                    'AXIA_CURRENT_YEAR'=>number_format_clean($row['AXIA_CURRENT_YEAR']),
+                                                    'AXIA_PAST_YEAR'=>number_format_clean($row['AXIA_PAST_YEAR']),
                                                     'BCTGDESCR'=>$row['BCTGDESCR'],
                                                     'CCTGDESCR'=>$row['CCTGDESCR'],
-                                                    'LASTPRICE' =>$row['LASTPRICE'],
+                                                    'LASTPRICE' =>number_format_clean($row['LASTPRICE']),
                                                     
                                                    
                                                     
@@ -154,10 +154,10 @@ while ($row = mysql_fetch_assoc($result_set))
                                                     'TRAID'=>$row['TRAID'],
                                                     'CODCODE'=>$row['CODCODE'],
                                                     'ITMNAME'=>$row['ITMNAME'],
-                                                    'POSOTITA_CURRENT_YEAR'=>$row['POSOTITA_CURRENT_YEAR'],
-                                                    'POSOTITA_PAST_YEAR'=>$row['POSOTITA_PAST_YEAR'],
-                                                    'AXIA_CURRENT_YEAR'=>$row['AXIA_CURRENT_YEAR'],
-                                                    'AXIA_PAST_YEAR'=>$row['AXIA_PAST_YEAR'],
+                                                    'POSOTITA_CURRENT_YEAR'=>number_format_clean($row['POSOTITA_CURRENT_YEAR']),
+                                                    'POSOTITA_PAST_YEAR'=>number_format_clean($row['POSOTITA_PAST_YEAR']),
+                                                    'AXIA_CURRENT_YEAR'=>number_format_clean($row['AXIA_CURRENT_YEAR']),
+                                                    'AXIA_PAST_YEAR'=>number_format_clean($row['AXIA_PAST_YEAR']),
                                                     'BCTGDESCR'=>$row['BCTGDESCR'],
                                                     'CCTGDESCR'=>$row['CCTGDESCR'],
                                                    
