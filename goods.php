@@ -78,7 +78,7 @@ SELECT  G.TRAID, LEENAME, G.CODCODE, G.ITMNAME, BCTGDESCR,CCTGDESCR,
 				GROUP BY G.TRAID, LEENAME, CODCODE, ITMNAME
 MARKER;
 
-if(isset($_GET['traid'])||isset($_POST['traid']))
+if(isset($_GET['traid'])||(isset($_POST['traid']) && trim($traid) != '' ))
     {
         
 //if(isset($_POST['apo_value']) && isset($_POST['mexri_value'])){
@@ -117,15 +117,18 @@ MARKER;
     
     
 
-
+// for debugging
 //print_r($sql);
 //print_r($_GET['traid']);
+//print_r($traid.'--');
+//print_r($_POST['traid']);
+
 
 
 //goro
 $result_set = $database->query($sql);
 $MultiDimArray = array();
-if(isset($_GET['traid']) || isset($_POST['traid']))
+if(isset($_GET['traid']) || (isset($_POST['traid']) && trim($traid) != '' ))
     {
 while ($row = mysql_fetch_assoc($result_set)) 
 			{
