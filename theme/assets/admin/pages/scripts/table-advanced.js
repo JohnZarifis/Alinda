@@ -83,10 +83,19 @@ var TableAdvanced = function () {
             // Remove the formatting to get integer data for summation
             var intVal = function ( i ) {
                 return typeof i === 'string' ?
-                    i.replace(/[\$,]/g, '.')*1 :  //john
+                    //i.replace(/[\$,]/g, '.')*1 :  //john
+                    i.replace(/\./g, "").replace(/[\$,]/g, '.')*1 :  //john
                     typeof i === 'number' ?
                         i : 0;
             };
+            //john 
+            Number.prototype.format = function(n, x, s, c) {
+    		var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
+        	num = this.toFixed(Math.max(0, ~~n));
+
+    		return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ','));
+				};
+            //john
 			//Update columns 2 to 4 ( numeric columns that can be agregated)
 			var i=2;
 			for (i=2;i<=8;i++)
@@ -130,12 +139,12 @@ var TableAdvanced = function () {
 				*/
 
 				if (searchTotal == total)
-					x.innerHTML = total.toFixed(2);
+					x.innerHTML = total.format(2, 3, '.', ',');//.toFixed(2);
 				else if (isNaN(searchTotal))
 					x.innerHTML=''
 				else
-					x.innerHTML=searchTotal.toFixed(2) +'/'+ total.toFixed(2);
-			}
+					x.innerHTML=searchTotal.format(2, 3, '.', ',') +'/'+ total.format(2, 3, '.', ',');
+			}     //
         }
         });
  
