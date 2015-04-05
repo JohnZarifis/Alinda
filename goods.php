@@ -169,21 +169,21 @@ while ($row = mysql_fetch_assoc($result_set))
                                                     
                              );
 			}
-//$xreosi = 0;
-//$pistosi = 0;
-//$tziros = 0;
-//$ypoloipo = 0;
+$posotitaCurrentYear = 0;
+$posotitaLastYear = 0;
+$axiaCurrentYear = 0;
+$axiaPastYear = 0;
 //$clientno =0;
-//foreach($MultiDimArray as $result){
-//    $xreosi +=$result['XREOSI'];
-//    $pistosi += $result['PISTOSI'];
-//    $tziros += $result['TZIROS'];
-//    $ypoloipo = $result['YPOLOIPO'];
+foreach($MultiDimArray as $result){
+    $posotitaCurrentYear +=$result['POSOTITA_CURRENT_YEAR'];
+    $posotitaLastYear += $result['POSOTITA_PAST_YEAR'];
+    $axiaCurrentYear += $result['AXIA_CURRENT_YEAR'];
+    $axiaPastYear += $result['AXIA_PAST_YEAR'];
 //    $clientno +=1;
 //    $afm = $result['LEEAFM'];
 //    $leename = $result['LEENAME'];
 //    
-//    }   
+   }   
        
 //print_r($MultiDimArray);
  
@@ -196,7 +196,10 @@ while ($row = mysql_fetch_assoc($result_set))
                                       'fromLast'=>$fromLast,
                                       'toLast'=>$toLast,
                                       'traid'=>$traid,
-                                      
+                                      'posotitaCurrentYear'=>$posotitaCurrentYear,
+                                      'posotitaLastYear'=>$posotitaLastYear,
+                                      'axiaCurrentYear'=>number_format_clean($axiaCurrentYear),
+                                      'axiaPastYear'=>number_format_clean($axiaPastYear),
                                       
                                     
                                      ));
