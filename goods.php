@@ -144,6 +144,10 @@ while ($row = mysql_fetch_assoc($result_set))
                                                     'BCTGDESCR'=>$row['BCTGDESCR'],
                                                     'CCTGDESCR'=>$row['CCTGDESCR'],
                                                     'LASTPRICE' =>number_format_lastprice($row['LASTPRICE']),
+                                                    'POSOTITA_CURRENT'=>$row['POSOTITA_CURRENT_YEAR'],
+                                                    'POSOTITA_PAST'=>$row['POSOTITA_PAST_YEAR'],
+                                                    'AXIA_CURRENT'=>$row['AXIA_CURRENT_YEAR'],
+                                                    'AXIA_PAST'=>$row['AXIA_PAST_YEAR'],
                                                     
                                                    
                                                     
@@ -161,6 +165,10 @@ while ($row = mysql_fetch_assoc($result_set))
                                                     'POSOTITA_PAST_YEAR'=>number_format_clean($row['POSOTITA_PAST_YEAR']),
                                                     'AXIA_CURRENT_YEAR'=>number_format_clean($row['AXIA_CURRENT_YEAR']),
                                                     'AXIA_PAST_YEAR'=>number_format_clean($row['AXIA_PAST_YEAR']),
+                                                    'POSOTITA_CURRENT'=>$row['POSOTITA_CURRENT_YEAR'],
+                                                    'POSOTITA_PAST'=>$row['POSOTITA_PAST_YEAR'],
+                                                    'AXIA_CURRENT'=>$row['AXIA_CURRENT_YEAR'],
+                                                    'AXIA_PAST'=>$row['AXIA_PAST_YEAR'],
                                                     'BCTGDESCR'=>$row['BCTGDESCR'],
                                                     'CCTGDESCR'=>$row['CCTGDESCR'],
                                                    
@@ -175,10 +183,10 @@ $axiaCurrentYear = 0;
 $axiaPastYear = 0;
 //$clientno =0;
 foreach($MultiDimArray as $result){
-    $posotitaCurrentYear +=$result['POSOTITA_CURRENT_YEAR'];
-    $posotitaLastYear += $result['POSOTITA_PAST_YEAR'];
-    $axiaCurrentYear += $result['AXIA_CURRENT_YEAR'];
-    $axiaPastYear += $result['AXIA_PAST_YEAR'];
+    $posotitaCurrentYear +=$result['POSOTITA_CURRENT'];
+    $posotitaLastYear += $result['POSOTITA_PAST'];
+    $axiaCurrentYear += $result['AXIA_CURRENT'];
+    $axiaPastYear += $result['AXIA_PAST'];
 //    $clientno +=1;
 //    $afm = $result['LEEAFM'];
 //    $leename = $result['LEENAME'];

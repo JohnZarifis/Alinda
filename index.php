@@ -67,9 +67,11 @@ while ($row = mysql_fetch_assoc($result_set))
                                                     'Max Date' => $row['MAX(TRNDATE)'],
                                                     'TRAID'=>$row['TRAID'],
                                                     'XREOSI'=>number_format_clean($row['sum(XΡΕΩΣΗ)']),
+                                                    'XREOSIFORSUM'=>$row['sum(XΡΕΩΣΗ)'],
                                                     'PISTOSI'=>number_format_clean($row['sum(ΠΙΣΤΩΣΗ)']),
-                                                    //'PISTOSI'=>$row['sum(ΠΙΣΤΩΣΗ)'],
+                                                    'PISTOSIFORSUM'=>$row['sum(ΠΙΣΤΩΣΗ)'],
                                                     'TZIROS'=>number_format_clean($row['sum(TZIROS)']),
+                                                    'TZIROSFORSUM'=>$row['sum(TZIROS)'],
                                                     'LEENAME'=>$row['LEENAME'],
                                                     'LEEAFM'=>$row['LEEAFM'],
                                                     'SLMID'=>$row['SLMID'], 
@@ -113,9 +115,9 @@ $tziros = 0;
 $ypoloipo = 0;
 $clientno =0;
 foreach($MultiDimArray as $result){
-    $xreosi +=$result['XREOSI'];
-    $pistosi += $result['PISTOSI'];
-    $tziros += $result['TZIROS'];
+    $xreosi +=$result['XREOSIFORSUM'];
+    $pistosi += $result['PISTOSIFORSUM'];
+    $tziros += $result['TZIROSFORSUM'];
     //$ypoloipo += $result[6];
     $clientno +=1;
     
