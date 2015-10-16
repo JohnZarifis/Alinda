@@ -34,12 +34,12 @@ $traid = $_POST['traid'];
 }
 
 $sql = <<<MARKER
-SELECT TRNDATE,T.TRAID,DOSCODE,DOCNUMBER,TRNREASON,XΡΕΩΣΗ,ΠΙΣΤΩΣΗ,TZIROS,YPOLOIPO,LEENAME,LEEAFM,C.SLMCODE,ADRCITY
+SELECT TRNDATE,T.TRAID,DOSCODE,DOCNUMBER,TRNREASON,XREOSI,PISTOSI,TZIROS,YPOLOIPO,LEENAME,LEEAFM,C.SLMCODE,ADRCITY
 FROM TRN T
 INNER JOIN CUSTOMER C
 ON C.TRAID = T.TRAID
 WHERE
-TRNDATE  BETWEEN 
+TRNDATE  BETWEEN
 STR_TO_DATE('{$from}', '%d/%m/%Y')  AND STR_TO_DATE('{$to}', '%d/%m/%Y')
 AND T.TRAID = {$traid}
 ORDER BY TRNID
@@ -52,24 +52,24 @@ MARKER;
 //goro
 $result_set = $database->query($sql);
 $MultiDimArray = array();
-while ($row = mysql_fetch_assoc($result_set)) 
+while ($row = mysql_fetch_assoc($result_set))
 			{
                          $MultiDimArray[] = array ( 'TRNDATE' => $row['TRNDATE'],
                                                     'DOSCODE' => $row['DOSCODE'],
                                                     'TRAID'=>$row['TRAID'],
-                                                    'XREOSI'=>number_format_clean($row['XΡΕΩΣΗ']),
-                                                    'PISTOSI'=>number_format_clean($row['ΠΙΣΤΩΣΗ']),
-                                                    'XREOSIFORSUM'=>$row['XΡΕΩΣΗ'],
-                                                    'PISTOSIFORSUM'=>$row['ΠΙΣΤΩΣΗ'],
+                                                    'XREOSI'=>number_format_clean($row['XREOSI']),
+                                                    'PISTOSI'=>number_format_clean($row['PISTOSI']),
+                                                    'XREOSIFORSUM'=>$row['XREOSI'],
+                                                    'PISTOSIFORSUM'=>$row['PISTOSI'],
                                                     'TZIROS'=>number_format_clean($row['TZIROS']),
                                                     'TZIROSFORSUM'=>$row['TZIROS'],
                                                     'LEENAME'=>$row['LEENAME'],
                                                     'LEEAFM'=>$row['LEEAFM'],
-                                                    'DOCNUMBER'=>$row['DOCNUMBER'], 
-                                                    'TRNREASON'=>$row['TRNREASON'], 
-                                                    'YPOLOIPO'=>number_format_clean($row['YPOLOIPO']), 
-                                                    'YPOLOIPOFORSUM'=>$row['YPOLOIPO'], 
-                                                    'SLMCODE'=>$row['SLMCODE'], 
+                                                    'DOCNUMBER'=>$row['DOCNUMBER'],
+                                                    'TRNREASON'=>$row['TRNREASON'],
+                                                    'YPOLOIPO'=>number_format_clean($row['YPOLOIPO']),
+                                                    'YPOLOIPOFORSUM'=>$row['YPOLOIPO'],
+                                                    'SLMCODE'=>$row['SLMCODE'],
                                                     'ADRCITY'=>$row['ADRCITY'],
                              );
 			}
@@ -86,7 +86,7 @@ while ($row = mysql_fetch_assoc($result_graph)) {
     );
 }
 $graph =  json_encode($Grapharray);
-			
+
 $xreosi = 0;
 $pistosi = 0;
 $tziros = 0;
@@ -100,13 +100,13 @@ foreach($MultiDimArray as $result){
     $clientno +=1;
     $afm = $result['LEEAFM'];
     $leename = $result['LEENAME'];
-    
-    }   
-       
 
- 
+    }
+
+
+
         //$name = 'John';
-        $template = $twig->loadTemplate('client.html');  
+        $template = $twig->loadTemplate('client.html');
         echo $template->render(array('username' => $username,
                                       'clientno'=>$clientno,
                                       'res'=>$MultiDimArray,

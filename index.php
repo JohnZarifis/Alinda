@@ -31,23 +31,23 @@ $filter = "";
 }
 else if($isAdmin == 2){
 
-$filter = "AND Supervisor = {$id}";	
+$filter = "AND Supervisor = {$id}";
 }
 else if($isAdmin == 2){
-	
+
 }
 else{
 $filter = "AND commonPSW = {$commonPSW}";
 }
 
 $sql = <<<MARKER
-SELECT MIN(TRNDATE), MAX(TRNDATE) , T.TRAID ,sum(XΡΕΩΣΗ),sum(ΠΙΣΤΩΣΗ),sum(TZIROS),YPOLOIPO,LEENAME,LEEAFM,S.SLMID,C.SLMNAME
+SELECT MIN(TRNDATE), MAX(TRNDATE) , T.TRAID ,sum(XREOSI),sum(PISTOSI),sum(TZIROS),YPOLOIPO,LEENAME,LEEAFM,S.SLMID,C.SLMNAME
 FROM TRN T
 INNER JOIN CUSTOMER C
 ON T.TRAID = C.TRAID
 INNER JOIN SLM S
 ON S.SLMID = C.SLMCODE
-WHERE TRNDATE  BETWEEN 
+WHERE TRNDATE  BETWEEN
 STR_TO_DATE('{$from}', '%d/%m/%Y') AND STR_TO_DATE('{$to}', '%d/%m/%Y')
 {$filter}
 GROUP BY T.TRAID ,LEENAME,LEEAFM,S.SLMID,YPOLOIPO,C.SLMNAME
@@ -61,29 +61,29 @@ MARKER;
 
 $result_set = $database->query($sql);
 $MultiDimArray = array();
-while ($row = mysql_fetch_assoc($result_set)) 
+while ($row = mysql_fetch_assoc($result_set))
 			{
                          $MultiDimArray[] = array ( 'Min Date' => $row['MIN(TRNDATE)'],
                                                     'Max Date' => $row['MAX(TRNDATE)'],
                                                     'TRAID'=>$row['TRAID'],
-                                                    'XREOSI'=>number_format_clean($row['sum(XΡΕΩΣΗ)']),
-                                                    'XREOSIFORSUM'=>$row['sum(XΡΕΩΣΗ)'],
-                                                    'PISTOSI'=>number_format_clean($row['sum(ΠΙΣΤΩΣΗ)']),
-                                                    'PISTOSIFORSUM'=>$row['sum(ΠΙΣΤΩΣΗ)'],
+                                                    'XREOSI'=>number_format_clean($row['sum(XREOSI)']),
+                                                    'XREOSIFORSUM'=>$row['sum(XREOSI)'],
+                                                    'PISTOSI'=>number_format_clean($row['sum(PISTOSI)']),
+                                                    'PISTOSIFORSUM'=>$row['sum(PISTOSI)'],
                                                     'TZIROS'=>number_format_clean($row['sum(TZIROS)']),
                                                     'TZIROSFORSUM'=>$row['sum(TZIROS)'],
                                                     'LEENAME'=>$row['LEENAME'],
                                                     'LEEAFM'=>$row['LEEAFM'],
-                                                    'SLMID'=>$row['SLMID'], 
+                                                    'SLMID'=>$row['SLMID'],
                                                     'YPOLOIPO'=>number_format_clean($row['YPOLOIPO']),
-                                                    //'YPOLOIPO'=> $row['YPOLOIPO'],          
+                                                    //'YPOLOIPO'=> $row['YPOLOIPO'],
                                                     'SLMNAME'=>$row['SLMNAME']
-                                                    
-                                                    
-                                                    
+
+
+
                              );
 			}
-                        
+
 //$nrows = oci_fetch_all($result_set,$res,0,-1,OCI_FETCHSTATEMENT_BY_ROW+ OCI_NUM);
 //print_r($nrows);
 //print_r($sql);
@@ -92,13 +92,13 @@ while ($row = mysql_fetch_assoc($result_set))
 
 $graphSql = <<<MARKER
 				SELECT MONTH(TRNDATE) as MONTH ,SUM(TZIROS) AS TZIROS FROM TRN T
-                INNER JOIN  CUSTOMER C 
+                INNER JOIN  CUSTOMER C
                 ON T.TRAID = C.TRAID
-                INNER JOIN   SLM S 
+                INNER JOIN   SLM S
                 ON  S.SLMID = C.SLMCODE
         	    WHERE TRNDATE  BETWEEN STR_TO_DATE('{$from}', '%d/%m/%Y')  AND STR_TO_DATE('{$to}', '%d/%m/%Y')
 				{$filter}
-        	    GROUP BY MONTH(TRNDATE) 
+        	    GROUP BY MONTH(TRNDATE)
 MARKER;
 $result_graph = $database->query($graphSql);
 $Grapharray;
@@ -120,12 +120,12 @@ foreach($MultiDimArray as $result){
     $tziros += $result['TZIROSFORSUM'];
     //$ypoloipo += $result[6];
     $clientno +=1;
-    
-    }      
-	
 
- 
-        $template = $twig->loadTemplate('index.html');  
+    }
+
+
+
+        $template = $twig->loadTemplate('index.html');
         echo $template->render(array('username' => $username,
                                     'clientno'=>$clientno,
                                      'res'=>$MultiDimArray,

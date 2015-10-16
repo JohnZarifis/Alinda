@@ -26,7 +26,7 @@ $filter = "";
 }
 else if($isAdmin == 2){
 
-$filter = "AND Supervisor = {$id}";	
+$filter = "AND Supervisor = {$id}";
 }
 else{
 $filter = "AND commonPSW = {$commonPSW}";
@@ -50,10 +50,10 @@ $toLast = date('d-m-Y', $toLast);
 
 $sql = <<< MARKER
 SELECT  G.TRAID, LEENAME, G.CODCODE, G.ITMNAME, BCTGDESCR,CCTGDESCR,
-                 SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) 
+                 SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE())
                                     then POSOTA
                                     else .00 END ) as POSOTITA_CURRENT_YEAR,
-                 SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) 
+                 SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE())
                                     then AXIA
                                     else .00 END ) as AXIA_CURRENT_YEAR,
 				 SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) -1
@@ -62,16 +62,16 @@ SELECT  G.TRAID, LEENAME, G.CODCODE, G.ITMNAME, BCTGDESCR,CCTGDESCR,
                                     SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) -1
                                     then AXIA
                                     else .00 END ) as AXIA_PAST_YEAR
-               
+
                 FROM GOODS G
-	            INNER JOIN CUSTOMER C				
+	            INNER JOIN CUSTOMER C
                 ON C.TRAID = G.TRAID
-                INNER JOIN SLM S               
+                INNER JOIN SLM S
                 ON S.SLMID = C.SLMCODE
                 INNER JOIN PRODUCT P
-                ON P.CODCODE = G.CODCODE                           
-                WHERE 
-                ( DOCEKDOSISDATE  BETWEEN 
+                ON P.CODCODE = G.CODCODE
+                WHERE
+                ( DOCEKDOSISDATE  BETWEEN
                 STR_TO_DATE('{$from}', '%d-%m-%Y')  AND STR_TO_DATE('{$to}', '%d-%m-%Y')
 				OR (DOCEKDOSISDATE  BETWEEN STR_TO_DATE('{$fromLast}', '%d-%m-%Y')  AND STR_TO_DATE('{$toLast}', '%d-%m-%Y')))
 				{$filter}
@@ -80,16 +80,16 @@ MARKER;
 
 if(isset($_GET['traid'])||(isset($_POST['traid']) && trim($traid) != '' ))
     {
-        
+
 //if(isset($_POST['apo_value']) && isset($_POST['mexri_value'])){
 //$from = $_POST['apo_value'];
 //$to = $_POST['mexri_value'];
 $sql = <<<MARKER
-SELECT G.TRAID, LEENAME, G.CODCODE, G.ITMNAME,BCTGDESCR,CCTGDESCR, 
-                SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) 
+SELECT G.TRAID, LEENAME, G.CODCODE, G.ITMNAME,BCTGDESCR,CCTGDESCR,
+                SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE())
                                     then POSOTA
                                     else .00 END ) as POSOTITA_CURRENT_YEAR,
-                 SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) 
+                 SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE())
                                     then AXIA
                                     else .00 END ) as AXIA_CURRENT_YEAR,
 				 SUM( case when YEAR(DOCEKDOSISDATE) = YEAR(CURDATE()) -1
@@ -100,22 +100,22 @@ SELECT G.TRAID, LEENAME, G.CODCODE, G.ITMNAME,BCTGDESCR,CCTGDESCR,
                                     else .00 END ) as AXIA_PAST_YEAR,
                 MAX(MAXPRICE) AS LASTPRICE
                 FROM GOODS G
-                INNER JOIN CUSTOMER C				
+                INNER JOIN CUSTOMER C
                 ON C.TRAID = G.TRAID
                 INNER JOIN PRODUCT P
                 ON P.CODCODE = G.CODCODE
-                INNER JOIN LASTPRICE L 
+                INNER JOIN LASTPRICE L
                 ON (L.TRAID = C.TRAID AND L.CODCODE = P.CODCODE)
                 WHERE C.TRAID = {$traid}
-                AND ( DOCEKDOSISDATE  BETWEEN 
+                AND ( DOCEKDOSISDATE  BETWEEN
                 STR_TO_DATE('{$from}', '%d-%m-%Y')  AND STR_TO_DATE('{$to}', '%d-%m-%Y')
-				OR (DOCEKDOSISDATE  BETWEEN STR_TO_DATE('{$fromLast}', '%d-%m-%Y')  AND STR_TO_DATE('{$toLast}', '%d-%m-%Y'))) 
+				OR (DOCEKDOSISDATE  BETWEEN STR_TO_DATE('{$fromLast}', '%d-%m-%Y')  AND STR_TO_DATE('{$toLast}', '%d-%m-%Y')))
 GROUP BY TRAID, LEENAME, CODCODE, ITMNAME
 MARKER;
-}   
-  
-    
-    
+}
+
+
+
 
 // for debugging
 //print_r($sql);
@@ -130,9 +130,9 @@ $result_set = $database->query($sql);
 $MultiDimArray = array();
 if(isset($_GET['traid']) || (isset($_POST['traid']) && trim($traid) != '' ))
     {
-while ($row = mysql_fetch_assoc($result_set)) 
+while ($row = mysql_fetch_assoc($result_set))
 			{
-                         $MultiDimArray[] = array ( 
+                         $MultiDimArray[] = array (
                                                     'LEENAME' => $row['LEENAME'],
                                                     'TRAID'=>$row['TRAID'],
                                                     'CODCODE'=>$row['CODCODE'],
@@ -148,15 +148,15 @@ while ($row = mysql_fetch_assoc($result_set))
                                                     'POSOTITA_PAST'=>$row['POSOTITA_PAST_YEAR'],
                                                     'AXIA_CURRENT'=>$row['AXIA_CURRENT_YEAR'],
                                                     'AXIA_PAST'=>$row['AXIA_PAST_YEAR'],
-                                                    
-                                                   
-                                                    
+
+
+
                              );
 			}
 	}
-while ($row = mysql_fetch_assoc($result_set)) 
+while ($row = mysql_fetch_assoc($result_set))
 			{
-                         $MultiDimArray[] = array ( 
+                         $MultiDimArray[] = array (
                                                     'LEENAME' => $row['LEENAME'],
                                                     'TRAID'=>$row['TRAID'],
                                                     'CODCODE'=>$row['CODCODE'],
@@ -171,10 +171,10 @@ while ($row = mysql_fetch_assoc($result_set))
                                                     'AXIA_PAST'=>$row['AXIA_PAST_YEAR'],
                                                     'BCTGDESCR'=>$row['BCTGDESCR'],
                                                     'CCTGDESCR'=>$row['CCTGDESCR'],
-                                                   
-                                                    
-                                                   
-                                                    
+
+
+
+
                              );
 			}
 $posotitaCurrentYear = 0;
@@ -190,14 +190,14 @@ foreach($MultiDimArray as $result){
 //    $clientno +=1;
 //    $afm = $result['LEEAFM'];
 //    $leename = $result['LEENAME'];
-//    
-   }   
-       
+//
+   }
+
 //print_r($MultiDimArray);
- 
+
         //$name = 'John';
-        $template = $twig->loadTemplate('goods.html');  
-        echo $template->render(array('username' => $username,                                     
+        $template = $twig->loadTemplate('goods.html');
+        echo $template->render(array('username' => $username,
                                       'res'=>$MultiDimArray,
                                       'from'=>$from,
                                       'to' => $to,
@@ -208,8 +208,8 @@ foreach($MultiDimArray as $result){
                                       'posotitaLastYear'=>$posotitaLastYear,
                                       'axiaCurrentYear'=>number_format_clean($axiaCurrentYear),
                                       'axiaPastYear'=>number_format_clean($axiaPastYear),
-                                      
-                                    
+
+
                                      ));
 
 ?>
